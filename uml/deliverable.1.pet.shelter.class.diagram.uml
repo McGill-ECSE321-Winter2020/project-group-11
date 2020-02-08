@@ -3,8 +3,15 @@
   <uml:Model xmi:id="_OrCuEEnkEeq7PcvS8f9mQg" name="deliverable_1_pet_shelter_class_diagram">
     <eAnnotations xmi:id="_lknaIEohEeqZG5NsJreXng" source="http://ns.yatta.de/umllab">
       <contents xmi:type="ecore:EAnnotation" xmi:id="_lkqdcEohEeqZG5NsJreXng" source="codegen">
-        <details xmi:id="_lkrEgEohEeqZG5NsJreXng" key="AssociatedSourceCode" value="/project-group-11/javacode/User.java;3951269785/1;/project-group-11/javacode/Address.java;1710964293/1;/project-group-11/javacode/Owner.java;782866961/1;/project-group-11/javacode/Adopter.java;2269274092/1;/project-group-11/javacode/Pet.java;1237413856/1;/project-group-11/javacode/PetProfile.java;2322811932/1;/project-group-11/javacode/AdoptionPosting.java;3913650410/1;/project-group-11/javacode/Shelter.java;2467217711/1;/project-group-11/javacode/AnimalType.java;3351015227/1;/project-group-11/javacode/Manager.java;655399165/1;"/>
+        <details xmi:id="_lkrEgEohEeqZG5NsJreXng" key="AssociatedSourceCode" value="/project-group-11/javacode/User.java;3951269785/1;/project-group-11/javacode/Address.java;1710964293/1;/project-group-11/javacode/Owner.java;782866961/1;/project-group-11/javacode/Adopter.java;2269274092/1;/project-group-11/javacode/Pet.java;2595378876/1;/project-group-11/javacode/PetProfile.java;3087333786/1;/project-group-11/javacode/AdoptionPosting.java;3913650410/1;/project-group-11/javacode/Shelter.java;2467217711/1;/project-group-11/javacode/AnimalType.java;3372390725/1;/project-group-11/javacode/Manager.java;655399165/1;"/>
         <details xmi:id="_lxR9IEohEeqZG5NsJreXng" key="codegenDirectory" value="/project-group-11/javacode"/>
+      </contents>
+      <contents xmi:type="ecore:EAnnotation" xmi:id="_Yt5BEEqqEeqgoMZEAqERcg" source="preferences">
+        <contents xmi:type="ecore:EAnnotation" xmi:id="_Yt5BEUqqEeqgoMZEAqERcg" source="com.yattasolutions.codegen.reverse">
+          <details xmi:id="_Yt5BEkqqEeqgoMZEAqERcg" key="com.yattasolutions.codegen.reverse.roundtrip.ReverseEngineerNewFiles" value="true"/>
+          <details xmi:id="_Yt5BE0qqEeqgoMZEAqERcg" key="com.yattasolutions.codegen.reverse.roundtrip.ReverseEngineerChangedFiles" value="true"/>
+          <details xmi:id="_Yt5BFEqqEeqgoMZEAqERcg" key="com.yattasolutions.codegen.reverse.roundtrip.RemoveDeletedFiles" value="true"/>
+        </contents>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_o7wzYEnlEeq7PcvS8f9mQg">

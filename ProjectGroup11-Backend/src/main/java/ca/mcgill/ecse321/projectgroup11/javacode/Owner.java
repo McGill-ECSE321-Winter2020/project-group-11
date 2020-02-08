@@ -1,3 +1,5 @@
+package ca.mcgill.ecse321.projectgroup11.javacode;
+
 import javax.persistence.Entity;
 import java.util.Set;
 import javax.persistence.OneToMany;
@@ -16,14 +18,4 @@ public class Owner extends User {
 		this.pet = pets;
 	}
 
-	private Integer ownerID;
-
-	private void setOwnerID(Integer value) {
-		this.ownerID = value;
-	}
-
-	@Id
-	private Integer getOwnerID() {
-		return this.ownerID;
-	}
 }

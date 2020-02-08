@@ -488,9 +488,9 @@
     <attributes xmi:id="_qNwMo0oaEeqZG5NsJreXng" name="type">
       <modelElement href="deliverable.1.pet.shelter.class.diagram.uml#_Tm214EnmEeq7PcvS8f9mQg"/>
       <stereotypes xmi:id="_l30C8EohEeqZG5NsJreXng" name="StyledElement"/>
-      <stereotypes xmi:id="_l8Fe8EohEeqZG5NsJreXng" name="StyledElement">
-        <modelElement href="deliverable.1.pet.shelter.class.diagram.uml#_lxzhkEohEeqZG5NsJreXng"/>
-      </stereotypes>
+      <stereotypes xmi:id="_U3n6IEqqEeqgoMZEAqERcg" name="StyledElement"/>
+      <stereotypes xmi:id="_U3pIQEqqEeqgoMZEAqERcg" name="StyledElement"/>
+      <stereotypes xmi:id="_U3tZsEqqEeqgoMZEAqERcg" name="StyledElement"/>
       <visibility xmi:id="_qNwMpEoaEeqZG5NsJreXng" label="+"/>
       <cardinality xmi:id="_qNwMpUoaEeqZG5NsJreXng" label="1" max="1" min="1"/>
       <type xmi:id="_Bs1QwEocEeqZG5NsJreXng" name="AnimalType">

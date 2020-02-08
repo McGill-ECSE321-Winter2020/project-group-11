@@ -1,3 +1,5 @@
+package ca.mcgill.ecse321.projectgroup11.javacode;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import javax.persistence.Id;
@@ -15,14 +17,4 @@ public class Manager extends User {
 		this.shelter = shelter;
 	}
 
-	private Integer managerID;
-
-	private void setManagerID(Integer value) {
-		this.managerID = value;
-	}
-
-	@Id
-	private Integer getManagerID() {
-		return this.managerID;
-	}
 }
