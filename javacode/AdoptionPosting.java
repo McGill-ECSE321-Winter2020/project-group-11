@@ -2,38 +2,41 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
-public class AdoptionPosting{
-   private int id;
+public class AdoptionPosting {
+	private Integer id;
 
-public void setId(int value) {
-    this.id = value;
+	private void setId(Integer value) {
+		this.id = value;
+	}
+
+	@Id
+	private Integer getId() {
+		return this.id;
+	}
+
+	private Set<Adopter> adopters;
+
+	@OneToMany(mappedBy = "adoptionPosting")
+	public Set<Adopter> getAdopters() {
+		return this.adopters;
+	}
+
+	public void setAdopters(Set<Adopter> adopterss) {
+		this.adopters = adopterss;
+	}
+
+	private Pet pet;
+
+	@OneToOne(mappedBy = "adoptionPosting", optional = false)
+	public Pet getPet() {
+		return this.pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
+	}
+
 }
-@Id
-public int getId() {
-    return this.id;
-}
-   private Set<PetProfile> petProfile;
-   
-   @OneToMany(mappedBy="adoptionPosting" )
-   public Set<PetProfile> getPetProfile() {
-      return this.petProfile;
-   }
-   
-   public void setPetProfile(Set<PetProfile> petProfiles) {
-      this.petProfile = petProfiles;
-   }
-   
-   private Set<Adopter> adopter;
-   
-   @OneToMany(mappedBy="adoptionPosting" )
-   public Set<Adopter> getAdopter() {
-      return this.adopter;
-   }
-   
-   public void setAdopter(Set<Adopter> adopters) {
-      this.adopter = adopters;
-   }
-   
-   }

@@ -4,81 +4,97 @@ import java.util.Set;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User{
-   private int id;
+public abstract class User {
+	private Integer userID;
 
-public void setId(int value) {
-    this.id = value;
-}
-@Id
-public int getId() {
-    return this.id;
-}
-private String username;
+	private void setUserID(Integer value) {
+		this.userID = value;
+	}
 
-public void setUsername(String value) {
-    this.username = value;
-}
-public String getUsername() {
-    return this.username;
-}
-private String password;
+	@Id
+	private Integer getUserID() {
+		return this.userID;
+	}
 
-private void setPassword(String value) {
-    this.password = value;
-}
-private String getPassword() {
-    return this.password;
-}
-private String firstName;
+	private String username;
 
-public void setFirstName(String value) {
-    this.firstName = value;
-}
-public String getFirstName() {
-    return this.firstName;
-}
-private String lastName;
+	public void setUsername(String value) {
+		this.username = value;
+	}
 
-public void setLastName(String value) {
-    this.lastName = value;
-}
-public String getLastName() {
-    return this.lastName;
-}
-private String phoneNumer;
+	public String getUsername() {
+		return this.username;
+	}
 
-private void setPhoneNumer(String value) {
-    this.phoneNumer = value;
-}
-private String getPhoneNumer() {
-    return this.phoneNumer;
-}
-private String emailAddress;
+	private String password;
 
-private void setEmailAddress(String value) {
-    this.emailAddress = value;
-}
-private String getEmailAddress() {
-    return this.emailAddress;
-}
-private String description;
+	private void setPassword(String value) {
+		this.password = value;
+	}
 
-public void setDescription(String value) {
-    this.description = value;
+	private String getPassword() {
+		return this.password;
+	}
+
+	private String firstName;
+
+	private void setFirstName(String value) {
+		this.firstName = value;
+	}
+
+	private String getFirstName() {
+		return this.firstName;
+	}
+
+	private String lastName;
+
+	private void setLastName(String value) {
+		this.lastName = value;
+	}
+
+	private String getLastName() {
+		return this.lastName;
+	}
+
+	private String phoneNumer;
+
+	private void setPhoneNumer(String value) {
+		this.phoneNumer = value;
+	}
+
+	private String getPhoneNumer() {
+		return this.phoneNumer;
+	}
+
+	private String emailAddress;
+
+	private void setEmailAddress(String value) {
+		this.emailAddress = value;
+	}
+
+	private String getEmailAddress() {
+		return this.emailAddress;
+	}
+
+	private String description;
+
+	public void setDescription(String value) {
+		this.description = value;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	private Set<Address> address;
+
+	@OneToMany
+	public Set<Address> getAddress() {
+		return this.address;
+	}
+
+	public void setAddress(Set<Address> addresss) {
+		this.address = addresss;
+	}
+
 }
-public String getDescription() {
-    return this.description;
-}
-   private Set<Address> address;
-   
-   @OneToMany(mappedBy="user" )
-   public Set<Address> getAddress() {
-      return this.address;
-   }
-   
-   public void setAddress(Set<Address> addresss) {
-      this.address = addresss;
-   }
-   
-   }

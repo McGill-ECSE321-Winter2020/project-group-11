@@ -1,57 +1,66 @@
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
 
 @Entity
-public class Address{
-   private String street;
+public class Address {
+	private String street;
 
-public void setStreet(String value) {
-    this.street = value;
-}
-public String getStreet() {
-    return this.street;
-}
-private int streetNumber;
+	private void setStreet(String value) {
+		this.street = value;
+	}
 
-public void setStreetNumber(int value) {
-    this.streetNumber = value;
-}
-public int getStreetNumber() {
-    return this.streetNumber;
-}
-private String city;
+	private String getStreet() {
+		return this.street;
+	}
 
-public void setCity(String value) {
-    this.city = value;
-}
-public String getCity() {
-    return this.city;
-}
-private String province;
+	private Integer streetNumber;
 
-public void setProvince(String value) {
-    this.province = value;
-}
-public String getProvince() {
-    return this.province;
-}
-private String postalCode;
+	private void setStreetNumber(Integer value) {
+		this.streetNumber = value;
+	}
 
-public void setPostalCode(String value) {
-    this.postalCode = value;
+	private Integer getStreetNumber() {
+		return this.streetNumber;
+	}
+
+	private String city;
+
+	private void setCity(String value) {
+		this.city = value;
+	}
+
+	private String getCity() {
+		return this.city;
+	}
+
+	private String province;
+
+	private void setProvince(String value) {
+		this.province = value;
+	}
+
+	private String getProvince() {
+		return this.province;
+	}
+
+	private String postalCode;
+
+	private void setPostalCode(String value) {
+		this.postalCode = value;
+	}
+
+	private String getPostalCode() {
+		return this.postalCode;
+	}
+
+	private String id;
+
+	private void setId(String value) {
+		this.id = value;
+	}
+
+	@Id
+	private String getId() {
+		return this.id;
+	}
 }
-public String getPostalCode() {
-    return this.postalCode;
-}
-   private User user;
-   
-   @ManyToOne(optional=false)
-   public User getUser() {
-      return this.user;
-   }
-   
-   public void setUser(User user) {
-      this.user = user;
-   }
-   
-   }
