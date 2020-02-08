@@ -9,7 +9,7 @@ import javax.persistence.OneToMany;
 public abstract class User {
 	private Integer userID;
 
-	private void setUserID(Integer value) {
+	public void setUserID(Integer value) {
 		this.userID = value;
 	}
 
@@ -30,55 +30,55 @@ public abstract class User {
 
 	private String password;
 
-	private void setPassword(String value) {
+	public void setPassword(String value) {
 		this.password = value;
 	}
 
-	private String getPassword() {
+	public String getPassword() {
 		return this.password;
 	}
 
-	private String firstName;
+	public String firstName;
 
-	private void setFirstName(String value) {
+	public void setFirstName(String value) {
 		this.firstName = value;
 	}
 
-	private String getFirstName() {
+	public String getFirstName() {
 		return this.firstName;
 	}
 
-	private String lastName;
+	public String lastName;
 
-	private void setLastName(String value) {
+	public void setLastName(String value) {
 		this.lastName = value;
 	}
 
-	private String getLastName() {
+	public String getLastName() {
 		return this.lastName;
 	}
 
-	private String phoneNumer;
+	public String phoneNumer;
 
-	private void setPhoneNumer(String value) {
+	public void setPhoneNumer(String value) {
 		this.phoneNumer = value;
 	}
 
-	private String getPhoneNumer() {
+	public String getPhoneNumer() {
 		return this.phoneNumer;
 	}
 
-	private String emailAddress;
+	public String emailAddress;
 
-	private void setEmailAddress(String value) {
+	public void setEmailAddress(String value) {
 		this.emailAddress = value;
 	}
 
-	private String getEmailAddress() {
+	public String getEmailAddress() {
 		return this.emailAddress;
 	}
 
-	private String description;
+	public String description;
 
 	public void setDescription(String value) {
 		this.description = value;
@@ -88,7 +88,7 @@ public abstract class User {
 		return this.description;
 	}
 
-	private Set<Address> address;
+	public Set<Address> address;
 
 	@OneToMany
 	public Set<Address> getAddress() {
