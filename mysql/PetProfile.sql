@@ -4,8 +4,8 @@
 
 CREATE TABLE public."PetProfile"
 (
-    description character varying(200) COLLATE pg_catalog."default",
     id integer NOT NULL,
+    description character varying(200) COLLATE pg_catalog."default",
     "photoURL" character varying(200) COLLATE pg_catalog."default",
     CONSTRAINT "PetProfile_pkey" PRIMARY KEY (id),
     CONSTRAINT "PetProfile_id_fkey" FOREIGN KEY (id)
