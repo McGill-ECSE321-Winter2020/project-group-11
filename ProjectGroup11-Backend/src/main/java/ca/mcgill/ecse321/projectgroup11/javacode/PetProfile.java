@@ -11,6 +11,7 @@ public class PetProfile {
 		this.description = value;
 	}
 
+	
 	public String getDescription() {
 		return this.description;
 	}
@@ -45,14 +46,14 @@ public class PetProfile {
 		return this.apartment;
 	}
 	
-	private Boolean kidsOkay;
+	private Boolean kidOkay;
 
-	public void setKidsOkay(Boolean value) {
-		this.kidsOkay = value;
+	public void setKidOkay(Boolean value) {
+		this.kidOkay = value;
 	}
 
-	public Boolean getKidsOkay() {
-		return this.kidsOkay;
+	public Boolean getKidOkay() {
+		return this.kidOkay;
 	}
 
 	private String petsOkay;
