@@ -8,10 +8,10 @@ This project aims to allow people looking to adopt pets to browse through pets u
 #### Deliverable 1:
 | Name          | Role          | Hours logged   |
 | ------------- |:-------------:| --------------:|
-| Libby         | Documentation, user end requirements | 10          |
+| Libby         | Documentation | 10          |
 | Yacine        | Project lead      |   $12          |
 | Yanis         | backend      |    $1          |
 | Dixit         | UML modeling | $1600          |
-| Keanu         | use-case diagram      |   $12          |
+| Keanu         | use-case diagram, requirements      |   $12          |
 
 Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/wiki/Deliverable-1)
