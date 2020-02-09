@@ -7,15 +7,15 @@ import javax.persistence.OneToMany;
 
 @Entity
 public abstract class User {
-	private Integer userID;
+	private Integer user_userid;
 
 	public void setUserID(Integer value) {
-		this.userID = value;
+		this.user_userid = value;
 	}
 
 	@Id
-	private Integer getUserID() {
-		return this.userID;
+	public Integer getUserID() {
+		return this.user_userid;
 	}
 
 	private String username;

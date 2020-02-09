@@ -1,8 +1,10 @@
 package ca.mcgill.ecse321.projectgroup11.javacode;
 
+import java.util.ArrayList;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -10,12 +12,12 @@ import javax.persistence.OneToOne;
 public class AdoptionPosting {
 	private Integer id;
 
-	private void setId(Integer value) {
+	public void setId(Integer value) {
 		this.id = value;
 	}
 
 	@Id
-	private Integer getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
