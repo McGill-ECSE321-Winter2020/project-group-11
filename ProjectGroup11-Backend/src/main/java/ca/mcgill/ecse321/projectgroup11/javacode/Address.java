@@ -55,14 +55,22 @@ public class Address {
 		return this.postalCode;
 	}
 
-	private String id;
+	private Integer id;
 
+<<<<<<< HEAD
 	public void setId(String value) {
+=======
+	public void setId(Integer value) {
+>>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
 		this.id = value;
 	}
 
 	@Id
+<<<<<<< HEAD
 	public String getId() {
+=======
+	public Integer getId() {
+>>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
 		return this.id;
 	}
 }
