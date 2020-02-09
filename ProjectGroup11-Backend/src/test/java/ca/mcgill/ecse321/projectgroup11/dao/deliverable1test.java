@@ -74,21 +74,25 @@ class deliverable1test {
 	
 	@Test 
 	public void testPersistAndLoadPet() {
-		
+		AdoptionPosting a = new AdoptionPosting();
 		Pet dog = new Pet();
+		
+
+		a.setId(20);
 		dog.setId(50);
-		AdoptionPosting hamza = new AdoptionPosting();
-		hamza.setId(100);
-		hamza.setPet(dog);
-		dog.setAdoptionPosting(hamza);
-		adoptionPostingRepository.save(hamza);
+
+		a.setPet(dog);
+		dog.setAdoptionPosting(a);
+		adoptionPostingRepository.save(a);
+
 		petRepository.save(dog);
+
+
+		dog.setAdoptionPosting(a);
 		
 	}
 	@Test
 	public void testPersistAndLoadOwner() {
-		Address ok = new Address();
-		ok.setId(50);
 		Owner hamza = new Owner();
 		hamza.setFirstName("Jouer");
 		hamza.setLastName("ballon");
