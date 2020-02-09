@@ -4,6 +4,9 @@ package ca.mcgill.ecse321.projectgroup11.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,8 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
+import ca.mcgill.ecse321.projectgroup11.javacode.Address;
+import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
 import ca.mcgill.ecse321.projectgroup11.javacode.AdoptionPosting;
 import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
+import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class deliverable1test {
@@ -43,22 +50,65 @@ class deliverable1test {
 	
 	@Test
 	public void testPersistAndLoadAdoptionPosting() {
-		Integer testing = 750; // creating an ID for the post
+		Integer testing = 800; // creating an ID for the post
 		
 		AdoptionPosting post = new AdoptionPosting();
 		
-		post.setId(testing);
+		post.setId(testing);	
 		adoptionPostingRepository.save(post);
+
 		post = null;
-		Owner adel = new Owner();
-		adel.setUserID(testing);
-		userRepository.save(adel);
+
 		
 		
 		post= adoptionPostingRepository.findAdoptionPostingById(testing);
 		
 		assertNotNull(post);
 		assertEquals(testing, post.getId());
+		
+		
+		
+		
+		
+	}
+	
+	@Test 
+	public void testPersistAndLoadPet() {
+		
+		Pet dog = new Pet();
+		dog.setId(50);
+		AdoptionPosting hamza = new AdoptionPosting();
+		hamza.setId(100);
+		hamza.setPet(dog);
+		dog.setAdoptionPosting(hamza);
+		adoptionPostingRepository.save(hamza);
+		petRepository.save(dog);
+		
+	}
+	@Test
+	public void testPersistAndLoadOwner() {
+		Address ok = new Address();
+		ok.setId(50);
+		Owner hamza = new Owner();
+		hamza.setFirstName("Jouer");
+		hamza.setLastName("ballon");
+		hamza.setDescription("for fun");
+		hamza.setUserID(50);
+		
+		// Try creating a hashset of pets to verify if we have access to those fields
+		userRepository.save(hamza);
+		hamza = null;
+		hamza = (Owner) userRepository.findAccountUserByuserID(50);
+		assertNotNull(hamza);
+		assertEquals(50, hamza.getUserID());
+		assertEquals("Jouer", hamza.getFirstName());
+		assertEquals("ballon", hamza.getLastName());
+		assertEquals("for fun", hamza.getDescription());
+		
+		
+		
+		
+		
 		
 		
 		

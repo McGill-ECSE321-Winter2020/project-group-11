@@ -55,14 +55,14 @@ public class Address {
 		return this.postalCode;
 	}
 
-	private String id;
+	private Integer id;
 
-	public void setId(String value) {
+	public void setId(Integer value) {
 		this.id = value;
 	}
 
 	@Id
-	public String getId() {
+	public Integer getId() {
 		return this.id;
 	}
 }
