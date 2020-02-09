@@ -46,14 +46,14 @@ public class PetProfile {
 		return this.apartment;
 	}
 	
-	private Boolean kidOkay;
+	private Boolean kidsOkay;
 
-	public void setKidOkay(Boolean value) {
-		this.kidOkay = value;
+	public void setKidsOkay(Boolean value) {
+		this.kidsOkay = value;
 	}
 
-	public Boolean getKidOkay() {
-		return this.kidOkay;
+	public Boolean getKidsOkay() {
+		return this.kidsOkay;
 	}
 
 	private String petsOkay;
