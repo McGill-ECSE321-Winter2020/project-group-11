@@ -2,10 +2,9 @@ package ca.mcgill.ecse321.projectgroup11.javacode;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
-import javax.persistence.Id;
 
 @Entity
-public class Manager extends User {
+public class Manager extends AccountUser {
 	private Shelter shelter;
 
 	@OneToOne(mappedBy = "manager", optional = false)

@@ -32,12 +32,12 @@ public class Shelter {
 
 	private Integer id;
 
-	private void setId(Integer value) {
+	public void setId(Integer value) {
 		this.id = value;
 	}
 
 	@Id
-	private Integer getId() {
+	public Integer getId() {
 		return this.id;
 	}
 }

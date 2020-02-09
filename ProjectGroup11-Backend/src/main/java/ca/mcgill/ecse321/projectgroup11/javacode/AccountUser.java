@@ -1,21 +1,23 @@
 package ca.mcgill.ecse321.projectgroup11.javacode;
 
+import ca.mcgill.ecse321.projectgroup11.javacode.Address;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.OneToMany;
 
 @Entity
-public abstract class User {
-	private Integer user_userid;
+public abstract class AccountUser {
+	private Integer userID;
 
 	public void setUserID(Integer value) {
-		this.user_userid = value;
+		this.userID = value;
 	}
 
 	@Id
 	public Integer getUserID() {
-		return this.user_userid;
+		return this.userID;
 	}
 
 	private String username;
@@ -30,15 +32,15 @@ public abstract class User {
 
 	private String password;
 
-	public void setPassword(String value) {
+	private void setPassword(String value) {
 		this.password = value;
 	}
 
-	public String getPassword() {
+	private String getPassword() {
 		return this.password;
 	}
 
-	public String firstName;
+	private String firstName;
 
 	public void setFirstName(String value) {
 		this.firstName = value;
@@ -48,7 +50,7 @@ public abstract class User {
 		return this.firstName;
 	}
 
-	public String lastName;
+	private String lastName;
 
 	public void setLastName(String value) {
 		this.lastName = value;
@@ -58,7 +60,7 @@ public abstract class User {
 		return this.lastName;
 	}
 
-	public String phoneNumer;
+	private String phoneNumer;
 
 	public void setPhoneNumer(String value) {
 		this.phoneNumer = value;
@@ -68,7 +70,7 @@ public abstract class User {
 		return this.phoneNumer;
 	}
 
-	public String emailAddress;
+	private String emailAddress;
 
 	public void setEmailAddress(String value) {
 		this.emailAddress = value;
@@ -78,7 +80,7 @@ public abstract class User {
 		return this.emailAddress;
 	}
 
-	public String description;
+	private String description;
 
 	public void setDescription(String value) {
 		this.description = value;
@@ -88,7 +90,7 @@ public abstract class User {
 		return this.description;
 	}
 
-	public Set<Address> address;
+	private Set<Address> address;
 
 	@OneToMany
 	public Set<Address> getAddress() {

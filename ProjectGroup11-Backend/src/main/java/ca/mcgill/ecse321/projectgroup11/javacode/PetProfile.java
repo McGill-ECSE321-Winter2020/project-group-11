@@ -17,32 +17,33 @@ public class PetProfile {
 
 	private String photoURL;
 
-	private void setPhotoURL(String value) {
+	public void setPhotoURL(String value) {
 		this.photoURL = value;
 	}
 
-	private String getPhotoURL() {
+	public String getPhotoURL() {
 		return this.photoURL;
 	}
 
 	private Integer id;
 
-	private void setId(Integer value) {
+	public void setId(Integer value) {
 		this.id = value;
 	}
 
 	@Id
-	private Integer getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
 	private String name;
 
-	private void setName(String value) {
+	public void setName(String value) {
 		this.name = value;
 	}
 
-	private String getName() {
+	public String getName() {
 		return this.name;
 	}
+
 }
