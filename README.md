@@ -8,7 +8,7 @@ This project aims to allow people looking to adopt pets to browse through pets u
 #### Deliverable 1:
 | Name          | Role          | Hours logged   |
 | ------------- |:-------------:| --------------:|
-| Libby         | Documentation, user end requirements | $1600          |
+| Libby         | Documentation, user end requirements | 10          |
 | Yacine        | Project lead      |   $12          |
 | Yanis         | backend      |    $1          |
 | Dixit         | UML modeling | $1600          |
