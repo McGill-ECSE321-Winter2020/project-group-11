@@ -4,15 +4,6 @@ package ca.mcgill.ecse321.projectgroup11.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,13 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
 import ca.mcgill.ecse321.projectgroup11.javacode.AdoptionPosting;
 import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
-import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
-import ca.mcgill.ecse321.projectgroup11.javacode.User;
-
-import org.junit.jupiter.api.Test;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class deliverable1test {
@@ -41,7 +27,7 @@ class deliverable1test {
 	@Autowired
 	private AddressRepository addressRepository;
 	@Autowired
-	private UserRepository userRepository;
+	private AccountUserRepository userRepository;
 	
 
 	@AfterEach

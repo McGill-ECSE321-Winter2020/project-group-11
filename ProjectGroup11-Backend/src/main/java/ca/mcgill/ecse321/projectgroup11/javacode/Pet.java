@@ -1,24 +1,14 @@
 package ca.mcgill.ecse321.projectgroup11.javacode;
 
+import ca.mcgill.ecse321.projectgroup11.javacode.PetProfile;
+
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Pet {
-	
-	private String type;
-
-	public void setType(String value) {
-		this.type = value;
-	}
-
-	public String getType() {
-		return this.type;
-	}
-
 	private Owner owner;
 
 	@ManyToOne
@@ -43,12 +33,12 @@ public class Pet {
 
 	private Integer id;
 
-	private void setId(Integer value) {
+	public void setId(Integer value) {
 		this.id = value;
 	}
 
 	@Id
-	private Integer getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
@@ -74,4 +64,13 @@ public class Pet {
 		this.petProfile = petProfile;
 	}
 
+	private String type;
+
+	public void setType(String value) {
+		this.type = value;
+	}
+
+	public String getType() {
+		return this.type;
+	}
 }

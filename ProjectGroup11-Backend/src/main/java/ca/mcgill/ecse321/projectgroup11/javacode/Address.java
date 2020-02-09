@@ -7,62 +7,62 @@ import javax.persistence.Id;
 public class Address {
 	private String street;
 
-	private void setStreet(String value) {
+	public void setStreet(String value) {
 		this.street = value;
 	}
 
-	private String getStreet() {
+	public String getStreet() {
 		return this.street;
 	}
 
 	private Integer streetNumber;
 
-	private void setStreetNumber(Integer value) {
+	public void setStreetNumber(Integer value) {
 		this.streetNumber = value;
 	}
 
-	private Integer getStreetNumber() {
+	public Integer getStreetNumber() {
 		return this.streetNumber;
 	}
 
 	private String city;
 
-	private void setCity(String value) {
+	public void setCity(String value) {
 		this.city = value;
 	}
 
-	private String getCity() {
+	public String getCity() {
 		return this.city;
 	}
 
 	private String province;
 
-	private void setProvince(String value) {
+	public void setProvince(String value) {
 		this.province = value;
 	}
 
-	private String getProvince() {
+	public String getProvince() {
 		return this.province;
 	}
 
 	private String postalCode;
 
-	private void setPostalCode(String value) {
+	public void setPostalCode(String value) {
 		this.postalCode = value;
 	}
 
-	private String getPostalCode() {
+	public String getPostalCode() {
 		return this.postalCode;
 	}
 
 	private String id;
 
-	private void setId(String value) {
+	public void setId(String value) {
 		this.id = value;
 	}
 
 	@Id
-	private String getId() {
+	public String getId() {
 		return this.id;
 	}
 }
