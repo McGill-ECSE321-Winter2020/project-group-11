@@ -1,0 +1,27 @@
+Allowing the Owner to Select the Final Adopter
+
+Description:
+A user (an owner) of the system that is hoping to find a suitable person to adopt the pet they have posted for adoption.
+They receive multiple offers from different users (adopters) which is presented in the form of a list. 
+This list will be ordered from best fit new owner to worst based on criteria outlined by the posted pet’s profile where 
+characteristics such as good with children, requires daily walks and is not friendly to other animals to list a few. 
+Then from that the list the owner of the pet can select the adopter they find most fit for their pet and contact them
+to complete the adoption process.
+
+Main Scenario:
+
+1. An owner connects to the pet adoption system
+2. The owner proceeds to check the list of potential adopters who would like to adopt the posted pet
+3. The owner selects an adopter from the list
+4. The owner is contacts the potential adopter
+5. The potential adopter answers and accepts the offer
+6. The owner and the adopter go through the adoption process
+
+Alternate Scenarios:
+
+2a. The owner has an empty list
+3a. The owner finds no suitable adopters
+3b. The owner selects an inactive user
+5a. The potential adopter does not answer
+5b. The potential adopter refuses the offer
+5c. The potential adopter is not who they seem on their profile and the owner refuses the offer
