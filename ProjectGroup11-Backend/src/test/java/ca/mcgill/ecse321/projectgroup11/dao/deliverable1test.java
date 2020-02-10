@@ -54,15 +54,9 @@ class deliverable1test {
 		Integer testing = 800; // creating an ID for the post
 		
 		AdoptionPosting post = new AdoptionPosting();
-		Pet hamza = new Pet();
-		hamza.setId(20);
 		post.setId(testing);
-		hamza.setAdoptionPosting(post);
-		petsRepository.createPet(20, 10, "Elephant");
-		//petsRepository.save(hamza);
-		post.setPet(hamza);
-
-		adoptionPostingRepository.save(post);
+		
+		post = adoptionPostingRepository.save(post);
 
 		post = null;
 
@@ -83,12 +77,11 @@ class deliverable1test {
 	public void testPersistAndLoadPet() {
 		/*
 		AdoptionPosting a = new AdoptionPosting();
+		
 		Pet dog = new Pet();
-		Adopter alfred = new Adopter();
-		alfred.setUserID(20);
 		
 
-		a.setId(20);
+		a.setId(50);
 		dog.setId(50);
 
 		a.setPet(dog);

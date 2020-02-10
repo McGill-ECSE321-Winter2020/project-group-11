@@ -1,0 +1,12 @@
+Browse Profile of Pets Available for Adoption:
+Use Case Detailed Specification: A customer can browse through pet profiles 
+and ,given his needs, 
+set some filters that will allow him to browse for a more specific and a smaller or equal list of profiles that match to its filters. If the filters give an empty list,
+the adopter is able to unset those filters or modify it.
+Before being able to actually Browse for pets, the adopter(same as customer for this context) must complete the registration part which will let him have access
+to the Pet Profiles, Applying for Adoption, Donation,etc. After the registration, the adopter is now able to look for pets. 
+If they are no such pet that meet its needs, the web browsing page should display "No Results" and also display a UI that
+will propose the adopter for some "Related Results". If there are no "Related Results" associated list then it should output
+the most popular pets for adoption linked to highly rated owners. When browsing, the adopter is able to select by left-clicking the pet profile. If the adopter already has
+posted for an adoption, he can still be able to browse. 
+

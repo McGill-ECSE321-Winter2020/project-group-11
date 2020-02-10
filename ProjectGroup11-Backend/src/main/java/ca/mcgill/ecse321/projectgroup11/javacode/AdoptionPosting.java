@@ -36,11 +36,13 @@ public class AdoptionPosting {
 
 	private Pet pet;
 
-	@OneToOne(mappedBy = "adoptionPosting", optional = true)
-	//@NotFound(action = NotFoundAction.IGNORE)
+
+	@OneToOne 
+	(mappedBy = "adoptionPosting", optional = true)
 	public Pet getPet() {
 		return this.pet;
 	}
+	
 
 	public void setPet(Pet pet) {
 		this.pet = pet;
