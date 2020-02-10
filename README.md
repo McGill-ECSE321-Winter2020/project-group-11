@@ -8,10 +8,10 @@ This project aims to allow people looking to adopt pets to browse through pets u
 #### Deliverable 1:
 | Name          | Role          | Hours logged   |
 | ------------- |:-------------:| --------------:|
-| Libby         | Documentation | 10          |
-| Yacine        | Project lead      |   8          |
+| Libby         | Documentation, project management | 10          |
+| Yacine        | Project lead, UML diagram      |   8          |
 | Yanis         | backend      |    5          |
 | Dixit         | UML modeling | 4          |
-| Keanu         | use-case diagram, requirements      |   4          |
+| Keanu         | use-case diagram, requirements      |   6          |
 
 Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/wiki/Deliverable-1)
