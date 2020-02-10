@@ -6,6 +6,9 @@ import java.util.Set;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 public class AdoptionPosting {
 	private Integer id;
@@ -32,10 +35,12 @@ public class AdoptionPosting {
 
 	private Pet pet;
 
-	@OneToOne(mappedBy = "adoptionPosting", optional = false)
+	@OneToOne 
+	(mappedBy = "adoptionPosting", optional = true)
 	public Pet getPet() {
 		return this.pet;
 	}
+	
 
 	public void setPet(Pet pet) {
 		this.pet = pet;

@@ -44,7 +44,7 @@ public class Pet {
 
 	private AdoptionPosting adoptionPosting;
 
-	@OneToOne(optional = false)
+	@OneToOne(optional = true)
 	public AdoptionPosting getAdoptionPosting() {
 		return this.adoptionPosting;
 	}
@@ -55,7 +55,7 @@ public class Pet {
 
 	private PetProfile petProfile;
 
-	@OneToOne(optional = false)
+	@OneToOne(optional = true)
 	public PetProfile getPetProfile() {
 		return this.petProfile;
 	}
