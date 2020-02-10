@@ -10,7 +10,7 @@ This project aims to allow people looking to adopt pets to browse through pets u
 | ------------- |:-------------:| --------------:|
 | Libby         | Documentation | 10          |
 | Yacine        | Project lead      |   $12          |
-| Yanis         | backend      |    $1          |
+| Yanis         | backend      |    4          |
 | Dixit         | UML modeling | $1600          |
 | Keanu         | use-case diagram, requirements      |   $12          |
 
