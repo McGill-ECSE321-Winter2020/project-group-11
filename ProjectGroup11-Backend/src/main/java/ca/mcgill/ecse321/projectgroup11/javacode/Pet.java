@@ -7,6 +7,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 @Entity
 public class Pet {
 	private Owner owner;

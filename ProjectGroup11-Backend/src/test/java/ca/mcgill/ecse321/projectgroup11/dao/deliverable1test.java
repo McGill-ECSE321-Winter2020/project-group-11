@@ -4,38 +4,25 @@ package ca.mcgill.ecse321.projectgroup11.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-<<<<<<< HEAD
-=======
-import java.util.HashSet;
-import java.util.Set;
-
->>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-<<<<<<< HEAD
-=======
-import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
-import ca.mcgill.ecse321.projectgroup11.javacode.Address;
-import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
->>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
 import ca.mcgill.ecse321.projectgroup11.javacode.AdoptionPosting;
 import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
-<<<<<<< HEAD
-=======
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
->>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class deliverable1test {
 	@Autowired
 	private AdoptionPostingRepository adoptionPostingRepository;
 	@Autowired
-	private PetRepository petRepository;
+	private PetsRepository petsRepository;
 	@Autowired
 	private PetProfileRepository petProfileRepository;
 	@Autowired
@@ -47,15 +34,20 @@ class deliverable1test {
 	
 
 	@AfterEach
+	@BeforeEach
 	public void clearDatabase() {
 		// We clear in this order => adoption_posting, pet, pet_profile, shelter, address, user
-		adoptionPostingRepository.deleteAll();
-		petRepository.deleteAll();
-		petProfileRepository.deleteAll();
+		petsRepository.clear();
+		//adoptionPostingRepository.deleteAll();
+		//petRepository.deleteAll();
+		//petProfileRepository.deleteAll();
 		shelterRepository.deleteAll();
 		addressRepository.deleteAll();
 		userRepository.deleteAll();
+		
 	}
+	
+	
 	
 	@Test
 	public void testPersistAndLoadAdoptionPosting() {
@@ -83,6 +75,7 @@ class deliverable1test {
 	
 	@Test 
 	public void testPersistAndLoadPet() {
+		/*
 		AdoptionPosting a = new AdoptionPosting();
 		
 		Pet dog = new Pet();
@@ -93,15 +86,28 @@ class deliverable1test {
 
 		a.setPet(dog);
 		dog.setAdoptionPosting(a);
-		a = adoptionPostingRepository.save(a);		
-		dog = petRepository.save(dog);
+		alfred.setAdoptionPosting(a);
+		Set<Adopter> c = new HashSet<Adopter>();
+		a.setAdopters(c);
+		*/
+		//petsRepository.removePet(20);
+		System.out.println("Making pet");
+		Pet dog = petsRepository.createPet(20, 30, "DOGGO");
+		System.out.println("Pet made");
+		
+		Pet p = petsRepository.getPet(20);
+		assertNotNull(p);
+		assertEquals("DOGGO", p.getType());
+		
+		//petRepository.save(dog);
+		
+		//adoptionPostingRepository.save(a);
+
 
 		
 
 
-
-
-
+		//dog.setAdoptionPosting(a);
 		
 	}
 	@Test
