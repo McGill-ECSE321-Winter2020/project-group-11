@@ -9,8 +9,8 @@ This project aims to allow people looking to adopt pets to browse through pets u
 | Name          | Role          | Hours logged   |
 | ------------- |:-------------:| --------------:|
 | Libby         | Documentation, project management | 10          |
-| Yacine        | Project lead, UML diagram      |   8          |
-| Yanis         | backend      |    5          |
+| Yacine        | Project lead, testing      |   8          |
+| Yanis         | backend, database      |    5          |
 | Dixit         | UML modeling | 4          |
 | Keanu         | use-case diagram, requirements      |   6          |
 
