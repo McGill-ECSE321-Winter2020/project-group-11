@@ -4,9 +4,12 @@ package ca.mcgill.ecse321.projectgroup11.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+<<<<<<< HEAD
+=======
 import java.util.HashSet;
 import java.util.Set;
 
+>>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,12 +17,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+<<<<<<< HEAD
+=======
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
 import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
+>>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
 import ca.mcgill.ecse321.projectgroup11.javacode.AdoptionPosting;
 import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
+<<<<<<< HEAD
+=======
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
+>>>>>>> branch 'master' of https://github.com/McGill-ECSE321-Winter2020/project-group-11.git
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 class deliverable1test {
