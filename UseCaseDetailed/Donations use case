@@ -1,0 +1,10 @@
+Use Case Name: Make and Accept Donations
+Actors: Owners and Adopters (Primary), Shelter (Secondary)
+Summary Description: The pet adoption system shal allow the pet shelter to accept donations
+Priority: Must Have
+Status: Low level of Detail
+Pre-Conditions: The donator has a method of online payment. The shelter has a method of receiving online payment.
+Post-Conditions: The donator and shelter receive an e-receipt of their transaction.
+Basic Path: 1. The donator navigates to the donation page. 2. The donator inputs the donation amount. 3. The donator inputs the method of payment. 4. The donator inputs the information regarding their method of payment. 5. The donator and the shelter receive a receipt to their e-mail.
+Alternate Paths: 4a.The payment method is invalid 4b. The payment method does not contain the funds necessary to donate the specified amount. 
+

@@ -1,0 +1,30 @@
+Description:
+
+A potential user of the system hoping to adopt an animal (an adopter) is attempting to access the pet adoption system.
+Before they may use the services, they must provide relavent information about themselves and their homes during a 
+sign up process. This information may include, but is not limited to, their name, address, email, and phone number.
+Only after this sign up information is received will the pet adoption system let them search through adoption postings.
+
+Main Scenario:
+
+1. A new potential adopter connects to the pet adoption system
+2. The system guides them towards a sign up process (through pop-ups or other such visual cues)
+3. The new adopter enter a valid username, password, name, address, phone number, email, and description
+4. A new account is made in the database for the account user
+5. The user will have access to view adoption postings
+
+Alternate Scenarios:
+
+2a. The user does not follow the prompts towards the sign up process
+3a. At least one of the values provided is not valid. 
+    3a.1 Any of the values contain SQL code
+    3a.2 The username is already taken
+    3a.3 The email can not be confirmed
+    3a.4 The phone number contains letters
+    3a.5 The description is longer than a built-in max word count
+4a. An error occurs (such as null values or incorrect mapping)
+
+
+
+
+
