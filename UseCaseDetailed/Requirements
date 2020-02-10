@@ -1,0 +1,14 @@
+1.	The pet adoption system shall require the adopter to sign up before allowing access to the pets posted for adoption.
+2.	The pet adoption system shall require the adopter to provide relevant information about themselves and their homes during the sign up process.
+3.	The pet adoption system shall allow the adopter to browse profiles of pets available for adoption after completing the sign up process. 
+4.	The pet adoption system shall allow the adopter to apply to adopt a selected pet after completing the sign up process.
+5.	The pet adoption system shall allow the user to ask for recommendations from the pet shelter.
+6.	The pet adoption system shall require the owner to sign up to allow the user to post their pet for adoption.
+7.	The pet adoption system shall require the owner to provide a description of the pet during the sign up process.
+8.	The pet adoption system shall allow the owner to provide a reason for putting their pet for adoption.
+9.	The pet adoption system shall allow the owner to see a list of candidates applying to adopt their pet.
+10.	The pet adoption system shall allow the owner to select the final adopter.
+11.	The pet adoption system shall allow the pet shelter to reply to questions from the user.
+12.	The pet adoption system shall allow the pet shelter to accept donations.
+13.	The pet adoption system shall be online twenty-four hours a day.
+14.	The pet adoption system shall be able to load pages in less than 1 second.
