@@ -1,0 +1,9 @@
+Providing the description of the pet up for adoption
+Use case detailed specification: the pet adoption system shall require the owner to provide a description of the pet
+before being able to complete the signup process
+
+In the signup page, the user will enter their information, and indicate their desire to put a pet up for adoption,
+after agreeing to save/confirm their information
+the user will be directed to a page in which they can upload a photo of their pet, indicate
+the species, breed, energy level, living conditions, health status, etcetera of their pet
+They will then be prompted to save/confirm their pet's profile.
