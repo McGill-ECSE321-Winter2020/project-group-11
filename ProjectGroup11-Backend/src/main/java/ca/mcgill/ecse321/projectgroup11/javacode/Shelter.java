@@ -22,7 +22,7 @@ public class Shelter {
 	private Manager manager;
 
 	@OneToOne(optional = false)
-	public Manager getManager() {
+	public AccountUser getManager() {
 		return this.manager;
 	}
 

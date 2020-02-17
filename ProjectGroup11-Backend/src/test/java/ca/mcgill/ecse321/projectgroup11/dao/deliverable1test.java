@@ -83,43 +83,16 @@ class deliverable1test {
 	
 	@Test 
 	public void testPersistAndLoadPet() {
-		/*
-		AdoptionPosting a = new AdoptionPosting();
-		
-		Pet dog = new Pet();
-		
 
-		a.setId(50);
-		dog.setId(50);
-
-		a.setPet(dog);
-		dog.setAdoptionPosting(a);
-		alfred.setAdoptionPosting(a);
-		Set<Adopter> c = new HashSet<Adopter>();
-		a.setAdopters(c);
-		*/
-		//petsRepository.removePet(20);
-		System.out.println("Making pet");
 		Pet dog = petsRepository.createPet(20, 30, "DOGGO");
-		System.out.println("Pet made");
 		dog =null;
 		dog = petsRepository.getPet(20);
 		assertNotNull(dog);
 		assertEquals("DOGGO", dog.getType());
 		assertEquals(20 , dog.getId());
-		assertEquals(30, dog.getAdoptionPosting().getId());
-		
-		//petRepository.save(dog);
-		
-		//adoptionPostingRepository.save(a);
-
-
-		
-
-
-		//dog.setAdoptionPosting(a);
-		
+		assertEquals(30, dog.getAdoptionPosting().getId());	
 	}
+	
 	@Test
 	public void testPersistAndLoadOwner() {
 		Owner hamza = new Owner();
@@ -153,43 +126,56 @@ class deliverable1test {
 	public void testPersistAndLoadShelter() {
 		
 		Shelter s = new Shelter();
+		
 		Pet p = petsRepository.createPet(50, 40, "dog");
 		Set<Pet> own = new HashSet<Pet>();
-		s.setId(20);
 		
+		s.setId(20);
+	
 		
 		own.add(p);
 		s.setPet(own);
+		
+		Manager m = new Manager();
+		m.setDescription("I am a manager");
+		m.setEmailAddress("yoohoo@yahoo.com");
+		m.setFirstName("RandomManage");
+		m.setLastName("Yeeeeee");
+		m.setUserID(20);
+		
+		
+		m.setShelter(s);
+		s.setManager(m);
+		
+		userRepository.save(m);
+		m = null;
+		m = (Manager) userRepository.findAccountUserByuserID(20);
+		
+		
+		//Ok, I'm noting here what happened:
+		//Basically, there was this recurring error of shelter being unable
+		//to find manager, even though it was clearly in the database.
+		//The problem was that it was looking for a manager table.
+		//I fixed this by making the getManager() method return an
+		//Account User - thereby making it look for an object in the AccountUser table
+		
 		s = shelterRepository.save(s);
 		s= null;
 		s= shelterRepository.findShelterById(20);
 		
 		assertNotNull(s);
 		assertEquals(20 , s.getId());
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 	}
+	
+	
 	@Test
 	public void testPersistAndLoadAddress() {
 		Address a = new Address();
-		a.setCity("Montréal");
+		a.setCity("Montreal");
 		a.setId(50);
 		a.setPostalCode("H2E1Z1");
-		a.setProvince("Québec");
+		a.setProvince("Quebec");
 		a.setStreetNumber(7501);
 		a.setStreet("Rue Rousselot");
 		
@@ -198,12 +184,12 @@ class deliverable1test {
 		a = null;
 		a = addressRepository.findAddressById(50);
 		assertNotNull(a);
-		assertEquals("Montréal" , a.getCity());
+		assertEquals("Montreal" , a.getCity());
 		assertEquals("H2E1Z1", a.getPostalCode());
 		assertEquals(50, a.getId());
 		assertEquals("Rue Rousselot", a.getStreet());
 		assertEquals(7501, a.getStreetNumber());
-		assertEquals("Québec", a.getProvince());
+		assertEquals("Quebec", a.getProvince());
 		
 		
 		
