@@ -1,13 +1,18 @@
 package ca.mcgill.ecse321.projectgroup11.javacode;
 
-import ca.mcgill.ecse321.projectgroup11.javacode.Address;
+import java.util.Set;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Set;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
 @Entity
+@DiscriminatorColumn(name="type",discriminatorType=DiscriminatorType.STRING)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class AccountUser {
 	private Integer userID;
 
