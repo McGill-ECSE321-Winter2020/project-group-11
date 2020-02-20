@@ -25,23 +25,13 @@ public abstract class AccountUser {
 		return this.userID;
 	}
 
-	private String username;
-
-	public void setUsername(String value) {
-		this.username = value;
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-
 	private String password;
 
-	private void setPassword(String value) {
+	public void setPassword(String value) {
 		this.password = value;
 	}
 
-	private String getPassword() {
+	public String getPassword() {
 		return this.password;
 	}
 

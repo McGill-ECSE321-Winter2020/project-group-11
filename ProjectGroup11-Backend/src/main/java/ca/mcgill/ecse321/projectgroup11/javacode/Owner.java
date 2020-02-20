@@ -1,10 +1,9 @@
 package ca.mcgill.ecse321.projectgroup11.javacode;
 
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.DiscriminatorType;
+import java.util.Set;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.util.Set;
 import javax.persistence.OneToMany;
 
 @Entity

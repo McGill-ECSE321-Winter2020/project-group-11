@@ -203,8 +203,7 @@ class deliverable1test {
 		a.setLastName("dam");
 		a.setPhoneNumer("514400230");
 		a.setUserID(50);
-		a.setUsername("jean99");
-		
+
 		a = userRepository.save(a);
 		a = null;
 		a = (Adopter) userRepository.findAccountUserByuserID(50);
@@ -216,9 +215,6 @@ class deliverable1test {
 		assertEquals("dam", a.getLastName());
 		assertEquals("514400230", a.getPhoneNumer());
 		assertEquals(50, a.getUserID());
-		assertEquals("jean99", a.getUsername());
-		
-		
 		
 	}
 	
@@ -231,7 +227,6 @@ class deliverable1test {
 		a.setLastName("dam");
 		a.setPhoneNumer("514400230");
 		a.setUserID(50);
-		a.setUsername("jean99");
 		
 		a = userRepository.save(a);
 		a = null;
@@ -244,7 +239,6 @@ class deliverable1test {
 		assertEquals("dam", a.getLastName());
 		assertEquals("514400230", a.getPhoneNumer());
 		assertEquals(50, a.getUserID());
-		assertEquals("jean99", a.getUsername());
 		
 		
 		

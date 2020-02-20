@@ -41,11 +41,19 @@ public class PetsRepository {
 		entityManager.persist(a);
 		entityManager.persist(p);
 		
-		
-		
-		
 		return p;
 	}
+	
+	@Transactional
+	public Pet save(Pet pet, PetProfile profile) {
+		pet.setPetProfile(profile);
+		
+		entityManager.persist(profile);
+		entityManager.persist(pet);
+		
+		return pet;
+	}
+	
 
 	@Transactional
 	public Pet getPet(Integer i) {
