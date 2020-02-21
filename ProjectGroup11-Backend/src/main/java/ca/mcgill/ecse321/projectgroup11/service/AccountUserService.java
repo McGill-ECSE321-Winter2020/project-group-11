@@ -41,7 +41,12 @@ public class AccountUserService {
 	}
 	
 	@Transactional
-	public List<AccountUser> findAccountUsersByName(String firstName, String lastName) {
+	public AccountUser getAccountUserByID(Integer ID) {
+		return userRepo.findAccountUserByuserID(ID);
+	}
+	
+	@Transactional
+	public List<AccountUser> getAccountUsersByName(String firstName, String lastName) {
 		ArrayList<AccountUser> users = new ArrayList<>();
 		Iterable<AccountUser> iterUsers = userRepo.findAll();
 		for(AccountUser user : iterUsers) {
@@ -54,7 +59,7 @@ public class AccountUserService {
 	}
 	
 	@Transactional
-	public List<AccountUser> findAccountUsersByEmail(String email) {
+	public List<AccountUser> getAccountUsersByEmail(String email) {
 		ArrayList<AccountUser> users = new ArrayList<>();
 		Iterable<AccountUser> iterUsers = userRepo.findAll();
 		for(AccountUser user : iterUsers) {
@@ -65,6 +70,13 @@ public class AccountUserService {
 		
 		return users;
 	}
+	
+	@Transactional
+	public AccountUser updateAccountUser(AccountUser a) {
+		userRepo.save(a);
+		return a;
+	}
+	
 	
 	
 	@Transactional
@@ -90,6 +102,14 @@ public class AccountUserService {
 		
 		return a;
 	}
+	
+	@Transactional
+	public Adopter updateAdopter(Adopter a) {
+		userRepo.save(a);
+		return a;
+	}
+	
+	
 	@Transactional
 	public Adopter createAdopter(String firstName, String lastName, String password, Integer ID) {
 		Adopter a = new Adopter();
@@ -109,7 +129,7 @@ public class AccountUserService {
 	}
 	
 	@Transactional
-	public List<AccountUser> findAllAdopters() {
+	public List<AccountUser> getAllAdopters() {
 		//TODO: Check if these things work. if not we might need a query method... fun
 		ArrayList<AccountUser> adopters = new ArrayList<>();
 		Iterable<AccountUser> users = userRepo.findAll();
@@ -120,6 +140,12 @@ public class AccountUserService {
 		return adopters;
 	}
 	
+	
+	@Transactional
+	public Owner updateOwner(Owner a) {
+		userRepo.save(a);
+		return a;
+	}
 	
 	@Transactional
 	public Owner createOwner(String firstName, String lastName, String email, String phone, 
@@ -160,8 +186,8 @@ public class AccountUserService {
 		
 		o.setUserID(ID);
 		
-		HashSet<Pet> pets = new HashSet<>();
-		o.setPet(pets);
+		//HashSet<Pet> pets = new HashSet<>();
+		//o.setPet(pets);
 
 		userRepo.save(o);
 		
@@ -180,6 +206,7 @@ public class AccountUserService {
 		HashSet<Pet> pets = new HashSet<>();
 		pets.add(pet);
 		o.setPet(pets);
+		
 
 		userRepo.save(o);
 		
@@ -256,7 +283,7 @@ public class AccountUserService {
 		return o;
 	}
 	@Transactional
-	public List<AccountUser> findAllOwners() {
+	public List<AccountUser> getAllOwners() {
 		ArrayList<AccountUser> owners = new ArrayList<>();
 		Iterable<AccountUser> users = userRepo.findAll();
 		for(AccountUser user : users) {
@@ -266,6 +293,11 @@ public class AccountUserService {
 		return owners;
 	}
 	
+	@Transactional
+	public Manager updateManager(Manager a) {
+		userRepo.save(a);
+		return a;
+	}
 	
 	@Transactional
 	public Manager createManager(String firstName, String lastName, String email, String phone, 
@@ -318,7 +350,7 @@ public class AccountUserService {
 	}
 	
 	@Transactional
-	public List<AccountUser> findAllManagers() {
+	public List<AccountUser> getAllManagers() {
 		ArrayList<AccountUser> managers = new ArrayList<>();
 		Iterable<AccountUser> users = userRepo.findAll();
 		for(AccountUser user : users) {

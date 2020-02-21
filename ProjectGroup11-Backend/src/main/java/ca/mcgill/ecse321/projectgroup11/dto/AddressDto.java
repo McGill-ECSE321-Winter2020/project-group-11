@@ -7,6 +7,15 @@ public class AddressDto {
 	private String province;
 	private String postalCode;
 	private Integer id;
+	
+	public AddressDto(Integer id, Integer streetNum, String street, String city, String province, String postal) {
+		this.street = street;
+		this.streetNumber = streetNum;
+		this.id = id;
+		this.city = city;
+		this.province = province;
+		this.postalCode = postal;
+	}
 
 	public String getStreet() {
 		return this.street;
