@@ -6,44 +6,33 @@ public class PetDto {
 	private ShelterDto shelter;
 	private AdoptionPostingDto adoptionPosting;
 	private PetProfileDto petProfile;
-	private String type;
 
 	public PetDto(Integer id) {
 		this.id = id;
-		this.type = "Koala-Hamster";
 	}
-	public PetDto(Integer id, String type) {
+	public PetDto(Integer id, PetProfileDto description) {
 		this.id = id;
-		this.type = type;
-	}
-	public PetDto(Integer id, String type, PetProfileDto description) {
-		this.id = id;
-		this.type = type;
 		this.petProfile = description;
 	}
-	public PetDto(Integer id, String type, PetProfileDto description, OwnerDto owner) {
+	public PetDto(Integer id, PetProfileDto description, OwnerDto owner) {
 		this.id = id;
 		this.owner = owner;
-		this.type = type;
 		this.petProfile = description;
 	}
-	public PetDto(Integer id, String type, PetProfileDto description, ShelterDto shelter) {
+	public PetDto(Integer id, PetProfileDto description, ShelterDto shelter) {
 		this.id = id;
 		this.shelter = shelter;
-		this.type = type;
 		this.petProfile = description;
 	}
-	public PetDto(Integer id, String type, PetProfileDto description, OwnerDto owner, AdoptionPostingDto posting) {
+	public PetDto(Integer id, PetProfileDto description, OwnerDto owner, AdoptionPostingDto posting) {
 		this.id = id;
 		this.owner = owner;
-		this.type = type;
 		this.petProfile = description;
 		this.adoptionPosting = posting;
 	}
-	public PetDto(Integer id, String type, PetProfileDto description, ShelterDto shelter, AdoptionPostingDto posting) {
+	public PetDto(Integer id, PetProfileDto description, ShelterDto shelter, AdoptionPostingDto posting) {
 		this.id = id;
 		this.shelter = shelter;
-		this.type = type;
 		this.petProfile = description;
 		this.adoptionPosting = posting;
 	}
@@ -62,8 +51,5 @@ public class PetDto {
 	}
 	public PetProfileDto getPetProfile() {
 		return this.petProfile;
-	}
-	public String getType() {
-		return this.type;
 	}
 }

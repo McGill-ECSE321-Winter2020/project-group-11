@@ -5,6 +5,18 @@ import javax.persistence.Id;
 
 @Entity
 public class PetProfile {
+	
+
+	private String type;
+
+	public void setType(String value) {
+		this.type = value;
+	}
+
+	public String getType() {
+		return this.type;
+	}
+	
 	private String description;
 
 	public void setDescription(String value) {
@@ -56,13 +68,13 @@ public class PetProfile {
 		return this.kidsOkay;
 	}
 
-	private String petsOkay;
+	private Boolean petsOkay;
 
-	public void setPetsOkay(String value) {
+	public void setPetsOkay(Boolean value) {
 		this.petsOkay = value;
 	}
 
-	public String getPetsOkay() {
+	public Boolean getPetsOkay() {
 		return this.petsOkay;
 	}
 	

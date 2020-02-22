@@ -1,14 +1,9 @@
 package ca.mcgill.ecse321.projectgroup11.javacode;
 
-import ca.mcgill.ecse321.projectgroup11.javacode.PetProfile;
-
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 @Entity
 public class Pet {
@@ -65,15 +60,5 @@ public class Pet {
 
 	public void setPetProfile(PetProfile petProfile) {
 		this.petProfile = petProfile;
-	}
-
-	private String type;
-
-	public void setType(String value) {
-		this.type = value;
-	}
-
-	public String getType() {
-		return this.type;
 	}
 }

@@ -5,11 +5,6 @@ import java.util.List;
 public class AdopterDto extends AccountUserDto {
 	// A LOT of constructors... I may have gone overboard. But there's just so many
 	// Attributes!
-
-	public AdopterDto(Integer ID, String firstName, String lastName) {
-		super(ID, firstName, lastName);
-	}
-
 	public AdopterDto(Integer ID, String firstName, String lastName, String emailAddress) {
 		super(ID, firstName, lastName, emailAddress);
 	}

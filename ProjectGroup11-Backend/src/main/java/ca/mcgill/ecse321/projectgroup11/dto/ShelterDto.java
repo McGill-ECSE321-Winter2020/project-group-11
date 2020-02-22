@@ -15,6 +15,10 @@ public class ShelterDto {
 		this.id = id;
 		this.manager = manager;
 	}
+	public ShelterDto(Integer id, List<PetDto> pets) {
+		this.id = id;
+		this.pets = pets;
+	}
 	public ShelterDto(Integer id, ManagerDto manager, List<PetDto> pets) {
 		this.id = id;
 		this.manager = manager;

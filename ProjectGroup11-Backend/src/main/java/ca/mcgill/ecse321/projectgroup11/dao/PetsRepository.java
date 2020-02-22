@@ -18,7 +18,7 @@ public class PetsRepository {
 	EntityManager entityManager;
 
 	@Transactional
-	public Pet createPet(Integer i, Integer adoptID, String type) {
+	public Pet createPet(Integer i, Integer adoptID) {
 		PetProfile pp = new PetProfile();
 		pp.setName("Hiya Name");
 		pp.setApartment(true);
@@ -27,7 +27,6 @@ public class PetsRepository {
 		
 		Pet p = new Pet();
 		p.setId(i);
-		p.setType(type);
 		p.setPetProfile(pp);
 		
 		AdoptionPosting a = new AdoptionPosting();
@@ -48,7 +47,7 @@ public class PetsRepository {
 	public Pet save(Pet pet, PetProfile profile) {
 		pet.setPetProfile(profile);
 		
-		entityManager.persist(profile);
+		if(profile != null) entityManager.persist(profile);
 		entityManager.persist(pet);
 		
 		return pet;
@@ -56,9 +55,15 @@ public class PetsRepository {
 	
 
 	@Transactional
-	public Pet getPet(Integer i) {
+	public Pet findPet(Integer i) {
 		Pet p = entityManager.find(Pet.class, i);
 		return p;
+	}
+	
+	@Transactional
+	public List<Pet> findAll() {
+		return entityManager.createQuery(
+			      "SELECT * FROM Pet", Pet.class).getResultList();
 	}
 	
 	@Transactional

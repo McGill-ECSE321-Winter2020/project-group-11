@@ -84,11 +84,10 @@ class deliverable1test {
 	@Test 
 	public void testPersistAndLoadPet() {
 
-		Pet dog = petsRepository.createPet(20, 30, "DOGGO");
+		Pet dog = petsRepository.createPet(20, 30);
 		dog =null;
-		dog = petsRepository.getPet(20);
+		dog = petsRepository.findPet(20);
 		assertNotNull(dog);
-		assertEquals("DOGGO", dog.getType());
 		assertEquals(20 , dog.getId());
 		assertEquals(30, dog.getAdoptionPosting().getId());	
 	}
@@ -127,7 +126,7 @@ class deliverable1test {
 		
 		Shelter s = new Shelter();
 		
-		Pet p = petsRepository.createPet(50, 40, "dog");
+		Pet p = petsRepository.createPet(50, 40);
 		Set<Pet> own = new HashSet<Pet>();
 		
 		s.setId(20);
@@ -255,7 +254,7 @@ class deliverable1test {
 		p.setId(20);
 		p.setHighEnergy(true);
 		p.setKidsOkay(true);
-		p.setPetsOkay("no");
+		p.setPetsOkay(false);
 		p.setPhotoURL("index.html");
 		p.setName("baki");
 		
@@ -272,7 +271,7 @@ class deliverable1test {
 		assertEquals(20, p.getId());
 		assertEquals(true, p.getHighEnergy());
 		assertEquals(true, p.getKidsOkay());
-		assertEquals("no", p.getPetsOkay());
+		assertEquals(false, p.getPetsOkay());
 		assertEquals("index.html" , p.getPhotoURL());
 		assertEquals("baki" , p.getName());
 

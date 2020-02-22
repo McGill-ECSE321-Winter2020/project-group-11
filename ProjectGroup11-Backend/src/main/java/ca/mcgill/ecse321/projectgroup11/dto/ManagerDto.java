@@ -7,9 +7,6 @@ public class ManagerDto extends AccountUserDto {
 	// A LOT of constructors... I may have gone overboard. But there's just so many
 	// Attributes!
 
-	public ManagerDto(Integer ID, String firstName, String lastName) {
-		super(ID, firstName, lastName);
-	}
 	public ManagerDto(Integer ID, String firstName, String lastName, String emailAddress) {
 		super(ID, firstName, lastName, emailAddress);
 	}

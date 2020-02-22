@@ -6,15 +6,6 @@ public class OwnerDto extends AccountUserDto {
 	// A LOT of constructors... I may have gone overboard. But there's just so many
 	// Attributes!
 
-	public OwnerDto(Integer ID, String firstName, String lastName) {
-		super(ID, firstName, lastName);
-	}
-
-	public OwnerDto(Integer ID, String firstName, String lastName, List<PetDto> pets) {
-		super(ID, firstName, lastName);
-		this.pets = pets;
-	}
-
 	public OwnerDto(Integer ID, String firstName, String lastName, String emailAddress) {
 		super(ID, firstName, lastName, emailAddress);
 	}
