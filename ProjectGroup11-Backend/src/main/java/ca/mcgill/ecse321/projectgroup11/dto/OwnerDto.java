@@ -5,26 +5,71 @@ import java.util.List;
 public class OwnerDto extends AccountUserDto {
 	// A LOT of constructors... I may have gone overboard. But there's just so many
 	// Attributes!
+	/* We wrote here all the possible ways to create an OwnerDto object using many different constructors with different input (with respect to the constraints we decided (for instance : every object should have an id , so the id param will be there for each constructor)
 
+	/**
+	 *
+	 * 
+	 * @param ID
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 */
 	public OwnerDto(Integer ID, String firstName, String lastName, String emailAddress) {
 		super(ID, firstName, lastName, emailAddress);
 	}
-
+	/**
+	 * 
+	 * @param ID
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 * @param phoneNumber
+	 */
 	public OwnerDto(Integer ID, String firstName, String lastName, String emailAddress,
 					String phoneNumber) {
 		super(ID, firstName, lastName, emailAddress, phoneNumber);
 	}
+	/**
+	 * 
+	 * @param ID
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 * @param phoneNumber
+	 * @param description
+	 */
 
 	public OwnerDto(Integer ID, String firstName, String lastName, String emailAddress,
 					String phoneNumber, String description) {
 		super(ID, firstName, lastName, emailAddress, phoneNumber, description);
 	}
+	/**
+	 * 
+	 * @param ID
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 * @param phoneNumber
+	 * @param description
+	 * @param address
+	 */
 
 	public OwnerDto(Integer ID, String firstName, String lastName, String emailAddress,
 					String phoneNumber, String description, List<AddressDto> address) {
 		super(ID, firstName, lastName, emailAddress, phoneNumber, description, address);
 	}
-
+	/**
+	 * 
+	 * @param ID
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 * @param phoneNumber
+	 * @param description
+	 * @param address
+	 * @param pets
+	 */
 	public OwnerDto(Integer ID, String firstName, String lastName, String emailAddress,
 					String phoneNumber, String description, List<AddressDto> address, List<PetDto> pets) {
 		super(ID, firstName, lastName, emailAddress, phoneNumber, description, address);

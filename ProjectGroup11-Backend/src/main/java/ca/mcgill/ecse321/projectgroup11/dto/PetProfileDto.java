@@ -13,12 +13,32 @@ public class PetProfileDto {
 	private String healthConcerns;
 	private Integer id;
 	
+	// Given the logic of the constructors, a PetProfile object can have id name and type OR must specify all the more exhaustive fields (kids okay apartment etc)
 	
+	/**
+	 * 
+	 * @param ID
+	 * @param name
+	 * @param type
+	 */
 	public PetProfileDto(Integer ID, String name, String type) {
 		//RIP - wish I knew this was possible before making AccountUser
 		this(ID, name, type, null, null, null, null, null, null, null, null);
 	}
-	
+	/**
+	 * 
+	 * @param ID
+	 * @param name
+	 * @param type
+	 * @param description
+	 * @param photoURL
+	 * @param breed
+	 * @param apartment
+	 * @param kidsOk
+	 * @param petsOk
+	 * @param highEnergy
+	 * @param healthConcerns
+	 */
 	public PetProfileDto(Integer ID, String name, String type, String description, 
 						 String photoURL,String breed, Boolean apartment, Boolean kidsOk, 
 						 Boolean petsOk, Boolean highEnergy, String healthConcerns) {

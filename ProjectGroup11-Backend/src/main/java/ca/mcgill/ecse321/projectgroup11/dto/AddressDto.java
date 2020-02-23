@@ -8,6 +8,17 @@ public class AddressDto {
 	private String postalCode;
 	private Integer id;
 	
+	/* We wrote here all the possible ways to create an AddressDto object using many different constructors with different input (with respect to the constraints we decided (for instance : every object should have an id , so the id param will be there for each constructor)
+
+	/**
+	 * 
+	 * @param id
+	 * @param streetNum
+	 * @param street
+	 * @param city
+	 * @param province
+	 * @param postal
+	 */
 	public AddressDto(Integer id, Integer streetNum, String street, String city, String province, String postal) {
 		this.street = street;
 		this.streetNumber = streetNum;
