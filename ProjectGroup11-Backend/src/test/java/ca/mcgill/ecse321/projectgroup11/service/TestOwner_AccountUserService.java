@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.projectgroup11.dao;
+package ca.mcgill.ecse321.projectgroup11.service;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 import org.mockito.MockitoAnnotations;
 
+import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
 import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
@@ -23,14 +24,18 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
-import static org.mockito.Matchers.anyInt;
+
 
 
 import org.junit.jupiter.api.Test;
+
+
 @ExtendWith(MockitoExtension.class)
-class owner_account_user_service_test {
+class TestOwner_AccountUserService{
+	
 	@Mock
 	private AccountUserRepository userDao;
 
@@ -42,6 +47,7 @@ class owner_account_user_service_test {
 
 	@BeforeEach
 	public void setUp() throws Exception {
+		//When finding by ID - return an Owner with ID USER_KEY if passed with ID user_key
 		lenient().when(userDao.findAccountUserByuserID(anyInt())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(USER_KEY)) {
 				Owner person = new Owner();
@@ -57,56 +63,79 @@ class owner_account_user_service_test {
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
 		};
+		
 		lenient().when(userDao.save(any(Owner.class))).thenAnswer(returnParameterAsAnswer);
 	}
-
+	
+	
 	@Test
-	// Try create owner with an incorrect name (recall account user service => name + last name separed by a space)
-
-	void testCreateOwnerIncorrectName() {
-		Owner id = service.createOwner("String Char", "ken@hotmail.com", "MUNRO", 40);
+	void testCreateOwner() {
+		Owner owner = null;
 		try {
-			Owner manger = service.createOwner("manger", "ok@hotmail.com", "noob", 50);
-
+			owner = service.createOwner("Hello World", "ken@hotmail.com", "MUNRO", 40);
+		} catch (IllegalArgumentException e) {
+			fail();
 		}
 
-		catch(Exception e) {
-			String error = e.getMessage();
-			assertEquals( "Invalid Name", error );
-
-
-		}
+		assertNotNull(owner);
+		// check error
+		assertEquals("Hello", owner.getFirstName());
+		assertEquals("World", owner.getLastName());
+		assertEquals("ken@hotmail.com", owner.getEmailAddress());
+		assertEquals("MUNRO", owner.getPassword());
+		assertEquals(40, owner.getUserID());
 	}
+
+	// Try create owner with an incorrect name (recall account user service => name + last name separed by a space)
+	@Test
+	void testCreateOwnerIncorrectName() {
+		String name = " ";
+		String error = null;
+		Owner owner = null;
+		try {
+			owner = service.createOwner(name, "ken@hotmail.com", "MUNRO", 40);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+
+		assertNull(owner);
+		// check error
+		assertEquals("Invalid Name", error);
+		
+	}
+	
+	
 	@Test
 	// Try create owner with an incorrect email 
 	void testCreateOwnerIncorrectEmail() {
+		String error = "";
+		String email = "notemail";
+		Owner owner = null;
 		try {
-			Owner manger = service.createOwner("manger jouer", "notemail", "noob", 50);
+			owner = service.createOwner("manger jouer", email, "noob", 50);
 
+		} catch(Exception e) {
+			error = e.getMessage();
 		}
-
-		catch(Exception e) {
-			String error = e.getMessage();
-			assertEquals( "Invalid Email", error );
-
-
-		}
+		
+		assertNull(owner);
+		assertEquals( "Invalid Email", error );
 	}
+	
 	@Test
 	// Try create owner with a password less than 4 characters
 	void testCreateOwnerShortPassword() {
-
+		String error = "";
+		String password = "ok";
+		Owner owner = null;
 		try {
-			Owner manger = service.createOwner("manger jouer", "notemail@hotmail.com", "ok", 50);
-
+			owner = service.createOwner("manger jouer", "notemail@hotmail.com", "ok", 50);
+		} catch(Exception e) {
+			error = e.getMessage();
 		}
-
-		catch(Exception e) {
-			String error = e.getMessage();
-			assertEquals( "Invalid Password - must be between 4 and 20 characters", error );
-
-
-		}
+		
+		assertNull(owner);
+		assertEquals( "Invalid Password - must be between 4 and 20 characters", error );
 	}
 
 	@Test
@@ -214,10 +243,17 @@ class owner_account_user_service_test {
 			assertEquals(e.getMessage() , "Cannot update owner that is not in the database");
 		}
 	}
+	
 	@Test
 	// Try to get an null account user by browsing for nonexisting iD
 	public void testGetNonExistingPerson() {
 		assertNull(service.getAccountUserByID(NONEXISTING_KEY));
+	}
+	
+	@Test
+	// Try to get an null account user by browsing for nonexisting iD
+	public void testGetExistingPerson() {
+		assertEquals(USER_KEY, service.getAccountUserByID(USER_KEY).getUserID());
 	}
 	
 	

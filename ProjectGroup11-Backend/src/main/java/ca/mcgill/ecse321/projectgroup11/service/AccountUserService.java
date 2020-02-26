@@ -322,13 +322,10 @@ public class AccountUserService {
 	 */
 	public Owner createOwner(String name, String email, String password, Integer ID) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
-		AccountUser a = userRepo.findAccountUserByuserID(ID);
-		List<AccountUser> b = getAllOwners();
 		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
 			
 			throw new IllegalArgumentException("ID already used");
-		}
-		else {
+		} else {
 			// Throw an exception if and only if the given email is already in the database
 
 			if ( !(getAccountUsersByEmail(email).isEmpty())) throw new IllegalArgumentException("Email Already used");
@@ -341,6 +338,7 @@ public class AccountUserService {
 				Owner o = new Owner();
 				o.setFirstName(name.substring(0, space));
 				o.setLastName(name.substring(space+1));
+				o.setPassword(password);
 
 				o.setUserID(ID);
 				o.setEmailAddress(email);
