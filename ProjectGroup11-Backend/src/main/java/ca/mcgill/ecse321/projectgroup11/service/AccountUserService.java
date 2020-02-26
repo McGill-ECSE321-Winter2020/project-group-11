@@ -265,7 +265,7 @@ public class AccountUserService {
 			Integer ID, Pet pet) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
 
-		if ((userRepo.findAccountUserByuserID(ID).getUserID() == null))  {
+		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
 			throw new IllegalArgumentException("ID already used");
 		}
 		else
@@ -275,6 +275,7 @@ public class AccountUserService {
 			if ( !(getAccountUsersByEmail(email).isEmpty())) throw new IllegalArgumentException("Email Already used");
 			else {
 				validateAccountUser(name, email, phone, password, description, ID);
+				if(!validPhoneNumber(phone)) throw new IllegalArgumentException("Incorrect Phone Number");
 
 				int space = name.indexOf(' ');
 
@@ -287,6 +288,7 @@ public class AccountUserService {
 					addresses.add(address);
 					o.setAddress(addresses);
 				}
+				if(address == null) throw new IllegalArgumentException("address must be written");
 
 				o.setEmailAddress(email);
 				o.setPhoneNumer(phone);
@@ -299,6 +301,7 @@ public class AccountUserService {
 					pets.add(pet);
 					o.setPet(pets);
 				}
+				if(pet == null) throw new IllegalArgumentException("Can't have a null pet, use other constructor");
 
 				userRepo.save(o);
 
@@ -319,6 +322,8 @@ public class AccountUserService {
 	 */
 	public Owner createOwner(String name, String email, String password, Integer ID) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
+		AccountUser a = userRepo.findAccountUserByuserID(ID);
+		List<AccountUser> b = getAllOwners();
 		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
 			
 			throw new IllegalArgumentException("ID already used");
@@ -374,6 +379,8 @@ public class AccountUserService {
 				HashSet<Pet> pets = new HashSet<>();
 				pets.add(pet);
 				o.setPet(pets);
+				if(pet == null) throw new IllegalArgumentException("Can't have a null pet, use other constructor");
+
 				userRepo.save(o);
 
 				return o;
