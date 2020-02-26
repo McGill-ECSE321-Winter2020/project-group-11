@@ -135,7 +135,7 @@ public class AccountUserService {
 			String password, String description, Address address,
 			Integer ID) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
-		if ((userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
+		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
 			throw new IllegalArgumentException("ID already used");
 		}
 		else {
@@ -175,7 +175,7 @@ public class AccountUserService {
 	@Transactional
 	public Adopter createAdopter(String name, String email, String password, Integer ID) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
-		if ((userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
+		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
 			throw new IllegalArgumentException("ID already used");
 		}
 		else
@@ -323,7 +323,7 @@ public class AccountUserService {
 	public Owner createOwner(String name, String email, String password, Integer ID) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
 		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
-			
+
 			throw new IllegalArgumentException("ID already used");
 		} else {
 			// Throw an exception if and only if the given email is already in the database
@@ -363,7 +363,8 @@ public class AccountUserService {
 	 */
 	public Owner createOwner(String name, String email, String password, Integer ID, Pet pet) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
-		if ((userRepo.findAccountUserByuserID(ID).getUserID() == null))  {
+		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
+
 			throw new IllegalArgumentException("ID already used");
 		}
 		else
@@ -444,7 +445,8 @@ public class AccountUserService {
 			String password, String description, Address address,
 			Integer ID, Shelter shelter) {
 		// Throw an exception if and only if the given ID is already in the DATABASE
-		if ((userRepo.findAccountUserByuserID(ID).getUserID() == null))  {
+		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
+
 			throw new IllegalArgumentException("ID already used");
 		}
 		else
@@ -495,7 +497,7 @@ public class AccountUserService {
 	public Manager createManager(String name, String email, String password, Integer ID) {
 
 		// Throw an exception if and only if the given ID is already in the DATABASE
-		if ((userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
+		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
 			throw new IllegalArgumentException("ID already used");
 		}
 		else

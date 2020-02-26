@@ -103,6 +103,23 @@ class TestOwner_AccountUserService{
 		assertEquals("Invalid Name", error);
 		
 	}
+	// Try creating Owner with only first name
+	@Test
+	void testCreateOwnerFirstNameOrLastNameOnly() {
+		String name = "Jean ";
+		String error = null;
+		Owner owner = null;
+		try {
+			owner = service.createOwner(name, "ken@hotmail.com", "MUNRO", 40);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
+		}
+
+		assertNull(owner);
+		// check error
+		assertEquals("Invalid Name", error);
+		
+	}
 	
 	
 	@Test
@@ -254,6 +271,16 @@ class TestOwner_AccountUserService{
 	// Try to get an null account user by browsing for nonexisting iD
 	public void testGetExistingPerson() {
 		assertEquals(USER_KEY, service.getAccountUserByID(USER_KEY).getUserID());
+	}
+	
+	@Test
+	// Finally creating correctly an owner with the three constructors
+	public void testFinalCreateOwner() {
+		Pet x = new Pet();
+		
+		Owner a = service.createOwner("Jean Michel", "ok@hotmail.com", "vivaAlgeria", 20);
+		Owner b = service.createOwner("Yacine du99", "bc@hotmail.com", "HamzaBenatia", 30, x);
+		System.out.println(b.getPet());
 	}
 	
 	
