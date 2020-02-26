@@ -44,6 +44,7 @@ class TestOwner_AccountUserService{
 
 	private static final int USER_KEY = 5;
 	private static final int NONEXISTING_KEY = 20;
+	private static final String EMAIL_KEY = "team@hotmail.com";
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -58,6 +59,16 @@ class TestOwner_AccountUserService{
 				return null;
 			}
 		});
+		
+		lenient().when(userDao.findAccountUserByEmail(anyString())).thenAnswer((InvocationOnMock invocation) -> {
+			if (invocation.getArgument(0).equals(EMAIL_KEY)) {
+				Owner a = new Owner();
+				a.setEmailAddress(EMAIL_KEY);
+				return a;
+			} else {
+				return null;
+			}
+		});
 
 		// Whenever anything is saved, just return the parameter object
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
@@ -65,6 +76,10 @@ class TestOwner_AccountUserService{
 		};
 		
 		lenient().when(userDao.save(any(Owner.class))).thenAnswer(returnParameterAsAnswer);
+		
+		
+
+		
 	}
 	
 	
@@ -273,14 +288,57 @@ class TestOwner_AccountUserService{
 		assertEquals(USER_KEY, service.getAccountUserByID(USER_KEY).getUserID());
 	}
 	
+	
 	@Test
 	// Finally creating correctly an owner with the three constructors
 	public void testFinalCreateOwner() {
 		Pet x = new Pet();
+		Pet y = new Pet();
+		Address z = new Address();
 		
 		Owner a = service.createOwner("Jean Michel", "ok@hotmail.com", "vivaAlgeria", 20);
-		Owner b = service.createOwner("Yacine du99", "bc@hotmail.com", "HamzaBenatia", 30, x);
-		System.out.println(b.getPet());
+		Owner b = service.createOwner("Yacine duNeufNeuf", "bc@hotmail.com", "HamzaBenatia", 30, x);
+		Owner c = service.createOwner("Jean Michael", "ng@hotmail.com", "514-495-0371", "intellijide", "un jour jserais back dans le 99 , cs.villeray turin villeray",z , 70, y);
+		
+		assertNotNull(a);
+		assertNotNull(b);
+		assertNotNull(c);
+		
+		// Verifying fields for first constructor
+		assertEquals(a.getFirstName(), "Jean");
+		assertEquals(a.getLastName() , "Michel");
+		assertEquals(a.getAddress() , null);
+		assertEquals(a.getPet() , null);
+		assertEquals(a.getPassword(), "vivaAlgeria");
+		assertEquals(a.getUserID(), 20);
+		assertEquals(a.getEmailAddress(), "ok@hotmail.com");
+		assertEquals(a.getPhoneNumer() , null);
+		assertEquals(a.getDescription(), null);
+		
+		// Verifying fields for second constructor
+		
+		assertEquals(b.getFirstName(), "Yacine");
+		assertEquals(b.getLastName(), "duNeufNeuf");
+		assertEquals(b.getPet().contains(x) , true);
+		assertEquals(b.getAddress() , null);
+		assertEquals(b.getEmailAddress(), "bc@hotmail.com");
+		assertEquals(b.getPassword(), "HamzaBenatia");
+		assertEquals(b.getUserID(), 30);
+		assertEquals(b.getPhoneNumer(), null);
+		assertEquals(b.getDescription(), null);
+		
+		// Verifying fields for third constructor
+		
+
+		assertEquals(c.getFirstName(), "Jean");
+		assertEquals(c.getLastName(), "Michael");
+		assertEquals(c.getPet().contains(y) , true);
+		assertEquals(c.getAddress().contains(z) , true);
+		assertEquals(c.getEmailAddress(), "ng@hotmail.com");
+		assertEquals(c.getPassword(), "intellijide");
+		assertEquals(c.getUserID(), 70);
+		assertEquals(c.getPhoneNumer() ,"514-495-0371" );
+		assertEquals(c.getDescription(), "un jour jserais back dans le 99 , cs.villeray turin villeray");
 	}
 	
 	
