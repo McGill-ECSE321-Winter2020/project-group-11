@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.projectgroup11.service;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 
@@ -18,6 +19,11 @@ import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.javacode.Shelter;
 
+/**
+ * 
+ * @author ProjectGroup11
+ *
+ */
 @Service
 public class AccountUserService {
 
@@ -513,6 +519,7 @@ public class AccountUserService {
 				Manager m = new Manager();
 				m.setFirstName(name.substring(0, space));
 				m.setLastName(name.substring(space+1));
+				m.setEmailAddress(email);
 
 				m.setPassword(password);
 
@@ -529,7 +536,7 @@ public class AccountUserService {
 	/**
 	 * 
 	 * @param id
-	 * @return find a manger with the ID
+	 * @return find a manager with the ID
 	 */
 	public Manager getManagerByID(Integer id) {
 		if(id == null) return null;

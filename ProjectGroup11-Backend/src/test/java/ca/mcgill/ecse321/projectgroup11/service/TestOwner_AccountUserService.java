@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
+import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
 import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.service.AccountUserService;
@@ -32,6 +33,11 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
+/**
+ * 
+ * @author ProjectGroup11
+ *
+ */
 
 @ExtendWith(MockitoExtension.class)
 class TestOwner_AccountUserService{
@@ -183,6 +189,18 @@ class TestOwner_AccountUserService{
 			assertEquals( "Invalid Password - must be between 4 and 20 characters", error );
 
 
+		}
+	}
+	@Test
+	//Try creating an Owner with email already in the database
+	void testCreateOwnerWithEmailAlreadyInDB() {
+		
+		try {
+			Owner owner = service.createOwner("Jean Salem", EMAIL_KEY, "numérotons", 99);
+			
+		}
+		catch (Exception e) {
+			assertEquals(e.getMessage() , "Email Already used");
 		}
 	}
 

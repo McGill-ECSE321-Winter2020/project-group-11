@@ -16,7 +16,9 @@ import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
 import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
+import ca.mcgill.ecse321.projectgroup11.javacode.Manager;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
+import ca.mcgill.ecse321.projectgroup11.javacode.Shelter;
 import ca.mcgill.ecse321.projectgroup11.service.AccountUserService;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -40,7 +42,7 @@ import org.junit.jupiter.api.Test;
  */
 
 @ExtendWith(MockitoExtension.class)
-class TestAdopter_AccountUserService{
+class TestManager_AccountUserService{
 	
 	@Mock
 	private AccountUserRepository userDao;
@@ -57,10 +59,10 @@ class TestAdopter_AccountUserService{
 		//When finding by ID - return an Adopter with ID USER_KEY if passed with ID user_key
 		lenient().when(userDao.findAccountUserByuserID(anyInt())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(USER_KEY)) {
-				Adopter person = new Adopter();
-				person.setUserID(USER_KEY);
-				person.setEmailAddress("bien@hotmail.com");
-				return person;
+				Manager manager = new Manager();
+				manager.setUserID(USER_KEY);
+				manager.setEmailAddress("bien@hotmail.com");
+				return manager;
 			} else {
 				return null;
 			}
@@ -68,7 +70,7 @@ class TestAdopter_AccountUserService{
 		
 		lenient().when(userDao.findAccountUserByEmail(anyString())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(EMAIL_KEY)) {
-				Adopter a = new Adopter();
+				Manager a = new Manager();
 				a.setEmailAddress(EMAIL_KEY);
 				return a;
 			} else {
@@ -81,7 +83,7 @@ class TestAdopter_AccountUserService{
 			return invocation.getArgument(0);
 		};
 		
-		lenient().when(userDao.save(any(Adopter.class))).thenAnswer(returnParameterAsAnswer);
+		lenient().when(userDao.save(any(Manager.class))).thenAnswer(returnParameterAsAnswer);
 		
 		
 
@@ -90,53 +92,65 @@ class TestAdopter_AccountUserService{
 	
 	
 	@Test
-	void testCreateAdopter() {
-		Adopter adopter = null;
+	void testCreateManager() {
+		Manager manager = null;
 		try {
-			adopter = service.createAdopter("Hello World", "ken@hotmail.com", "MUNRO", 40);
+			manager = service.createManager("Hello World", "ken@hotmail.com", "MUNRO", 40);
 		} catch (IllegalArgumentException e) {
 			fail();
 		}
 
-		assertNotNull(adopter);
+		assertNotNull(manager);
 		// check error
-		assertEquals("Hello", adopter.getFirstName());
-		assertEquals("World", adopter.getLastName());
-		assertEquals("ken@hotmail.com", adopter.getEmailAddress());
-		assertEquals("MUNRO", adopter.getPassword());
-		assertEquals(40, adopter.getUserID());
+		assertEquals("Hello", manager.getFirstName());
+		assertEquals("World", manager.getLastName());
+		assertEquals("ken@hotmail.com", manager.getEmailAddress());
+		assertEquals("MUNRO", manager.getPassword());
+		assertEquals(40, manager.getUserID());
 	}
 
-	// Try create Adopter with an incorrect name (recall account user service => name + last name separed by a space)
+	// Try create Manager with an incorrect name (recall account user service => name + last name separed by a space)
 	@Test
 	void testCreateAdopterIncorrectName() {
 		String name = " ";
 		String error = null;
-		Adopter adopter = null;
+		Manager manager = null;
 		try {
-			adopter = service.createAdopter(name, "ken@hotmail.com", "MUNRO", 40);
+			manager = service.createManager(name, "ken@hotmail.com", "MUNRO", 40);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 
-		assertNull(adopter);
+		assertNull(manager);
 		// check error
 		assertEquals("Invalid Name", error);
 		
 	}
-	// Try creating Adopter with only first name
 	@Test
-	void testCreateAdopterFirstNameOrLastNameOnly() {
+	//Try creating an Manager with email already in the database
+	void testCreateManagerWithEmailAlreadyInDB() {
+		
+		try {
+			Manager manger = service.createManager("Jean Salem", EMAIL_KEY, "numérotons", 99);
+			
+		}
+		catch (Exception e) {
+			assertEquals(e.getMessage() , "Email Already used");
+		}
+	}
+	// Try creating Manager with only first name
+	@Test
+	void testCreateManagerFirstNameOrLastNameOnly() {
 		String name = "Jean ";
 		String error = null;
-		Adopter adopter = null;
+		Manager manager = null;
 		try {
-			adopter = service.createAdopter(name, "ken@hotmail.com", "MUNRO", 40);
+			manager = service.createManager(name, "ken@hotmail.com", "MUNRO", 40);
 		} catch (IllegalArgumentException e) {
 			error = e.getMessage();
 		}
 
-		assertNull(adopter);
+		assertNull(manager);
 		// check error
 		assertEquals("Invalid Name", error);
 		
@@ -144,43 +158,43 @@ class TestAdopter_AccountUserService{
 	
 	
 	@Test
-	// Try create Adopter with an incorrect email 
-	void testCreateAdopterIncorrectEmail() {
+	// Try create Manager with an incorrect email 
+	void testCreateManagerIncorrectEmail() {
 		String error = "";
 		String email = "notemail";
-		Adopter adopter = null;
+		Manager manager = null;
 		try {
-			adopter = service.createAdopter("manger jouer", email, "noob", 50);
+			manager = service.createManager("manger jouer", email, "noob", 50);
 
 		} catch(Exception e) {
 			error = e.getMessage();
 		}
 		
-		assertNull(adopter);
+		assertNull(manager);
 		assertEquals( "Invalid Email", error );
 	}
 	
 	@Test
-	// Try create Adopter with a password less than 4 characters
-	void testCreateAdopterShortPassword() {
+	// Try create Manager with a password less than 4 characters
+	void testCreateManagerShortPassword() {
 		String error = "";
 		String password = "ok";
-		Adopter adopter = null;
+		Manager manager = null;
 		try {
-			adopter = service.createAdopter("manger jouer", "notemail@hotmail.com", "ok", 50);
+			manager = service.createManager("manger jouer", "notemail@hotmail.com", "ok", 50);
 		} catch(Exception e) {
 			error = e.getMessage();
 		}
 		
-		assertNull(adopter);
+		assertNull(manager);
 		assertEquals( "Invalid Password - must be between 4 and 20 characters", error );
 	}
 
 	@Test
-	// Try create Adopter with a password more than 20 characters
-	void testCreateAdopterLongPassword(){
+	// Try create Manager with a password more than 20 characters
+	void testCreateManagerLongPassword(){
 		try {
-			Adopter adopter = service.createAdopter("manger jouer", "notemail@hotmail.com", "okiwoejfoweifojfoewifowjofweoifjwieojfoiwefiowej", 50);
+			Manager manager = service.createManager("manger jouer", "notemail@hotmail.com", "okiwoejfoweifojfoewifowjofweoifjwieojfoiwefiowej", 50);
 
 		}
 
@@ -194,11 +208,11 @@ class TestAdopter_AccountUserService{
 
 
 	@Test
-	// Try creating an Adopter with same ID as the one executed before each 
+	// Try creating an Manager with same ID as the one executed before each 
 
-	void testCreateAdopterSameID() {
+	void testCreateManagerSameID() {
 		try {
-			Adopter manger = service.createAdopter("manger jouer", "notemail@hotmail.com", "ofiowej", 5);
+			Manager manger = service.createManager("manger jouer", "notemail@hotmail.com", "ofiowej", 5);
 		}
 
 		catch(Exception e) {
@@ -207,18 +221,18 @@ class TestAdopter_AccountUserService{
 		}
 	}
 	@Test
-	// Try creating an Adopter with an incorrect phone number
-	void testCreateAdopterIncorrectPhoneNumber() {
+	// Try creating an Manager with an incorrect phone number
+	void testCreateManagerIncorrectPhoneNumber() {
 		try {
-			Adopter manger = service.createAdopter("jaime le", "ok@hotmail.com", "404", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", null, 50);
+			Manager manger = service.createManager("jaime le", "ok@hotmail.com", "404", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", null, 50, null);
 		}
 		catch(Exception e) {
 			assertEquals(e.getMessage() , "Invalid Phone Number");
 		}
 	}
 	@Test
-	// Try creating an Adopter with a too small description < 20 
-	void testCreateAdopterShortDescription() {
+	// Try creating an Manager with a too small description < 20 
+	void testCreateManagerShortDescription() {
 		try {
 			Adopter manger = service.createAdopter("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis", null, 50);
 		}
@@ -228,8 +242,8 @@ class TestAdopter_AccountUserService{
 	}
 	
 	@Test
-	// Try creating an Adopter with a large description > 5000
-	void testCreateAdopterLongDescription() {
+	// Try creating an Manager with a large description > 5000
+	void testCreateManagerLongDescription() {
 		try {
 			Adopter manger = service.createAdopter("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je vis", null, 50);
 		}
@@ -237,30 +251,28 @@ class TestAdopter_AccountUserService{
 			assertEquals(e.getMessage() , "Invalid Description - must not be less than 20 or greater than 5000 characters");
 		}
 	}
-	
 	@Test
-	//Try creating an Adopter with email already in the database
-	void testCreateAdopterWithEmailAlreadyInDB() {
-		
+	// Try creating an Manager with null address
+	void testCreateManagerNullAddress() {
 		try {
-			Adopter manger = service.createAdopter("Jean Salem", EMAIL_KEY, "numérotons", 99);
-			
+			Adopter manger = service.createAdopter("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis okokokokokokokkokokok", null, 50);
 		}
-		catch (Exception e) {
-			assertEquals(e.getMessage() , "Email Already used");
+		catch(Exception e) {
+			assertEquals(e.getMessage() , "address must be written");
 		}
 	}
+	
 	@Test
-	// Try to find Adopter by id using service
-	void testFindingAdopterByID() {
+	// Try to find Manager by id using service
+	void testFindingManagerByID() {
 		assertEquals(USER_KEY, (service.getAccountUserByID(USER_KEY).getUserID()));
 	}
 
 	@Test
-	// Try to update an Adopter which is not in DB
-	void testUpdatingAdopter() {
-		Adopter a = new Adopter();
-		try {service.updateAdopter(a);
+	// Try to update an Manager which is not in DB
+	void testUpdatingManager() {
+		Manager a = new Manager();
+		try {service.updateManager(a);
 
 		}
 		catch (Exception e) {
@@ -282,13 +294,14 @@ class TestAdopter_AccountUserService{
 	
 	
 	@Test
-	// Finally creating correctly an Adopter with the two constructors
+	// Finally creating correctly an Manager with the two constructors
 	public void testFinalCreateAdopter() {
 	
 		Address z = new Address();
+		Shelter x = new Shelter();
 		
-		Adopter a = service.createAdopter("Jean Michel", "ok@hotmail.com", "vivaAlgeria", 20);
-		Adopter c = service.createAdopter("Jean Michael", "ng@hotmail.com", "514-495-0371", "intellijide", "un jour jserais back dans le 99 , cs.villeray turin villeray",z , 70);
+		Manager a = service.createManager("Jean Michel", "ok@hotmail.com", "vivaAlgeria", 20);
+		Manager c = service.createManager("Jean Michael", "ng@hotmail.com", "514-495-0371", "intellijide", "un jour jserais back dans le 99 , cs.villeray turin villeray",z , 70, x);
 		
 		assertNotNull(a);
 		assertNotNull(c);
@@ -317,6 +330,7 @@ class TestAdopter_AccountUserService{
 		assertEquals(c.getUserID(), 70);
 		assertEquals(c.getPhoneNumer() ,"514-495-0371" );
 		assertEquals(c.getDescription(), "un jour jserais back dans le 99 , cs.villeray turin villeray");
+		assertEquals(c.getShelter() ,x );
 	}
 	
 	
