@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.AdoptionPostingRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.PetProfileRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.PetsRepository;
@@ -31,6 +32,8 @@ public class PetService {
 	ShelterRepository shelterRepo;
 	@Autowired
 	AdoptionPostingRepository postRepo;
+	@Autowired
+	AccountUserRepository managerRepo;
 	@Autowired
 	AccountUserService userService;
 	
@@ -210,16 +213,25 @@ public class PetService {
 		s.setId(ID);
 		if(pets != null) {
 			if(pets.size() == 0) {
-				throw new IllegalArgumentException("Please do not create an empy set of pets");
+				throw new IllegalArgumentException("Please do not create an empty set of pets");
 			}
 			Set<Pet> petsList = new HashSet<>();
 			petsList.addAll(pets);
 			s.setPet(petsList);
 		}
 		if(manager != null) {
-			if(userService.getManagerByID(manager.getUserID()) ==  null) {
-				throw new IllegalArgumentException("If existing, a manager must be saved before the shelter");
+			try   {
+				Manager a = (Manager) userService.getManagerByID(manager.getUserID());
 			}
+			catch(Exception e) {
+				if(e.getMessage() == null) {
+					throw new IllegalArgumentException("Manager must be saved first");
+				}
+			}
+			s.setManager(manager);
+
+			
+			
 			s.setManager(manager);
 		}
 
