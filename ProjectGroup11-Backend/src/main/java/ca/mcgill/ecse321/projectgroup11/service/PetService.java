@@ -133,7 +133,7 @@ public class PetService {
 		
 		Pet p = new Pet();
 		
-		if(petRepo.findPet(ID) != null) {
+		if(petRepo.findPet(ID) != null && petRepo.findPet(ID).getId() == ID) {
 			throw new IllegalArgumentException("Pet ID already exists");
 		}
 		
@@ -163,6 +163,9 @@ public class PetService {
 									   Boolean apartment, Boolean kidOk, 
 									   Boolean petOk, Boolean highE, 
 									   String health) {
+		if( profileRepo.findPetProfileById(ID) != null && profileRepo.findPetProfileById(ID).getId() == ID) {
+			throw new IllegalArgumentException("Profile with same ID already exists");
+		}
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);
@@ -182,6 +185,10 @@ public class PetService {
 	}
 	@Transactional
 	public PetProfile createPetProfile(Integer ID, String name, String type, String description) {
+		if( profileRepo.findPetProfileById(ID) != null && profileRepo.findPetProfileById(ID).getId() == ID) {
+			throw new IllegalArgumentException("Profile with same ID already exists");
+		}
+		
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);
@@ -197,7 +204,7 @@ public class PetService {
 	public Shelter createShelter(Integer ID, List<Pet> pets, Manager manager) {
 
 		Shelter s = new Shelter();
-		if(this.getShelterById(ID) != null) {
+		if(shelterRepo.findShelterById(ID) != null && shelterRepo.findShelterById(ID).getId() == ID) {
 			throw new IllegalArgumentException("Shelter with this ID already exists");
 		}
 		s.setId(ID);
@@ -222,7 +229,7 @@ public class PetService {
 	public Shelter createShelter(Integer ID) {
 
 		Shelter s = new Shelter();
-		if(this.getShelterById(ID) != null) {
+		if( shelterRepo.findShelterById(ID) != null && shelterRepo.findShelterById(ID).getId() == ID) {
 			throw new IllegalArgumentException("Shelter with this ID already exists");
 		}
 		s.setId(ID);
@@ -235,7 +242,7 @@ public class PetService {
 
 		AdoptionPosting a = new AdoptionPosting();
 
-		if (this.getPostingById(ID) != null) {
+		if (postRepo.findAdoptionPostingById(ID) != null && postRepo.findAdoptionPostingById(ID).getId() == ID) {
 			throw new IllegalArgumentException("Posting with this ID already exists");
 		}
 		a.setId(ID);
@@ -265,7 +272,7 @@ public class PetService {
 
 		AdoptionPosting a = new AdoptionPosting();
 
-		if (this.getPostingById(ID) != null) {
+		if (postRepo.findAdoptionPostingById(ID) != null && postRepo.findAdoptionPostingById(ID).getId() == ID) {
 			throw new IllegalArgumentException("Posting with this ID already exists");
 		}
 		a.setId(ID);
@@ -319,9 +326,7 @@ public class PetService {
 		if(profile == null) {
 			throw new IllegalArgumentException("Pet Profile cannot be null");
 		}
-		if(profile.getId() == null || profileRepo.findById(profile.getId()) != null) {
-			throw new IllegalArgumentException("Pet Profile ID is already taken");
-		}
+	
 		//Search types to see if current type matches one
 		if(profile.getType() != null) { 
 			boolean foundType = false;
