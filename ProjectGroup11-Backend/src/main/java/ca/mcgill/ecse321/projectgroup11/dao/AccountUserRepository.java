@@ -7,6 +7,5 @@ import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 public interface AccountUserRepository extends CrudRepository<AccountUser, Integer>{
 
 	AccountUser findAccountUserByuserID(Integer userid);
-	AccountUser findAccountUserByEmail(String email);
 
 }

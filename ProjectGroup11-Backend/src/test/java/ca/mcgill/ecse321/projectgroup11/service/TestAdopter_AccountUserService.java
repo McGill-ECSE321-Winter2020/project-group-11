@@ -65,16 +65,6 @@ class TestAdopter_AccountUserService{
 				return null;
 			}
 		});
-		
-		lenient().when(userDao.findAccountUserByEmail(anyString())).thenAnswer((InvocationOnMock invocation) -> {
-			if (invocation.getArgument(0).equals(EMAIL_KEY)) {
-				Adopter a = new Adopter();
-				a.setEmailAddress(EMAIL_KEY);
-				return a;
-			} else {
-				return null;
-			}
-		});
 
 		// Whenever anything is saved, just return the parameter object
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
