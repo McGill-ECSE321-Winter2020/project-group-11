@@ -1,0 +1,21 @@
+******************************************************************************ACCOUNT_USER SERVICE REPORT *********************************************************************
+                                                                   
+				The main testing concept used to test service methods inside the AccountUser_Service.java class was Unit testing (white-box) where we 
+                                separately stress the methods we wrote to be sure that they give us the expected output and behavior with respect to our logic even when we
+				try it with the most extreme cases.
+	
+
+	First,
+		we used try-catch logic block since we already know that inside our AccountUser_Service methods, those will throw exception depending of the inputs given to the method.
+		Using try-catch method allows us to catch the expected exception and make sure that it correspond to the correct message(String == exception.getMessage()). Those try-catch
+		blocks were used for all the methods except the one that correspond to correct use of the AccountUser_Service methods. Since we know that Account_User is an abstract class
+		and that Manager,Adopter and Owner extends this abstract class, I found it more intuitive to tests each one of them in separate classes (TestOwner_AccountService , TestAdopter_AccountService,
+		and TestManager_AccountService) considering the fact that we must do Mock Injection before each test. Reminder : Mock allows us to simulate when doing Unit Testing to simulate real objects that 		  produce behavior that is tangible to what we want to show when testing. This technique is refered to the dependency injection technique we have seen in class.
+	
+	Second, 
+		when testing, we found an issue where if we were creating a User(here I'll use the word User for Owner, Adopter and Manager, they all have similar structures) 
+		with a specific ID (i.e ID = 50) and we right after create another user with the same ID, it will just replace it in the database. 
+		Since it is not a behavior we want, we had to fix it. Similarly, we also considered that two users CAN'T have the same email, 
+		a decision we took that corresponds to most software registering systems where you can't create a new account with an email that is already used.
+
+

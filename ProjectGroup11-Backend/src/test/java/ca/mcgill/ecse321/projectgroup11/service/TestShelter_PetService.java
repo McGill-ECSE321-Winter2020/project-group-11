@@ -95,6 +95,7 @@ class TestShelter_PetService{
 		assertEquals(s.getPet(), null);
 	}
 	@Test
+	// Try creating Shelter with empty list of pets
 	void testCreateShelterWithEmptyListOfPets() {
 		List<Pet> a = new ArrayList<Pet>();
 		Shelter shelter = null;
@@ -112,6 +113,7 @@ class TestShelter_PetService{
 	}
 	
 	@Test
+	// Try creating shelter with a manager not saved
 	void testCreateShelterWithManagerNotSaved() {
 		Manager m = new Manager();
 		Shelter shelter = null;
@@ -128,5 +130,34 @@ class TestShelter_PetService{
 			
 		}
 	}
+	
+	@Test
+	// Try updating a Shelter that is not saved in the dB
+	void testUpdateShelter() {
+		Shelter s = new Shelter();
+		try {
+			service.updateShelter(s);
+		}
+		catch (Exception e) {
+			assertEquals(e.getMessage() , "Cannot update shelter that is not in the database");
+		}
+		
+		
+	}
+	@Test
+	// Try to get an null Shelter by browsing for nonexisting iD
+	public void testGetNonExistingPerson() {
+		assertNull(service.getShelterById(NONEXISTING_KEY));
+	}
+	
+	@Test
+	// Try to get an null Shelter by browsing for nonexisting iD
+	public void testGetExistingPerson() {
+		assertEquals(USER_KEY, service.getShelterById(USER_KEY).getId());
+	}
+	
+	
+	
+	
 	
 }
