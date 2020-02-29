@@ -450,6 +450,7 @@ public class AccountUserService {
 	public Manager createManager(String name, String email, String phone, 
 			String password, String description, Address address,
 			Integer ID, Shelter shelter) {
+		if(shelter == null) throw new IllegalArgumentException ("Manager must have a shelter to exist, use other constructor otherwise");
 		// Throw an exception if and only if the given ID is already in the DATABASE
 		if ((userRepo.findAccountUserByuserID(ID) != null && userRepo.findAccountUserByuserID(ID).getUserID() == ID))  {
 

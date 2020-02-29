@@ -16,13 +16,11 @@ import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
 import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
+import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.service.AccountUserService;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -165,6 +163,30 @@ class TestAdopter_AccountUserService{
 		assertNull(adopter);
 		assertEquals( "Invalid Password - must be between 4 and 20 characters", error );
 	}
+	@Test
+	// Try create Adopter with a password with 4 characters (BoundaryTesting)
+	void testCreateAdopter4CharPassword() {
+		String error = "";
+		String password = "ok";
+		Adopter adopter = null;
+			adopter = service.createAdopter("manger jouer", "notemail@hotmail.com", "okok", 50);
+		
+		
+		assertNotNull(adopter);
+		assertEquals("okok", adopter.getPassword());
+	}
+	@Test
+	// Try create Adopter with a password with 20 characters (BoundaryTesting)
+	void testCreateAdopter20CharPassword() {
+		String error = "";
+		String password = "ok";
+		Adopter adopter = null;
+			adopter = service.createAdopter("manger jouer", "notemail@hotmail.com", "okokokokokokokokokok", 50);
+		
+		
+		assertNotNull(adopter);
+		assertEquals("okokokokokokokokokok", adopter.getPassword());
+	}
 
 	@Test
 	// Try create Adopter with a password more than 20 characters
@@ -236,6 +258,45 @@ class TestAdopter_AccountUserService{
 			assertNull(manger);
 			assertEquals(e.getMessage() , "Invalid Description - must not be less than 20 or greater than 5000 characters");
 		}
+	}
+	
+	@Test
+	// Try creating an Adopter with a correct phone number (Boundary Testing)
+	void testCreateAdopter12CharPhoneNumber() {
+		Address a = new Address();
+		Adopter adopter = null;
+		Pet b = new Pet();
+
+		adopter = service.createAdopter("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", a, 50);
+		assertNotNull(adopter);
+		assertEquals(adopter.getPhoneNumer() , "514-495-0371");
+
+	}
+	@Test
+	// Try creating an Adopter with a phone number that has no "-" (Boundary Testing)
+	void testCreateAdopter10CharPhoneNumber() {
+		Address a = new Address();
+		Adopter adopter = null;
+		Pet b = new Pet();
+
+		adopter = service.createAdopter("jaime le", "ok@hotmail.com", "5144950371", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", a, 50);
+		assertNotNull(adopter);
+		assertEquals(adopter.getPhoneNumer() , "5144950371");
+
+	}
+	@Test
+	// Try creating an Adopter with an incorrect phone number (we only accept local phone number (xxx)xxx-xxxx (Boundary Testing)
+	void testCreateAdopterMoreCharPhoneNumber() {
+		Address a = new Address();
+		Adopter manger = null;
+		Pet b = new Pet();
+
+		try {manger = service.createAdopter("jaime le", "ok@hotmail.com", "1-800-514-495-0371", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", a, 50); }
+		catch (Exception e) {
+		assertNull(manger);
+		assertEquals(e.getMessage() , "Invalid Phone Number");
+		}
+
 	}
 	
 	@Test

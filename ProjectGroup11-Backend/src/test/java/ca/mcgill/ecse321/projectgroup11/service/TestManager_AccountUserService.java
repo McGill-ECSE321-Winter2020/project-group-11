@@ -17,14 +17,12 @@ import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
 import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
 import ca.mcgill.ecse321.projectgroup11.javacode.Manager;
+import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.javacode.Shelter;
 import ca.mcgill.ecse321.projectgroup11.service.AccountUserService;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -102,7 +100,7 @@ class TestManager_AccountUserService{
 
 	// Try create Manager with an incorrect name (recall account user service => name + last name separed by a space)
 	@Test
-	void testCreateAdopterIncorrectName() {
+	void testCreateManagerIncorrectName() {
 		String name = " ";
 		String error = null;
 		Manager manager = null;
@@ -198,6 +196,33 @@ class TestManager_AccountUserService{
 
 		}
 	}
+	
+	@Test
+	// Try create Manager with a password with 4 characters (BoundaryTesting)
+	void testCreateManager4CharPassword() {
+		String error = "";
+		String password = "ok";
+		Manager manager = null;
+			manager = service.createManager("manger jouer", "notemail@hotmail.com", "okok", 50);
+		
+		
+		assertNotNull(manager);
+		assertEquals("okok", manager.getPassword());
+	}
+	@Test
+	// Try create Manager with a password with 20 characters (BoundaryTesting)
+	void testCreateManager20CharPassword() {
+		String error = "";
+		String password = "ok";
+		Manager manager = null;
+			manager = service.createManager("manger jouer", "notemail@hotmail.com", "okokokokokokokokokok", 50);
+		
+		
+		assertNotNull(manager);
+		assertEquals("okokokokokokokokokok", manager.getPassword());
+	}
+
+	
 
 
 	@Test
@@ -217,10 +242,11 @@ class TestManager_AccountUserService{
 	@Test
 	// Try creating an Manager with an incorrect phone number
 	void testCreateManagerIncorrectPhoneNumber() {
+		Shelter s = new Shelter();
 		Manager manger = null;
 		
 		try {
-			manger = service.createManager("jaime le", "ok@hotmail.com", "404", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", null, 50, null);
+			manger = service.createManager("jaime le", "ok@hotmail.com", "404", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", null, 50, s);
 		}
 		catch(Exception e) {
 			assertNull(manger);
@@ -228,11 +254,50 @@ class TestManager_AccountUserService{
 		}
 	}
 	@Test
+	// Try creating an Manager with a correct phone number (Boundary Testing)
+	void testCreateManager12CharPhoneNumber() {
+		Address a = new Address();
+		Manager manger = null;
+		Shelter s = new Shelter();
+		manger = service.createManager("salut cv", "ok@hotmail.com", "514-495-0371", "salutcv", "description description description des", a , 99, s);
+		assertEquals(manger.getPhoneNumer() , "514-495-0371");
+
+	}
+	@Test
+	// Try creating an Manager with a phone number that has no "-" (Boundary Testing)
+	void testCreateManager10CharPhoneNumber() {
+		Address a = new Address();
+		Manager manger = null;
+		Shelter s = new Shelter();
+		manger = service.createManager("salut cv", "ok@hotmail.com", "5144950371", "salutcv", "description description description des", a , 99, s);
+		assertNotNull(manger);
+		assertEquals(manger.getPhoneNumer() , "5144950371");
+
+	}
+	@Test
+	// Try creating an Manager with an incorrect phone number (we only accept local phone number (xxx)xxx-xxxx (Boundary Testing)
+	void testCreateManagerMoreCharPhoneNumber() {
+		Address a = new Address();
+		Manager manger = null;
+		Shelter s = new Shelter();
+
+		try {
+			manger = service.createManager("salut cv", "ok@hotmail.com", "514-495-0371", "salutcv", "description description description des", a , 99, s);
+			}
+		catch (Exception e) {
+		assertNull(manger);
+		assertEquals(e.getMessage() , "Invalid Phone Number");
+		}
+
+	}
+	
+	@Test
 	// Try creating an Manager with a too small description < 20 
 	void testCreateManagerShortDescription() {
+		Shelter s = new Shelter();
 		Manager manger = null;
 		try {
-			 manger = service.createManager("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis", null, 50, null);
+			 manger = service.createManager("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis", null, 50, s);
 		}
 		catch(Exception e) {
 			assertNull(manger);
@@ -244,8 +309,9 @@ class TestManager_AccountUserService{
 	// Try creating an Manager with a large description > 5000
 	void testCreateManagerLongDescription() {
 		Manager manger = null;
+		Shelter s = new Shelter();
 		try {
-			 manger = service.createManager("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je vis", null, 50, null);
+			 manger = service.createManager("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je visJsp ou je vis", null, 50, s);
 		}
 		catch(Exception e) {
 			assertNull(manger);

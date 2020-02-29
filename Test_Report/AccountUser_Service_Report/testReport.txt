@@ -18,4 +18,4 @@
 		Since it is not a behavior we want, we had to fix it. Similarly, we also considered that two users CAN'T have the same email, 
 		a decision we took that corresponds to most software registering systems where you can't create a new account with an email that is already used.
 
-
+	Finally, we used  Equivalence Partitioning & Boundary Value Analysis testing techniques for the methods that require to check for many possible outputs. For instance, if we look to createPassword tests, we have a constraint that says passwords must be given with 4 to 20 characters inclusively. So we partitioned it into 3 sets, the set where there is less than 4 characters (invalid set, produces an IllegalArgumentException Error), between 4 and 20 characters inclusively (valid set, will initialize the password correctly) and above 20 characters (invalid set, produces an IllegalArgumentException Error. We only had to use 3 cases to cover all those sets (Boundary Testing), where we test those extreme cases which we know will fail and the correct tests.

@@ -20,9 +20,6 @@ import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.service.AccountUserService;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -41,7 +38,7 @@ import org.junit.jupiter.api.Test;
 
 @ExtendWith(MockitoExtension.class)
 class TestOwner_AccountUserService{
-	
+
 	@Mock
 	private AccountUserRepository userDao;
 
@@ -70,15 +67,15 @@ class TestOwner_AccountUserService{
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
 		};
-		
-		lenient().when(userDao.save(any(Owner.class))).thenAnswer(returnParameterAsAnswer);
-		
-		
 
-		
+		lenient().when(userDao.save(any(Owner.class))).thenAnswer(returnParameterAsAnswer);
+
+
+
+
 	}
-	
-	
+
+
 	@Test
 	void testCreateOwner() {
 		Owner owner = null;
@@ -112,7 +109,7 @@ class TestOwner_AccountUserService{
 		assertNull(owner);
 		// check error
 		assertEquals("Invalid Name", error);
-		
+
 	}
 	// Try creating Owner with only first name
 	@Test
@@ -129,12 +126,12 @@ class TestOwner_AccountUserService{
 		assertNull(owner);
 		// check error
 		assertEquals("Invalid Name", error);
-		
+
 	}
-	
-	
+
+
 	@Test
-	// Try create owner with an incorrect email 
+	// Try create Owner with an incorrect email 
 	void testCreateOwnerIncorrectEmail() {
 		String error = "";
 		String email = "notemail";
@@ -145,13 +142,13 @@ class TestOwner_AccountUserService{
 		} catch(Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(owner);
 		assertEquals( "Invalid Email", error );
 	}
-	
+
 	@Test
-	// Try create owner with a password less than 4 characters
+	// Try create Owner with a password less than 4 characters
 	void testCreateOwnerShortPassword() {
 		String error = "";
 		String password = "ok";
@@ -161,9 +158,33 @@ class TestOwner_AccountUserService{
 		} catch(Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(owner);
 		assertEquals( "Invalid Password - must be between 4 and 20 characters", error );
+	}
+	@Test
+	// Try create Owner with a password with 4 characters (BoundaryTesting)
+	void testCreateOwner4CharPassword() {
+		String error = "";
+		String password = "ok";
+		Owner owner = null;
+		owner = service.createOwner("manger jouer", "notemail@hotmail.com", "okok", 50);
+
+
+		assertNotNull(owner);
+		assertEquals("okok", owner.getPassword());
+	}
+	@Test
+	// Try create Adopter with a password with 20 characters (BoundaryTesting)
+	void testCreateOwner20CharPassword() {
+		String error = "";
+		String password = "ok";
+		Owner owner = null;
+		owner = service.createOwner("manger jouer", "notemail@hotmail.com", "okokokokokokokokokok", 50);
+
+
+		assertNotNull(owner);
+		assertEquals("okokokokokokokokokok", owner.getPassword());
 	}
 
 	@Test
@@ -171,7 +192,7 @@ class TestOwner_AccountUserService{
 	void testCreateOwnerLongPassword(){
 		Owner manger = null;
 		try {
-			 manger = service.createOwner("manger jouer", "notemail@hotmail.com", "okiwoejfoweifojfoewifowjofweoifjwieojfoiwefiowej", 50);
+			manger = service.createOwner("manger jouer", "notemail@hotmail.com", "okiwoejfoweifojfoewifowjofweoifjwieojfoiwefiowej", 50);
 
 		}
 
@@ -187,10 +208,10 @@ class TestOwner_AccountUserService{
 	//Try creating an Owner with email already in the database
 	void testCreateOwnerWithEmailAlreadyInDB() {
 		Owner owner = null;
-		
+
 		try {
-			 owner = service.createOwner("Jean Salem", EMAIL_KEY, "numérotons", 99);
-			
+			owner = service.createOwner("Jean Salem", EMAIL_KEY, "numérotons", 99);
+
 		}
 		catch (Exception e) {
 			assertNull(owner);
@@ -205,7 +226,7 @@ class TestOwner_AccountUserService{
 	void testCreateOwnerSameID() {
 		Owner manger = null;
 		try {
-			 manger = service.createOwner("manger jouer", "notemail@hotmail.com", "ofiowej", 5);
+			manger = service.createOwner("manger jouer", "notemail@hotmail.com", "ofiowej", 5);
 		}
 
 		catch(Exception e) {
@@ -218,9 +239,9 @@ class TestOwner_AccountUserService{
 	// Try creating an Owner with an incorrect phone number
 	void testCreateOwnerIncorrectPhoneNumber() {
 		Owner manger = null;
-		
+
 		try {
-			 manger = service.createOwner("jaime le", "ok@hotmail.com", "404", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", null, 50, null);
+			manger = service.createOwner("jaime le", "ok@hotmail.com", "404", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", null, 50, null);
 		}
 		catch(Exception e) {
 			assertNull(manger);
@@ -228,18 +249,57 @@ class TestOwner_AccountUserService{
 		}
 	}
 	@Test
+	// Try creating an Owner with a correct phone number (Boundary Testing)
+	void testCreateOwner12CharPhoneNumber() {
+		Address a = new Address();
+		Owner manger = null;
+		Pet b = new Pet();
+
+		manger = service.createOwner("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", a, 50, b);
+		assertNotNull(manger);
+		assertEquals(manger.getPhoneNumer() , "514-495-0371");
+
+	}
+	@Test
+	// Try creating an Owner with a phone number that has no "-" (Boundary Testing)
+	void testCreateOwner10CharPhoneNumber() {
+		Address a = new Address();
+		Owner manger = null;
+		Pet b = new Pet();
+
+		manger = service.createOwner("jaime le", "ok@hotmail.com", "5144950371", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", a, 50, b);
+		assertNotNull(manger);
+		assertEquals(manger.getPhoneNumer() , "5144950371");
+
+	}
+	@Test
+	// Try creating an Owner with an incorrect phone number (we only accept local phone number (xxx)xxx-xxxx (Boundary Testing)
+	void testCreateOwnerMoreCharPhoneNumber() {
+		Address a = new Address();
+		Owner manger = null;
+		Pet b = new Pet();
+
+		try {manger = service.createOwner("jaime le", "ok@hotmail.com", "1-800-514-495-0371", "Munko", "Jsp ou je vis, j'avoue la D , ok ok non ononon", a, 50, b); }
+		catch (Exception e) {
+		assertNull(manger);
+		assertEquals(e.getMessage() , "Invalid Phone Number");
+		}
+
+	}
+
+	@Test
 	// Try creating an Owner with a too small description < 20 
 	void testCreateOwnerShortDescription() {
 		Owner manger =null;
 		try {
-			 manger = service.createOwner("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis", null, 50, null);
+			manger = service.createOwner("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis", null, 50, null);
 		}
 		catch(Exception e) {
 			assertNull(manger);
 			assertEquals(e.getMessage() , "Invalid Description - must not be less than 20 or greater than 5000 characters");
 		}
 	}
-	
+
 	@Test
 	// Try creating an Owner with a large description > 5000
 	void testCreateOwnerLongDescription() {
@@ -256,7 +316,7 @@ class TestOwner_AccountUserService{
 	// Try creating an Owner with null address
 	void testCreateOwnerNullAddress() {
 		Owner manger = null;
-		
+
 		try {
 			manger = service.createOwner("jaime le", "ok@hotmail.com", "514-495-0371", "Munko", "Jsp ou je vis okokokokokokokkokokok", null, 50, null);
 		}
@@ -278,7 +338,7 @@ class TestOwner_AccountUserService{
 			assertEquals(e.getMessage() , "Can't have a null pet, use other constructor");
 		}
 	}
-	
+
 
 
 
@@ -301,35 +361,35 @@ class TestOwner_AccountUserService{
 			assertEquals(e.getMessage() , "Cannot update owner that is not in the database");
 		}
 	}
-	
+
 	@Test
 	// Try to get an null account user by browsing for nonexisting iD
 	public void testGetNonExistingPerson() {
 		assertNull(service.getAccountUserByID(NONEXISTING_KEY));
 	}
-	
+
 	@Test
 	// Try to get an null account user by browsing for nonexisting iD
 	public void testGetExistingPerson() {
 		assertEquals(USER_KEY, service.getAccountUserByID(USER_KEY).getUserID());
 	}
-	
-	
+
+
 	@Test
 	// Finally creating correctly an owner with the three constructors
 	public void testFinalCreateOwner() {
 		Pet x = new Pet();
 		Pet y = new Pet();
 		Address z = new Address();
-		
+
 		Owner a = service.createOwner("Jean Michel", "ok@hotmail.com", "vivaAlgeria", 20);
 		Owner b = service.createOwner("Yacine duNeufNeuf", "bc@hotmail.com", "HamzaBenatia", 30, x);
 		Owner c = service.createOwner("Jean Michael", "ng@hotmail.com", "514-495-0371", "intellijide", "un jour jserais back dans le 99 , cs.villeray turin villeray",z , 70, y);
-		
+
 		assertNotNull(a);
 		assertNotNull(b);
 		assertNotNull(c);
-		
+
 		// Verifying fields for first constructor
 		assertEquals(a.getFirstName(), "Jean");
 		assertEquals(a.getLastName() , "Michel");
@@ -340,9 +400,9 @@ class TestOwner_AccountUserService{
 		assertEquals(a.getEmailAddress(), "ok@hotmail.com");
 		assertEquals(a.getPhoneNumer() , null);
 		assertEquals(a.getDescription(), null);
-		
+
 		// Verifying fields for second constructor
-		
+
 		assertEquals(b.getFirstName(), "Yacine");
 		assertEquals(b.getLastName(), "duNeufNeuf");
 		assertEquals(b.getPet().contains(x) , true);
@@ -352,9 +412,9 @@ class TestOwner_AccountUserService{
 		assertEquals(b.getUserID(), 30);
 		assertEquals(b.getPhoneNumer(), null);
 		assertEquals(b.getDescription(), null);
-		
+
 		// Verifying fields for third constructor
-		
+
 
 		assertEquals(c.getFirstName(), "Jean");
 		assertEquals(c.getLastName(), "Michael");
@@ -366,8 +426,8 @@ class TestOwner_AccountUserService{
 		assertEquals(c.getPhoneNumer() ,"514-495-0371" );
 		assertEquals(c.getDescription(), "un jour jserais back dans le 99 , cs.villeray turin villeray");
 	}
-	
-	
+
+
 
 
 
