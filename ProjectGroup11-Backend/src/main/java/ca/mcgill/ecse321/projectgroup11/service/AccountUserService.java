@@ -242,7 +242,7 @@ public class AccountUserService {
 		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
 		Adopter b = null;
 		for (int i =0 ; i <a.size() ; i++) {
-			if(((Adopter)a.get(i)).getEmailAddress() == email ) {
+			if(((Adopter)a.get(i)).getEmailAddress().equals(email) ) {
 				b = ((Adopter)a.get(i));
 				break;	
 			}
@@ -262,7 +262,7 @@ public class AccountUserService {
 		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
 		Adopter b = null;
 		for (int i =0 ; i <a.size() ; i++) {
-			if(((Adopter)a.get(i)).getFirstName() == first && ((Adopter)a.get(i)).getFirstName() == last  ) {
+			if(((Adopter)a.get(i)).getFirstName().equals(first) && ((Adopter)a.get(i)).getFirstName().equals(last)  ) {
 				b = ((Adopter)a.get(i));
 				break;	
 			}
@@ -456,7 +456,7 @@ public class AccountUserService {
 		Owner b = null;
 		
 		for (int i =0 ; i <a.size() ; i++) {
-			if(((Owner)a.get(i)).getEmailAddress() == email ) {
+			if(((Owner)a.get(i)).getEmailAddress().equals(email) ) {
 				b = ((Owner)a.get(i));
 				break;	
 			}
@@ -476,7 +476,7 @@ public class AccountUserService {
 		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
 		Owner b = null;
 		for (int i =0 ; i <a.size() ; i++) {
-			if(((Owner)a.get(i)).getFirstName() == first && ((Owner)a.get(i)).getFirstName() == last  ) {
+			if(((Owner)a.get(i)).getFirstName().equals(first)  && ((Owner)a.get(i)).getFirstName().equals(last)  ) {
 				b = ((Owner)a.get(i));
 				break;	
 			}
@@ -636,7 +636,7 @@ public class AccountUserService {
 		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllManagers();
 		Manager b = null;
 		for (int i =0 ; i <a.size() ; i++) {
-			if(((Manager)a.get(i)).getEmailAddress() == email ) {
+			if(((Manager)a.get(i)).getEmailAddress().equals(email) ) {
 				b = ((Manager)a.get(i));
 				break;	
 			}
@@ -656,7 +656,7 @@ public class AccountUserService {
 		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
 		Manager b = null;
 		for (int i =0 ; i <a.size() ; i++) {
-			if(((Manager)a.get(i)).getFirstName() == first && ((Manager)a.get(i)).getFirstName() == last  ) {
+			if(((Manager)a.get(i)).getFirstName().equals(first) && ((Manager)a.get(i)).getFirstName().equals(last)  ) {
 				b = ((Manager)a.get(i));
 				break;	
 			}
