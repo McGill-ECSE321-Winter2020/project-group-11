@@ -208,7 +208,7 @@ class TestAddress_AddressService{
 		try {service.updateAddress(a);
 
 		}
-		catch (IllegalAcrgumentException e) {
+		catch (IllegalArgumentException e) {
 			assertEquals(e.getMessage() , "Cannot update address that is not in the database");
 		}
 	}
