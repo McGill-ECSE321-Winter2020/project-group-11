@@ -1,0 +1,20 @@
+*********************************************************************************************SHELTER TESTING REPORT ***************************************************************************************
+				The main testing concept used to test service methods inside the Pet_Service.java class related to SHELTER(methods related to Shelter) was Unit testing (white-box) where we
+                                separately stress the methods we wrote to be sure that they give us the expected output and behavior with respect to our logic. We know that Shelter has a manager and also has
+				a list of Pets that are in the architecture of the Shelter. Simple as that, the provided service methods must be sure that if there is a manager inside the Shelter, he should
+				not be null when using the CreateShelter method. Also, when using CreateShelter method, if we are provided as input a List of Pets, this list can't be empty or contain null
+				elements.
+
+
+					As always, we verify that we CAN'T create a Shelter if there is already a Shelter in the Database with the same ID. This will throw an Exception 
+						("Shelter with this ID already exists"). We used Try-Catch block to actually "try" to create a Shelter with the same ID , 
+						we catch the exception and see if the error message correspond to the one we wrote in our service method. 
+						This testing logic was used for all the methods inside Shelter, respectively :
+				- CreateShelter(ID)
+				- CreateShelter(ID, Manager, List of Pets)
+				- updateShelter(Shelter)
+				- getShelterByID(ID)
+
+
+						
+
