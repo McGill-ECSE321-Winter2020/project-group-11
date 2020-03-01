@@ -169,6 +169,20 @@ public class PetService {
 		if( profileRepo.findPetProfileById(ID) != null && profileRepo.findPetProfileById(ID).getId() == ID) {
 			throw new IllegalArgumentException("Profile with same ID already exists");
 		}
+		
+		if (ID == null &&
+				(name == null || name == "") &&
+				(type == null || type == "") &&
+				(description == null || description == "") &&
+				(photoURL == null || photoURL == "") &&
+				(breed == null || breed == "") &&
+				apartment == null &&
+				kidOk == null &&
+				petOk == null &&
+				highE == null &&
+				(health == null || health == "")) {
+				throw new IllegalArgumentException("PetProfile cannot be empty!");
+			}
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);
@@ -192,6 +206,12 @@ public class PetService {
 			throw new IllegalArgumentException("Profile with same ID already exists");
 		}
 		
+		if (ID == null &&
+				(name == null || name == "") &&
+				(type == null || type == "") &&
+				(description == null || description == "")) {
+				throw new IllegalArgumentException("PetProfile cannot be empty!");
+			}
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);

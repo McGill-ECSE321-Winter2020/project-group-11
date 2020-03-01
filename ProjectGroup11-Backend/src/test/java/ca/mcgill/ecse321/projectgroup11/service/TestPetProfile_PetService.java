@@ -137,6 +137,30 @@ public class TestPetProfile_PetService {
 	}
 	
 	@Test
+	public void testCreatePetProfileShort() {
+		assertEquals(0, service.getAllPetProfiles().size());
+		
+		Integer ID = 66;
+		String name = "Bobo";
+		String type = "cat";
+		String description = "chubby";		
+		
+		
+		PetProfile petProfile = null;
+		
+		try {
+			petProfile = service.createPetProfile(ID, name, type, description);
+		}	catch (Exception e) {
+			fail();
+		}
+		assertNotNull(petProfile);
+		assertEquals(ID, petProfile.getId());
+		assertEquals(name, petProfile.getName());
+		assertEquals(type, petProfile.getType());
+		assertEquals(description, petProfile.getDescription());
+	}
+	
+	@Test
 	public void testCreatePetProfileNull() {
 		Integer ID = null;
 		String name = null;
@@ -154,6 +178,28 @@ public class TestPetProfile_PetService {
 		
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description, photoURL, breed, apartment, kidOk, petOk, highE, health);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		
+		assertNull(petProfile);
+		//To correct
+		assertEquals("PetProfile cannot be empty!", error);
+		
+	}
+	
+	@Test
+	public void testCreatePetProfileNullShort() {
+		Integer ID = null;
+		String name = null;
+		String type = null;
+		String description = null;
+		String error = null;
+		PetProfile petProfile = null;
+
+		
+		try {
+			petProfile = service.createPetProfile(ID, name, type, description);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
@@ -193,6 +239,27 @@ public class TestPetProfile_PetService {
 	}
 	
 	@Test
+	public void testCreatePetProfileEmptyShort() {
+		Integer ID = null;
+		String name = "";
+		String type = "";
+		String description = "";
+		String error = null;
+		PetProfile petProfile = null;
+		
+		try {
+			petProfile = service.createPetProfile(ID, name, type, description);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		
+		assertNull(petProfile);
+		//To correct
+		assertEquals("PetProfile cannot be empty!", error);
+		
+	}
+	
+	@Test
 	public void testCreatePetProfileSpaces() {
 		Integer ID = null;
 		String name = " ";
@@ -221,6 +288,27 @@ public class TestPetProfile_PetService {
 	}
 	
 	@Test
+	public void testCreatePetProfileSpacesShort() {
+		Integer ID = null;
+		String name = " ";
+		String type = " ";
+		String description = " ";
+		String error = null;
+		PetProfile petProfile = null;
+		
+		try {
+			petProfile = service.createPetProfile(ID, name, type, description);
+		} catch (Exception e) {
+			error = e.getMessage();
+		}
+		
+		assertNull(petProfile);
+		//To correct
+		assertEquals("PetProfile cannot be empty!", error);
+		
+	}
+	
+	@Test
 	public void testCreatePetProfileWithSameInfo() {
 		PetProfile p = null;
 		try {
@@ -232,32 +320,19 @@ public class TestPetProfile_PetService {
 	}
 	
 	@Test
+	public void testCreatePetProfileWithSameInfoShort() {
+		PetProfile p = null;
+		try {
+			p = service.createPetProfile(USER_ID, USER_NAME, USER_TYPE, USER_DESCRIPTION);
+		} catch (Exception e) {
+			assertNull(p);
+			assertEquals(e.getMessage(), "Profile with same ID already exists");
+		}
+	}
+	
+	@Test
 	public void testGetPetProfiles() {
 		
 	}
-	
-	
-	
-	/*@Transactional
-	public PetProfile creatPetProfile(Integer ID, String name, 
-									  String type, String description, 
-								      String photoURL, String breed, Boolean apartment, 
-									  Boolean kidOk, Boolean petOk, Boolean highE, String health) {
-		if (ID == null &&
-			(name == null || name == "") &&
-			(type == null || type == "") &&
-			(description == null || description == "") &&
-			(photoURL == null || photoURL == "") &&
-			(breed == null || breed == "") &&
-			apartment == null &&
-			kidOk == null &&
-			petOk == null &&
-			highE == null &&
-			(health == null || health == "")) {
-			throw new IllegalArgumentException("PetProfile cannot be empty!");
-		}
-		//To complete PetProfile petProfile = petProfileRepository.findpetProfileByID(ID);
-			
-	}*/	
 	
 }
