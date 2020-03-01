@@ -15,3 +15,16 @@ This project aims to allow people looking to adopt pets to browse through pets u
 | Keanu         | use-case diagram, requirements      |   6          |
 
 Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/wiki/Deliverable-1)
+
+
+#### Deliverable 2:
+| Name          | Role          | Hours logged   |
+| ------------- |:-------------:| --------------:|
+| Libby         | Unit testing, Integration testing, project report | 16|
+| Yacine        | Project lead, Unit testing      |   18          |
+| Yanis         | Unit Testing, database      |    15          |
+| Dixit         | Unit testing | 12          |
+| Keanu         | Unit testing, requirements      |   8          |
+
+Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/Deliverable-2)
+
