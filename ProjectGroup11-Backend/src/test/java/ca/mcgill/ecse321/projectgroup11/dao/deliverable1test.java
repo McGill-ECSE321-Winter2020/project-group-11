@@ -109,16 +109,6 @@ class deliverable1test {
 		assertEquals("Jouer", hamza.getFirstName());
 		assertEquals("ballon", hamza.getLastName());
 		assertEquals("for fun", hamza.getDescription());
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 	
 	@Test

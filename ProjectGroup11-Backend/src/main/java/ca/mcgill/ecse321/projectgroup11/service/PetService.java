@@ -29,8 +29,6 @@ public class PetService {
 	@Autowired
 	PetProfileRepository profileRepo;
 	@Autowired
-	ShelterRepository shelterRepo;
-	@Autowired
 	AdoptionPostingRepository postRepo;
 	@Autowired
 	AccountUserRepository managerRepo;
@@ -41,16 +39,14 @@ public class PetService {
 	private static final String[] animalTypes = {
 			"dog", "cat", "rodent", "snake", "bird", "turtle", "fish"
 	};
-	
-	
-	
+
 	//Get all methods
 	@Transactional
 	public List<Pet> getAllPets() {
 		ArrayList<Pet> pets = new ArrayList<>();
-		List<Pet> iterPets = petRepo.findAll();
+		Iterable<Pet> iterPets = petRepo.findAll();
 		
-		//Convert to array list
+		// Add pets to new pet list
 		for(Pet pet : iterPets) {
 			pets.add(pet);
 		}
@@ -69,18 +65,7 @@ public class PetService {
 
 		return pets;
 	}
-	@Transactional
-	public List<Shelter> getAllShelters() {
-		ArrayList<Shelter> shelters = new ArrayList<>();
-		Iterable<Shelter> iterShel = shelterRepo.findAll();
-		
-		//Convert to array list
-		for(Shelter s : iterShel) {
-			shelters.add(s);
-		}
 
-		return shelters;
-	}
 	@Transactional
 	public List<AdoptionPosting> getAllAdoptionPostings() {
 		ArrayList<AdoptionPosting> posts = new ArrayList<>();
@@ -105,11 +90,7 @@ public class PetService {
 		if(ID == null) return null;
 		return profileRepo.findPetProfileById(ID);
 	}
-	@Transactional
-	public Shelter getShelterById(Integer ID) {
-		if(ID == null) return null;
-		return shelterRepo.findShelterById(ID);
-	}
+
 	@Transactional
 	public AdoptionPosting getPostingById(Integer ID) {
 		if(ID == null) return null;
@@ -135,7 +116,6 @@ public class PetService {
 		}
 		
 		Pet p = new Pet();
-		
 		if(petRepo.findPet(ID) != null && petRepo.findPet(ID).getId() == ID) {
 			throw new IllegalArgumentException("Pet ID already exists");
 		}
@@ -203,51 +183,7 @@ public class PetService {
 		return profileRepo.save(p);
 	}
 	
-	@Transactional
-	public Shelter createShelter(Integer ID, List<Pet> pets, Manager manager) {
 
-		Shelter s = new Shelter();
-		if(shelterRepo.findShelterById(ID) != null && shelterRepo.findShelterById(ID).getId() == ID) {
-			throw new IllegalArgumentException("Shelter with this ID already exists");
-		}
-		s.setId(ID);
-		if(pets != null) {
-			if(pets.size() == 0) {
-				throw new IllegalArgumentException("Please do not create an empty set of pets");
-			}
-			Set<Pet> petsList = new HashSet<>();
-			petsList.addAll(pets);
-			s.setPet(petsList);
-		}
-		if(manager != null) {
-			try   {
-				Manager a = (Manager) userService.getManagerByID(manager.getUserID());
-			}
-			catch(Exception e) {
-				if(e.getMessage() == null) {
-					throw new IllegalArgumentException("Manager must be saved first");
-				}
-			}
-			s.setManager(manager);
-
-			
-			
-			s.setManager(manager);
-		}
-
-		return shelterRepo.save(s);
-	}
-	@Transactional
-	public Shelter createShelter(Integer ID) {
-
-		Shelter s = new Shelter();
-		if( shelterRepo.findShelterById(ID) != null && shelterRepo.findShelterById(ID).getId() == ID) {
-			throw new IllegalArgumentException("Shelter with this ID already exists");
-		}
-		s.setId(ID);
-
-		return shelterRepo.save(s);
-	}
 
 	@Transactional
 	public AdoptionPosting createAdoptionPosting(Integer ID, Pet p, List<Adopter> adopters) {
@@ -317,13 +253,7 @@ public class PetService {
 		}
 		return profileRepo.save(p);
 	}
-	@Transactional
-	public Shelter updateShelter(Shelter s) {
-		if(s == null || this.getShelterById(s.getId()) == null) {
-			throw new IllegalArgumentException("Cannot update shelter that is not in the database");
-		}
-		return shelterRepo.save(s);
-	}
+
 	@Transactional
 	public AdoptionPosting updatePosting(AdoptionPosting a) {
 		if(a == null || this.getPostingById(a.getId()) == null) {
@@ -331,8 +261,6 @@ public class PetService {
 		}
 		return postRepo.save(a);
 	}
-	
-	
 	
 	private void validateProfile(PetProfile profile) {
 		if(profile == null) {

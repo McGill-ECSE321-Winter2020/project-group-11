@@ -31,14 +31,14 @@ import ca.mcgill.ecse321.projectgroup11.javacode.Shelter;
 import ca.mcgill.ecse321.projectgroup11.service.PetService;
 
 @ExtendWith(MockitoExtension.class)
-class TestShelter_PetService{
+class TestShelter_ShelterService {
 	
 	@Mock
 	private ShelterRepository shelterDao;
 	private AccountUserRepository managerDao;
 
 	@InjectMocks
-	private PetService service;
+	private ShelterService service;
 
 	private static final int USER_KEY = 5;
 	private static final int NONEXISTING_KEY = 20;
