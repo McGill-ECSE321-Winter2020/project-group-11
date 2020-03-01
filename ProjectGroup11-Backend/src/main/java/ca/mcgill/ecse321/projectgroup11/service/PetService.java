@@ -12,11 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.AdoptionPostingRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.PetProfileRepository;
-import ca.mcgill.ecse321.projectgroup11.dao.PetsRepository;
-import ca.mcgill.ecse321.projectgroup11.dao.ShelterRepository;
+import ca.mcgill.ecse321.projectgroup11.dao.PetRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
 import ca.mcgill.ecse321.projectgroup11.javacode.AdoptionPosting;
-import ca.mcgill.ecse321.projectgroup11.javacode.Manager;
 import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.javacode.PetProfile;
@@ -25,7 +23,7 @@ import ca.mcgill.ecse321.projectgroup11.javacode.Shelter;
 @Service
 public class PetService {
 	@Autowired
-	PetsRepository petRepo;
+	PetRepository petRepo;
 	@Autowired
 	PetProfileRepository profileRepo;
 	@Autowired
@@ -105,8 +103,6 @@ public class PetService {
 		throw new IllegalArgumentException("No Pet has this pet profile");
 	}
 	
-	
-	
 	//Creation Methods
 	@Transactional
 	public Pet createPet(Integer ID, Owner owner, Shelter shelter, AdoptionPosting aPost, PetProfile profile) {
@@ -116,7 +112,8 @@ public class PetService {
 		}
 		
 		Pet p = new Pet();
-		if(petRepo.findPet(ID) != null && petRepo.findPet(ID).getId() == ID) {
+		if(petRepo.findPet(ID) != null &&
+		   petRepo.findPet(ID).getId().equals(ID)) {
 			throw new IllegalArgumentException("Pet ID already exists");
 		}
 		

@@ -13,7 +13,7 @@ import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.javacode.PetProfile;
 
 @Repository
-public class PetsRepository {
+public class PetRepository {
 	@Autowired
 	EntityManager entityManager;
 

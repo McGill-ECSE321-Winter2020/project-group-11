@@ -2,11 +2,7 @@ package ca.mcgill.ecse321.projectgroup11.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +11,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
+
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,22 +19,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.PetProfileRepository;
-import ca.mcgill.ecse321.projectgroup11.dao.PetsRepository;
-import ca.mcgill.ecse321.projectgroup11.dao.ShelterRepository;
-import ca.mcgill.ecse321.projectgroup11.javacode.Manager;
-import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
+import ca.mcgill.ecse321.projectgroup11.dao.PetRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.PetProfile;
 import ca.mcgill.ecse321.projectgroup11.javacode.Shelter;
-import ca.mcgill.ecse321.projectgroup11.service.PetService;
 
 
 @ExtendWith(MockitoExtension.class)
 public class TestPetProfile_PetService {
 	@Mock
 	private PetProfileRepository petProfileDao;
-	private PetsRepository petDao;
+	private PetRepository petDao;
 
 	@InjectMocks
 	private PetService service;
@@ -75,9 +66,6 @@ public class TestPetProfile_PetService {
 		Boolean petOk = true;
 		Boolean highE = false;
 		String health = "chubby but healthy boi";
-		
-		
-		
 		PetProfile petProfile = null;
 		
 		try {

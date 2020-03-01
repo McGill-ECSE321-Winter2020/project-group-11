@@ -30,7 +30,7 @@ class deliverable1test {
 	@Autowired
 	private AdoptionPostingRepository adoptionPostingRepository;
 	@Autowired
-	private PetsRepository petsRepository;
+	private PetRepository petRepository;
 	@Autowired
 	private PetProfileRepository petProfileRepository;
 	@Autowired
@@ -45,7 +45,7 @@ class deliverable1test {
 	@BeforeEach
 	public void clearDatabase() {
 		// We clear in this order => adoption_posting, pet, pet_profile, shelter, address, user
-		petsRepository.clear();
+		petRepository.clear();
 		//adoptionPostingRepository.deleteAll();
 		//petRepository.deleteAll();
 		//petProfileRepository.deleteAll();
@@ -84,9 +84,9 @@ class deliverable1test {
 	@Test 
 	public void testPersistAndLoadPet() {
 
-		Pet dog = petsRepository.createPet(20, 30);
+		Pet dog = petRepository.createPet(20, 30);
 		dog =null;
-		dog = petsRepository.findPet(20);
+		dog = petRepository.findPet(20);
 		assertNotNull(dog);
 		assertEquals(20 , dog.getId());
 		assertEquals(30, dog.getAdoptionPosting().getId());	
@@ -116,7 +116,7 @@ class deliverable1test {
 		
 		Shelter s = new Shelter();
 		
-		Pet p = petsRepository.createPet(50, 40);
+		Pet p = petRepository.createPet(50, 40);
 		Set<Pet> own = new HashSet<Pet>();
 		
 		s.setId(20);

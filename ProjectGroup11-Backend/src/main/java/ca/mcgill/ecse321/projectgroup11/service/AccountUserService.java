@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
-import ca.mcgill.ecse321.projectgroup11.dao.PetsRepository;
+import ca.mcgill.ecse321.projectgroup11.dao.PetRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
 import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
@@ -31,7 +31,7 @@ public class AccountUserService {
 	AccountUserRepository userRepo;
 
 	@Autowired
-	PetsRepository petRepo;
+    PetRepository petRepo;
 
 
 	@Transactional
