@@ -2,11 +2,10 @@ package ca.mcgill.ecse321.projectgroup11.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
-
-import java.util.ArrayList;
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,29 +15,22 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.PetProfileRepository;
-import ca.mcgill.ecse321.projectgroup11.dao.PetsRepository;
-import ca.mcgill.ecse321.projectgroup11.dao.ShelterRepository;
-import ca.mcgill.ecse321.projectgroup11.javacode.Manager;
-import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.javacode.PetProfile;
-import ca.mcgill.ecse321.projectgroup11.javacode.Shelter;
 import ca.mcgill.ecse321.projectgroup11.service.PetService;
 
+
+/**
+*
+*@author ProjectGroup11
+*Tests the PetProfile methods in PetService
+*
+*/
 
 @ExtendWith(MockitoExtension.class)
 public class TestPetProfile_PetService {
 	@Mock
 	private PetProfileRepository petProfileDao;
-	private PetsRepository petDao;
 
 	@InjectMocks
 	private PetService service;
@@ -67,10 +59,6 @@ public class TestPetProfile_PetService {
 	public static final Boolean NONEXISTING_PETOK = true;
 	public static final Boolean NONEXISTING_HIGHE = false;
 	public static final String NONEXISTING_HEALTH = "Young healthy dog";
-	
-	
-	private static final int USER_KEY = 5;
-	private static final int NONEXISTING_KEY = 20;
 
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -102,71 +90,9 @@ public class TestPetProfile_PetService {
 		lenient().when(petProfileDao.save(any(PetProfile.class))).thenAnswer(returnParameterAsAnswer);
 	}
 	
-	@Test
-	public void testCreatePetProfile() {
-		assertEquals(0, service.getAllPetProfiles().size());
-		
-		Integer ID = 66;
-		String name = "Bobo";
-		String type = "cat";
-		String description = "chubby";
-		String photoURL = "urlurl";
-		String breed = "street cat";
-		Boolean apartment = true;
-		Boolean kidOk = true;
-		Boolean petOk = true;
-		Boolean highE = false;
-		String health = "chubby but healthy boi";
-		
-		
-		
-		PetProfile petProfile = null;
-		
-		try {
-			petProfile = service.createPetProfile(ID, name, type, description, photoURL, breed, apartment, kidOk, petOk, highE, health);
-		}	catch (IllegalArgumentException e) {
-			//Check that no error occured
-			fail();
-		}
-		assertNotNull(petProfile);
-		assertEquals(ID, petProfile.getId());
-		assertEquals(name, petProfile.getName());
-		assertEquals(type, petProfile.getType());
-		assertEquals(description, petProfile.getDescription());
-		assertEquals(photoURL, petProfile.getPhotoURL());
-		assertEquals(breed, petProfile.getBreed());
-		assertEquals(apartment, petProfile.getApartment());
-		assertEquals(kidOk, petProfile.getKidsOkay());
-		assertEquals(petOk, petProfile.getPetsOkay());
-		assertEquals(highE, petProfile.getHighEnergy());
-		assertEquals(health, petProfile.getHealthConcerns());
-	}
 	
 	@Test
-	public void testCreatePetProfileShort() {
-		assertEquals(0, service.getAllPetProfiles().size());
-		
-		Integer ID = 66;
-		String name = "Bobo";
-		String type = "cat";
-		String description = "chubby";		
-		
-		
-		PetProfile petProfile = null;
-		
-		try {
-			petProfile = service.createPetProfile(ID, name, type, description);
-		}	catch (IllegalArgumentException e) {
-			fail();
-		}
-		assertNotNull(petProfile);
-		assertEquals(ID, petProfile.getId());
-		assertEquals(name, petProfile.getName());
-		assertEquals(type, petProfile.getType());
-		assertEquals(description, petProfile.getDescription());
-	}
-	
-	@Test
+	// Testing the use of null imputs in the creation of a PetProfile using the long form
 	public void testCreatePetProfileNull() {
 		Integer ID = null;
 		String name = null;
@@ -195,6 +121,7 @@ public class TestPetProfile_PetService {
 	}
 	
 	@Test
+	// Testing the use of null inputs in the creation of a PetProfile using the short form
 	public void testCreatePetProfileNullShort() {
 		Integer ID = null;
 		String name = null;
@@ -217,6 +144,7 @@ public class TestPetProfile_PetService {
 	}
 	
 	@Test
+	// Testing the use of empty fields in the creation of a PetProfile using the long form
 	public void testCreatePetProfileEmpty() {
 		Integer ID = null;
 		String name = "";
@@ -239,12 +167,13 @@ public class TestPetProfile_PetService {
 		}
 		
 		assertNull(petProfile);
-		//To correct
+
 		assertEquals("PetProfile cannot be empty!", error);
 		
 	}
 	
 	@Test
+	// Testing the use of empty fields in the creation of a PetProfile using the short form
 	public void testCreatePetProfileEmptyShort() {
 		Integer ID = null;
 		String name = "";
@@ -260,12 +189,12 @@ public class TestPetProfile_PetService {
 		}
 		
 		assertNull(petProfile);
-		//To correct
 		assertEquals("PetProfile cannot be empty!", error);
 		
 	}
 	
 	@Test
+	// Testing the use of spaces in the creation of a PetProfile using the long form
 	public void testCreatePetProfileSpaces() {
 		Integer ID = null;
 		String name = " ";
@@ -288,12 +217,12 @@ public class TestPetProfile_PetService {
 		}
 		
 		assertNull(petProfile);
-		//To correct
 		assertEquals("PetProfile cannot be empty!", error);
 		
 	}
 	
 	@Test
+	// Testing the use of spaces in the creation of a PetProfile using the short form
 	public void testCreatePetProfileSpacesShort() {
 		Integer ID = null;
 		String name = " ";
@@ -309,12 +238,12 @@ public class TestPetProfile_PetService {
 		}
 		
 		assertNull(petProfile);
-		//To correct
 		assertEquals("PetProfile cannot be empty!", error);
 		
 	}
 	
 	@Test
+	// Testing if you can create the same PetProfile twice using the long form
 	public void testCreatePetProfileWithSameInfo() {
 		PetProfile p = null;
 		try {
@@ -326,19 +255,38 @@ public class TestPetProfile_PetService {
 	}
 	
 	@Test
+	// Testing if you can create the same PetProfile twice using the short form
 	public void testCreatePetProfileWithSameInfoShort() {
 		PetProfile p = null;
 		try {
 			p = service.createPetProfile(USER_ID, USER_NAME, USER_TYPE, USER_DESCRIPTION);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			assertNull(p);
 			assertEquals(e.getMessage(), "Profile with same ID already exists");
 		}
 	}
 	
 	@Test
-	public void testGetPetProfiles() {
-		
+	// Testing updating a PetProfile
+	public void testUpdatePetProfile() {
+		PetProfile p = new PetProfile();
+		try {
+			service.updateProfile(p);
+		} catch (IllegalArgumentException e) {
+			assertEquals(e.getMessage(), "Cannot update petProfile that is not in the database");
+		}
 	}
 	
+	@Test
+	// Testing if you can get a non-existing PetProfile
+	public void testGetNonExistingPetProfile() {
+		assertNull(service.getPetProfileById(NONEXISTING_ID));
+	}
+	
+	@Test
+	// Testing if you can get an existing PetProfile
+	public void testGetExistingPetProfile() {
+		assertEquals(USER_ID, service.getPetProfileById(USER_ID).getId());
+	}
+		
 }
