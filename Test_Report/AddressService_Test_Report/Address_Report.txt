@@ -1,3 +1,4 @@
 ************************************************* ADDRESS TESTING REPORT ************************************
 
-The method for this testing was BLABLABLA
+The main concept for this testing was unit testing (white box) of all the methods inside address service. This involves the creation of an address as well as the updating of such an address.
+The first thing this test class was addressed was that the service could accurately create an address with the appropriate information. The next thing tested was that each of the parameters we entered in the correct format. Next, it tested that it was possible to update an existing address. Finally, the testing unit tested that it wasn't possible to update a nonexisting address.
