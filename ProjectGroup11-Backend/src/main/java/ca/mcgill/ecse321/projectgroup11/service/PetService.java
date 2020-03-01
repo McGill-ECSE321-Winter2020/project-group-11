@@ -171,18 +171,18 @@ public class PetService {
 		}
 		
 		if (ID == null &&
-				(name == null || name == "") &&
-				(type == null || type == "") &&
-				(description == null || description == "") &&
-				(photoURL == null || photoURL == "") &&
-				(breed == null || breed == "") &&
-				apartment == null &&
-				kidOk == null &&
-				petOk == null &&
-				highE == null &&
-				(health == null || health == "")) {
+		   (name == null || name == "" || name == " ") &&
+		   (type == null || type == "" || type == " ") &&
+		   (description == null || description == "" || description == " ") &&
+		   (photoURL == null || photoURL == "" || photoURL == " ") &&
+		   (breed == null || breed == "" || breed == " ") &&
+		   apartment == null &&
+		   kidOk == null &&
+	       petOk == null &&
+		   highE == null &&
+		   (health == null || health == "" || health == " ")) {
 				throw new IllegalArgumentException("PetProfile cannot be empty!");
-			}
+		}
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);
@@ -207,11 +207,11 @@ public class PetService {
 		}
 		
 		if (ID == null &&
-				(name == null || name == "") &&
-				(type == null || type == "") &&
-				(description == null || description == "")) {
+		   (name == null || name == "" || name == " ") &&
+		   (type == null || type == "" || type == " ") &&
+		   (description == null || description == "" || description == " ")) {
 				throw new IllegalArgumentException("PetProfile cannot be empty!");
-			}
+		}
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);

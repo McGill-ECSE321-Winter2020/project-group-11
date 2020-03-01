@@ -95,6 +95,11 @@ public class TestPetProfile_PetService {
 				return null;
 			}
 		});	
+		
+		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
+			return invocation.getArgument(0);
+		};
+		lenient().when(petProfileDao.save(any(PetProfile.class))).thenAnswer(returnParameterAsAnswer);
 	}
 	
 	@Test
@@ -119,7 +124,8 @@ public class TestPetProfile_PetService {
 		
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description, photoURL, breed, apartment, kidOk, petOk, highE, health);
-		}	catch (Exception e) {
+		}	catch (IllegalArgumentException e) {
+			//Check that no error occured
 			fail();
 		}
 		assertNotNull(petProfile);
@@ -150,7 +156,7 @@ public class TestPetProfile_PetService {
 		
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description);
-		}	catch (Exception e) {
+		}	catch (IllegalArgumentException e) {
 			fail();
 		}
 		assertNotNull(petProfile);
