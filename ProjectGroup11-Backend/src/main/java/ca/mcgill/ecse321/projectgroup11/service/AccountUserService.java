@@ -231,6 +231,45 @@ public class AccountUserService {
 		if(!(a instanceof Adopter)) return null;
 		return (Adopter) a;
 	}
+	
+	@Transactional
+	/**
+	 * 
+	 * @param email
+	 * @return A manager with the corresponding email assuming that emails are unique
+	 */
+	public Adopter getAdopterByEmail(String email) {
+		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
+		Adopter b = null;
+		for (int i =0 ; i <a.size() ; i++) {
+			if(((Adopter)a.get(i)).getEmailAddress() == email ) {
+				b = ((Adopter)a.get(i));
+				break;	
+			}
+		}
+		return b;
+		
+	}
+	
+	@Transactional
+	/**
+	 * 
+	 * @param first name
+	 * @param last name
+	 * @return Adopter with first name and last name assuming that there are UNIQUES
+	 */
+	public Adopter getAdopterByFirstNameAndLastName(String first, String last) {
+		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
+		Adopter b = null;
+		for (int i =0 ; i <a.size() ; i++) {
+			if(((Adopter)a.get(i)).getFirstName() == first && ((Adopter)a.get(i)).getFirstName() == last  ) {
+				b = ((Adopter)a.get(i));
+				break;	
+			}
+		}
+		return b;
+		
+	}
 
 	@Transactional
 	public List<AccountUser> getAllAdopters() {
@@ -405,6 +444,47 @@ public class AccountUserService {
 		if(!(o instanceof Owner)) return null;
 		return (Owner)o;
 	}
+	
+	/**
+	 * 
+	 * @param email
+	 * @return An Owner with the corresponding email assuming that emails are unique
+	 */
+	@Transactional
+	public Owner getOwnerByEmail(String email) {
+		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllOwners();
+		Owner b = null;
+		
+		for (int i =0 ; i <a.size() ; i++) {
+			if(((Owner)a.get(i)).getEmailAddress() == email ) {
+				b = ((Owner)a.get(i));
+				break;	
+			}
+		}
+		return b;
+		
+	}
+	
+	@Transactional
+	/**
+	 * 
+	 * @param first
+	 * @param last
+	 * @return Owner with first name and last name assuming that there are UNIQUES
+	 */
+	public Owner getOwnerByFirstNameAndLastName(String first, String last) {
+		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
+		Owner b = null;
+		for (int i =0 ; i <a.size() ; i++) {
+			if(((Owner)a.get(i)).getFirstName() == first && ((Owner)a.get(i)).getFirstName() == last  ) {
+				b = ((Owner)a.get(i));
+				break;	
+			}
+		}
+		return b;
+		
+	}
+	
 	@Transactional
 	/**
 	 * 
@@ -544,6 +624,45 @@ public class AccountUserService {
 		AccountUser a = userRepo.findAccountUserByuserID(id);
 		if(! (a instanceof Manager)) return null;
 		return (Manager) a;
+	}
+	
+	@Transactional
+	/**
+	 * 
+	 * @param email
+	 * @return A manager with the corresponding email assuming that emails are unique
+	 */
+	public Manager getManagerByEmail(String email) {
+		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllManagers();
+		Manager b = null;
+		for (int i =0 ; i <a.size() ; i++) {
+			if(((Manager)a.get(i)).getEmailAddress() == email ) {
+				b = ((Manager)a.get(i));
+				break;	
+			}
+		}
+		return b;
+		
+	}
+	
+	@Transactional
+	/**
+	 * 
+	 * @param first
+	 * @param last
+	 * @return Manager with first name and last name assuming that there are UNIQUES
+	 */
+	public Manager getManagerByFirstNameAndLastName(String first, String last) {
+		ArrayList<AccountUser> a = (ArrayList<AccountUser>) getAllAdopters();
+		Manager b = null;
+		for (int i =0 ; i <a.size() ; i++) {
+			if(((Manager)a.get(i)).getFirstName() == first && ((Manager)a.get(i)).getFirstName() == last  ) {
+				b = ((Manager)a.get(i));
+				break;	
+			}
+		}
+		return b;
+		
 	}
 
 	@Transactional
