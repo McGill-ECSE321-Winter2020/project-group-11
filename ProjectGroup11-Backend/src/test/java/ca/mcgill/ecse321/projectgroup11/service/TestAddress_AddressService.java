@@ -1,13 +1,6 @@
 
 package ca.mcgill.ecse321.projectgroup11.service;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.lenient;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,16 +10,26 @@ import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
-import static org.junit.jupiter.api.Assertions.assertNull;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.mockito.MockitoAnnotations;
 
 import ca.mcgill.ecse321.projectgroup11.dao.AddressRepository;
+import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
+import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
+import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
+import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
+import ca.mcgill.ecse321.projectgroup11.service.AddressService;
 
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+
+
+
+import org.junit.jupiter.api.Test;
 
 /**
 *
@@ -212,7 +215,7 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-		int streetNumber = -40;
+		Integer streetNumber = -40;
 		String error = null;
 		
 		try {
@@ -229,12 +232,14 @@ class TestAddress_AddressService{
 	@Test
 	void testUpdatingAddress() {
 		Address a = new Address();
-		try {service.updateAddress(a);
-
+		String error = null;
+		try {
+			service.updateAddress(a);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
 		}
-		catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage() , "Cannot update address that is not in the database");
-		}
+		assertEquals(error , "Cannot update address that is not in the database");
 	}
+	
 	
 }
