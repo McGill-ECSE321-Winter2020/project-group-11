@@ -64,6 +64,64 @@ public class AccountUserRestController {
 		return addService.getAllAddresses().stream().map(p -> convertToAddressDto(p)).collect(Collectors.toList());
 	}
 	
+	@GetMapping(value = { "/users/{ID}", "/users/{ID}/" })
+	public AccountUserDto getUserById(@PathVariable("ID") Integer id) {
+		return convertToAccountUserDto(service.getAccountUserByID(id));
+	}
+	@GetMapping(value = { "/users/{firstName}/{lastName}", "/users/{firstName}/{lastName}/" })
+	public List<AccountUserDto> getUserByName(@PathVariable("firstName") String first, @PathVariable("lastName") String last) {
+		return service.getAccountUsersByName(first, last).stream().map(p -> convertToAccountUserDto(p)).collect(Collectors.toList());
+	}
+	@GetMapping(value = { "/users/email/{email}", "/users/email/{email}/" })
+	public List<AccountUserDto> getUserByEmail(@PathVariable("email") String email) {
+		return service.getAccountUsersByEmail(email).stream().map(p -> convertToAccountUserDto(p)).collect(Collectors.toList());
+	}
+	
+	@GetMapping(value = { "/adopters/{ID}", "/adopters/{ID}/" })
+	public AdopterDto getAdopterById(@PathVariable("ID") Integer id) {
+		return convertToAdopterDto(service.getAdopterByID(id));
+	}
+	@GetMapping(value = { "/adopters/{firstName}/{lastName}", "/adopters/{firstName}/{lastName}/" })
+	public AdopterDto getAdopterById(@PathVariable("firstName") String first, @PathVariable("lastName") String last) {
+		return convertToAdopterDto(service.getAdopterByFirstNameAndLastName(first, last));
+	}
+	@GetMapping(value = { "/adopters/email/{email}", "/adopters/email/{email}/" })
+	public AdopterDto getAdopterByEmail(@PathVariable("email") String email) {
+		return convertToAdopterDto(service.getAdopterByEmail(email));
+	}
+	
+	@GetMapping(value = { "/owners/{ID}", "/owners/{ID}/" })
+	public OwnerDto getOwnerById(@PathVariable("ID") Integer id) {
+		return convertToOwnerDto(service.getOwnerByID(id));
+	}
+	
+	@GetMapping(value = { "/owners/{firstName}/{lastName}", "/owners/{firstName}/{lastName}/" })
+	public OwnerDto getOwnerById(@PathVariable("firstName") String first, @PathVariable("lastName") String last) {
+		return convertToOwnerDto(service.getOwnerByFirstNameAndLastName(first, last));
+	}
+	@GetMapping(value = { "/owners/email/{email}", "/owners/email/{email}/" })
+	public OwnerDto getOwnerByEmail(@PathVariable("email") String email) {
+		return convertToOwnerDto(service.getOwnerByEmail(email));
+	}
+	
+	@GetMapping(value = { "/managers/{ID}", "/managers/{ID}/" })
+	public ManagerDto getManagerById(@PathVariable("ID") Integer id) {
+		return convertToManagerDto(service.getManagerByID(id));
+	}
+	@GetMapping(value = { "/managers/{firstName}/{lastName}", "/managers/{firstName}/{lastName}/" })
+	public ManagerDto getManagerById(@PathVariable("firstName") String first, @PathVariable("lastName") String last) {
+		return convertToManagerDto(service.getManagerByFirstNameAndLastName(first, last));
+	}
+	@GetMapping(value = { "/managers/email/{email}", "/managers/email/{email}/" })
+	public ManagerDto getManagerByEmail(@PathVariable("email") String email) {
+		return convertToManagerDto(service.getManagerByEmail(email));
+	}
+	
+	@GetMapping(value = { "/addresses/{ID}", "/addresses/{ID}/" })
+	public AddressDto getAddressById(@PathVariable("ID") Integer id) {
+		return convertToAddressDto(addService.getAddressById(id));
+	}
+	
 	@PostMapping(value = { "/adopters/{name}/{email}/{password}/{ID}", "/adopters/{name}/{email}/{password}/{ID}/" })
 	public AdopterDto createAdopter(@PathVariable("name") String name, @PathVariable("password") String pass, 
 									@PathVariable("ID") Integer id, @PathVariable("email") String email) throws IllegalArgumentException {

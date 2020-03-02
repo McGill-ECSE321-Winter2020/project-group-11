@@ -35,22 +35,39 @@ public class PetRestController {
 	@Autowired
 	private PetService petService;
 	
-	@GetMapping(value = { "/pets", "/pet/" })
+	@GetMapping(value = { "/pets", "/pets/" })
 	public List<PetDto> getAllPets() {
 		return petService.getAllPets().stream().map(p -> convertToPetDto(p)).collect(Collectors.toList());
+	}
+	@GetMapping(value = { "/pets/{ID}", "/pet/{ID}/" })
+	public PetDto getPetById(@PathVariable("ID") Integer ID) {
+		return convertToPetDto(petService.getPetById(ID));
 	}
 	@GetMapping(value = { "/petProfiles", "/petProfiles/" })
 	public List<PetProfileDto> getAllPetProfiles() {
 		return petService.getAllPetProfiles().stream().map(p -> convertToPetProfileDto(p)).collect(Collectors.toList());
+	}
+	@GetMapping(value = { "/petProfiles/{ID}", "/petProfiles/{ID}/" })
+	public PetProfileDto getPetProfileById(@PathVariable("ID") Integer ID) {
+		return convertToPetProfileDto(petService.getPetProfileById(ID));
 	}
 	
 	@GetMapping(value = { "/shelters", "/shelters/" })
 	public List<ShelterDto> getAllShelters() {
 		return petService.getAllShelters().stream().map(p -> convertToShelterDto(p)).collect(Collectors.toList());
 	}
+	@GetMapping(value = { "/shelters/{ID}", "/shelters/{ID}/" })
+	public ShelterDto getShelterById(@PathVariable("ID") Integer ID) {
+		return convertToShelterDto(petService.getShelterById(ID));
+	}
+	
 	@GetMapping(value = { "/adoptPosts", "/adoptPosts/" })
 	public List<AdoptionPostingDto> getAllAdoptionPostings() {
 		return petService.getAllAdoptionPostings().stream().map(p -> convertToAdoptionPostingDto(p)).collect(Collectors.toList());
+	}
+	@GetMapping(value = { "/adoptPosts/{ID}", "/adoptPosts/{ID}/" })
+	public AdoptionPostingDto getAdoptionPostingById(@PathVariable("ID") Integer ID) {
+		return convertToAdoptionPostingDto(petService.getPostingById(ID));
 	}
 	
 	
