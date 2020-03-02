@@ -125,6 +125,24 @@ public class PetService {
 	}
 	
 	
+	@Transactional
+	public List<Adopter> getPetApplicants(Integer ID) {
+		if(ID == null ) return null;
+		Pet p = petRepo.findPet(ID);
+		Set<Adopter> adopters = null;
+		if(p != null) adopters = p.getAdoptionPosting().getAdopters();
+		else return null;
+		if(adopters == null) return null;
+		
+		ArrayList<Adopter> candidates = new ArrayList<>();
+		for(Adopter a : adopters) {
+			candidates.add(a);
+		}
+		
+		return candidates;
+	}
+	
+	
 	
 	//Creation Methods
 	@Transactional
@@ -231,10 +249,12 @@ public class PetService {
 	 * @param ID - ID of pet to delete
 	 */
 	public AdoptionPosting addPostingApplicant(Integer postingID, Integer adopterID) {
-		AdoptionPosting a = this.getPostingById(postingID);
-		if(postingID == null || a == null) {
+		
+		if(postingID == null || this.getPostingById(postingID) == null) {
 			throw new IllegalArgumentException("Cannot update pet that is not in database");
 		}
+		AdoptionPosting a = this.getPostingById(postingID);
+		
 		if(adopterID == null || userService.getAdopterByID(adopterID) == null) {
 			throw new IllegalArgumentException("Cannot add applicant that is not in database");
 		}
@@ -250,6 +270,7 @@ public class PetService {
 		
 		return postRepo.save(a);
 	}
+	
 	
 	@Transactional
 	/**

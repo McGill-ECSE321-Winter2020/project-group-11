@@ -43,6 +43,13 @@ public class PetRestController {
 	public PetDto getPetById(@PathVariable("ID") Integer ID) {
 		return convertToPetDto(petService.getPetById(ID));
 	}
+	@GetMapping(value = { "/petApplicants/{petID}", "/petApplicants/{petID}/" })
+	public List<AdopterDto> getPetCandidates(@PathVariable("petID") Integer ID) {
+		List<AdopterDto> applicants = petService.getPetApplicants(ID).stream().map(p -> new AdopterDto(p.getUserID(), p.getFirstName(), p.getLastName(), p.getEmailAddress())
+																				  ).collect(Collectors.toList());
+		return applicants;
+	}
+	
 	@GetMapping(value = { "/petProfiles", "/petProfiles/" })
 	public List<PetProfileDto> getAllPetProfiles() {
 		return petService.getAllPetProfiles().stream().map(p -> convertToPetProfileDto(p)).collect(Collectors.toList());
