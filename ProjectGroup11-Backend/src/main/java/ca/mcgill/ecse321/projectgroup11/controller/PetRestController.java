@@ -141,6 +141,12 @@ public class PetRestController {
 	}
 	
 	
+	@PostMapping(value = { "/delete/pet/{ID}", "/delete/pet/{ID}/" })
+	public void deletePet(@PathVariable("ID") Integer PetID) throws IllegalArgumentException {
+		petService.deletePet(PetID);
+	}
+	
+	
 	
 	//CONVERSION METHODS
 	

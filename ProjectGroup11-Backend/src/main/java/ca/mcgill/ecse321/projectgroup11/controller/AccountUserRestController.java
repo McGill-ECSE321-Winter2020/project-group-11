@@ -186,6 +186,14 @@ public class AccountUserRestController {
 		return convertToAccountUserDto(user);
 	}
 	
+	
+	@PostMapping(value = { "/delete/user/{ID}", "/delete/user/{ID}/" })
+	public void deleteUser(@PathVariable("ID") Integer UserID) throws IllegalArgumentException {
+		service.deleteAccountUser(UserID);
+	}
+	
+	
+	
 	/**
 	 * Create an Adopter Data Transfer Object based on an Account User object
 	 * @param accU - AccountUser to summarize with DTO
