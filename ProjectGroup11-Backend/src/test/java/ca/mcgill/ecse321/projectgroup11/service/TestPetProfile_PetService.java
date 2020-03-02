@@ -21,11 +21,11 @@ import ca.mcgill.ecse321.projectgroup11.service.PetService;
 
 
 /**
-*
-*@author ProjectGroup11
-*Tests the PetProfile methods in PetService
-*
-*/
+ *
+ *@author ProjectGroup11
+ *Tests the PetProfile methods in PetService
+ *
+ */
 
 @ExtendWith(MockitoExtension.class)
 public class TestPetProfile_PetService {
@@ -35,7 +35,7 @@ public class TestPetProfile_PetService {
 	@InjectMocks
 	private PetService service;
 
-	
+
 	public static final Integer USER_ID = 5;
 	public static final String USER_NAME = "Bobo";
 	public static final String USER_TYPE = "cat";
@@ -47,7 +47,7 @@ public class TestPetProfile_PetService {
 	public static final Boolean USER_PETOK = true;
 	public static final Boolean USER_HIGHE = false;
 	public static final String USER_HEALTH = "chubby but healthy boi";
-	
+
 	public static final Integer NONEXISTING_ID = 20;
 	public static final String NONEXISTING_NAME = "Caesar";
 	public static final String NONEXISTING_TYPE = "dog";
@@ -77,20 +77,20 @@ public class TestPetProfile_PetService {
 				petProfile.setPetsOkay(USER_PETOK);
 				petProfile.setHighEnergy(USER_HIGHE);
 				petProfile.setHealthConcerns(USER_HEALTH);
-				
+
 				return petProfile;
 			} else {
 				return null;
 			}
 		});	
-		
+
 		Answer<?> returnParameterAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
 		};
 		lenient().when(petProfileDao.save(any(PetProfile.class))).thenAnswer(returnParameterAsAnswer);
 	}
-	
-	
+
+
 	@Test
 	// Testing the use of null imputs in the creation of a PetProfile using the long form
 	public void testCreatePetProfileNull() {
@@ -107,19 +107,19 @@ public class TestPetProfile_PetService {
 		String health = null;
 		String error = null;
 		PetProfile petProfile = null;
-		
+
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description, photoURL, breed, apartment, kidOk, petOk, highE, health);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(petProfile);
 		//To correct
 		assertEquals("PetProfile cannot be empty!", error);
-		
+
 	}
-	
+
 	@Test
 	// Testing the use of null inputs in the creation of a PetProfile using the short form
 	public void testCreatePetProfileNullShort() {
@@ -130,19 +130,19 @@ public class TestPetProfile_PetService {
 		String error = null;
 		PetProfile petProfile = null;
 
-		
+
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(petProfile);
 		//To correct
 		assertEquals("PetProfile cannot be empty!", error);
-		
+
 	}
-	
+
 	@Test
 	// Testing the use of empty fields in the creation of a PetProfile using the long form
 	public void testCreatePetProfileEmpty() {
@@ -159,19 +159,19 @@ public class TestPetProfile_PetService {
 		String health = "";
 		String error = null;
 		PetProfile petProfile = null;
-		
+
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description, photoURL, breed, apartment, kidOk, petOk, highE, health);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(petProfile);
 
 		assertEquals("PetProfile cannot be empty!", error);
-		
+
 	}
-	
+
 	@Test
 	// Testing the use of empty fields in the creation of a PetProfile using the short form
 	public void testCreatePetProfileEmptyShort() {
@@ -181,18 +181,18 @@ public class TestPetProfile_PetService {
 		String description = "";
 		String error = null;
 		PetProfile petProfile = null;
-		
+
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(petProfile);
 		assertEquals("PetProfile cannot be empty!", error);
-		
+
 	}
-	
+
 	@Test
 	// Testing the use of spaces in the creation of a PetProfile using the long form
 	public void testCreatePetProfileSpaces() {
@@ -209,18 +209,18 @@ public class TestPetProfile_PetService {
 		String health = " ";
 		String error = null;
 		PetProfile petProfile = null;
-		
+
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description, photoURL, breed, apartment, kidOk, petOk, highE, health);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(petProfile);
 		assertEquals("PetProfile cannot be empty!", error);
-		
+
 	}
-	
+
 	@Test
 	// Testing the use of spaces in the creation of a PetProfile using the short form
 	public void testCreatePetProfileSpacesShort() {
@@ -230,18 +230,18 @@ public class TestPetProfile_PetService {
 		String description = " ";
 		String error = null;
 		PetProfile petProfile = null;
-		
+
 		try {
 			petProfile = service.createPetProfile(ID, name, type, description);
 		} catch (Exception e) {
 			error = e.getMessage();
 		}
-		
+
 		assertNull(petProfile);
 		assertEquals("PetProfile cannot be empty!", error);
-		
+
 	}
-	
+
 	@Test
 	// Testing if you can create the same PetProfile twice using the long form
 	public void testCreatePetProfileWithSameInfo() {
@@ -253,7 +253,7 @@ public class TestPetProfile_PetService {
 			assertEquals(e.getMessage(), "Profile with same ID already exists");
 		}
 	}
-	
+
 	@Test
 	// Testing if you can create the same PetProfile twice using the short form
 	public void testCreatePetProfileWithSameInfoShort() {
@@ -265,7 +265,7 @@ public class TestPetProfile_PetService {
 			assertEquals(e.getMessage(), "Profile with same ID already exists");
 		}
 	}
-	
+
 	@Test
 	// Testing updating a PetProfile
 	public void testUpdatePetProfile() {
@@ -276,17 +276,17 @@ public class TestPetProfile_PetService {
 			assertEquals(e.getMessage(), "Cannot update petProfile that is not in the database");
 		}
 	}
-	
+
 	@Test
 	// Testing if you can get a non-existing PetProfile
 	public void testGetNonExistingPetProfile() {
 		assertNull(service.getPetProfileById(NONEXISTING_ID));
 	}
-	
+
 	@Test
 	// Testing if you can get an existing PetProfile
 	public void testGetExistingPetProfile() {
 		assertEquals(USER_ID, service.getPetProfileById(USER_ID).getId());
 	}
-		
+
 }

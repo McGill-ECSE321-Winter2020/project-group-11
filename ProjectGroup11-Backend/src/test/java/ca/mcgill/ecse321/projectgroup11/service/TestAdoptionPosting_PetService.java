@@ -5,9 +5,7 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.lenient;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -25,11 +23,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.projectgroup11.dao.AdoptionPostingRepository;
-
 import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
 import ca.mcgill.ecse321.projectgroup11.javacode.AdoptionPosting;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
-import ca.mcgill.ecse321.projectgroup11.javacode.PetProfile;
 import ca.mcgill.ecse321.projectgroup11.service.PetService;
 
 
@@ -53,7 +49,7 @@ public class TestAdoptionPosting_PetService {
 	public static final Pet USER_PET = new Pet();	
 	public static final Set<Adopter> USER_ADOPTER_SET = new HashSet<Adopter>();
 	public static final List<Adopter> USER_ADOPTER_LIST = new ArrayList<Adopter>();
-	
+
 	public static final Integer NONEXISTING_ID = 20;
 	public static final Pet NONEXISTING_PET = new Pet();	
 	public static final Set<Adopter> NONEXISITNG_ADOPTER_SET = new HashSet<Adopter>();
@@ -80,8 +76,9 @@ public class TestAdoptionPosting_PetService {
 		};
 		lenient().when(adoptionPostingDao.save(any(AdoptionPosting.class))).thenAnswer(returnParameterAsAnswer);
 	}
-	
+
 	@Test
+	// Testing the creation of another AdoptionPosting with an existing user ID
 	public void testCreateAdoptionPostingWithSameID() {
 		AdoptionPosting ap = null;
 		try {
@@ -91,14 +88,15 @@ public class TestAdoptionPosting_PetService {
 			assertEquals(e.getMessage(), "Posting with this ID already exists");
 		}
 	}
-	
+
 	@Test
+	// Testing the creation of a AdoptionPosting without a pet
 	public void testCreateAdoptionPostingWithoutPet() {
 		AdoptionPosting ap = null;
 		Integer ID = 323;
 		Pet pet = null;
 		List<Adopter> adopterList = new ArrayList<Adopter>();
-		
+
 		try {
 			ap = service.createAdoptionPosting(ID, pet, adopterList);
 		} catch (IllegalArgumentException e) {
@@ -106,8 +104,9 @@ public class TestAdoptionPosting_PetService {
 			assertEquals(e.getMessage(), "Posting requires a pet");
 		}
 	}
-	
+
 	@Test
+	// Testing the creation of a AdoptionPosting with a pet that is not part of the database
 	public void testCreateAdoptionPostingWithNonexisingPet() {
 		AdoptionPosting ap = null;		
 		try {
@@ -117,7 +116,7 @@ public class TestAdoptionPosting_PetService {
 			assertEquals(e.getMessage(), "Posting requires a pet stored in the database");
 		}
 	}
-	
+
 	@Test
 	// Testing updating a AdoptionPosting
 	public void testUpdateAdoptionPosting() {
@@ -128,17 +127,17 @@ public class TestAdoptionPosting_PetService {
 			assertEquals(e.getMessage(), "Cannot update posting that is not in the database");
 		}
 	}
-	
+
 	@Test
 	// Testing if you can get a non-existing AdoptionPosting
 	public void testGetNonExistingAdoptionPosting() {
 		assertNull(service.getPostingById(NONEXISTING_ID));
 	}
-	
+
 	@Test
 	//testing if you can get an existing AdoptionPosting
 	public void testExistingAdoptionPosting() {
 		assertEquals(USER_ID, service.getPostingById(USER_ID).getId());
 	}
-	
+
 }
