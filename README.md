@@ -22,7 +22,7 @@ Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/
 | ------------- |:-------------:| --------------:|
 | Libby         | Unit testing, Integration testing, project report | 16|
 | Yacine        | Project lead, Unit testing      |   18          |
-| Yanis         | Unit Testing, database      |    15          |
+| Yanis         | RESTful services, database      |    16          |
 | Dixit         | Unit testing | 7         |
 | Keanu         | Unit testing, requirements      |   10          |
 
