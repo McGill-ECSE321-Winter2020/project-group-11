@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.projectgroup11.service;
 
 import java.util.ArrayList;
-
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.projectgroup11.dao.AccountUserRepository;
+import ca.mcgill.ecse321.projectgroup11.dao.AddressRepository;
 import ca.mcgill.ecse321.projectgroup11.dao.PetsRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
@@ -29,9 +29,10 @@ public class AccountUserService {
 
 	@Autowired
 	AccountUserRepository userRepo;
-
 	@Autowired
 	PetsRepository petRepo;
+	@Autowired
+	AddressRepository addRepo;
 
 
 	@Transactional
@@ -121,6 +122,26 @@ public class AccountUserService {
 		}
 		userRepo.save(a);
 		return a;
+	}
+	
+	
+	@Transactional
+	/**
+	 * Deletes an account user
+	 * @param ID - ID of user to delete
+	 */
+	public void deleteAccountUser(Integer ID) {
+		if(ID == null || this.getAccountUserByID(ID) == null) {
+			throw new IllegalArgumentException("Cannot delete Account User that is not in the database");
+		}
+		AccountUser a = this.getAccountUserByID(ID);
+		userRepo.delete(a);
+		if(a.getAddress() != null) {
+			for(Address add : a.getAddress()) {
+				addRepo.delete(add);
+			}
+		}
+		
 	}
 
 

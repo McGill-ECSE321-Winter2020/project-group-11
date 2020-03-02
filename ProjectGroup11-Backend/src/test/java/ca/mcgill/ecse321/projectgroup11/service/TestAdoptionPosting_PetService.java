@@ -107,18 +107,16 @@ public class TestAdoptionPosting_PetService {
 		}
 	}
 	
-	/*@Test
+	@Test
 	public void testCreateAdoptionPostingWithNonexisingPet() {
-		AdoptionPosting ap = null;
-		List<Adopter> adopterList = new ArrayList<Adopter>();
-		
+		AdoptionPosting ap = null;		
 		try {
-			ap = service.createAdoptionPosting(NONEXISTING_ID, service.getPetById(NONEXISTING_ID), NONEXISTING_ADOPTER_LIST);
+			ap = service.createAdoptionPosting(NONEXISTING_ID, NONEXISTING_PET, NONEXISTING_ADOPTER_LIST);
 		} catch (IllegalArgumentException e) {
 			assertNull(ap);
 			assertEquals(e.getMessage(), "Posting requires a pet stored in the database");
 		}
-	}*/
+	}
 	
 	@Test
 	// Testing updating a AdoptionPosting

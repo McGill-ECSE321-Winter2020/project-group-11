@@ -200,6 +200,7 @@ public class PetService {
 
 		return profileRepo.save(p);
 	}
+	
 	@Transactional
 	public PetProfile createPetProfile(Integer ID, String name, String type, String description) {
 		if( profileRepo.findPetProfileById(ID) != null && profileRepo.findPetProfileById(ID).getId() == ID) {
@@ -222,6 +223,22 @@ public class PetService {
 
 		return profileRepo.save(p);
 	}
+	
+	@Transactional
+	/**
+	 * Deletes a pet
+	 * @param ID - ID of pet to delete
+	 */
+	public void deletePet(Integer ID) {
+		if(ID == null || this.getPetById(ID) == null) {
+			throw new IllegalArgumentException("Cannot delete pet that is not in database");
+		}
+		Pet p = this.getPetById(ID);
+		if(p.getAdoptionPosting() != null) postRepo.delete(p.getAdoptionPosting());
+		profileRepo.delete(p.getPetProfile());
+		petRepo.deletePetById(ID);
+	}
+	
 	
 	@Transactional
 	public Shelter createShelter(Integer ID, List<Pet> pets, Manager manager) {
