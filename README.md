@@ -24,7 +24,7 @@ Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/
 | Yacine        | Project lead, Unit testing      |   18          |
 | Yanis         | RESTful services, database      |    16          |
 | Dixit         | Unit testing | 7         |
-| Keanu         | Unit testing, requirements      |   10          |
+| Keanu         | Unit testing      |   10          |
 
 Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/wiki/Deliverable-2)
 
