@@ -26,5 +26,5 @@ Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/
 | Dixit         | Unit testing | 7         |
 | Keanu         | Unit testing, requirements      |   8          |
 
-Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/Deliverable-2)
+Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/wiki/Deliverable-2)
 
