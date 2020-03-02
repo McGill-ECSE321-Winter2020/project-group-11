@@ -224,6 +224,33 @@ public class PetService {
 		return profileRepo.save(p);
 	}
 	
+	
+	@Transactional
+	/**
+	 * Deletes a pet
+	 * @param ID - ID of pet to delete
+	 */
+	public AdoptionPosting addPostingApplicant(Integer postingID, Integer adopterID) {
+		AdoptionPosting a = this.getPostingById(postingID);
+		if(postingID == null || a == null) {
+			throw new IllegalArgumentException("Cannot update pet that is not in database");
+		}
+		if(adopterID == null || userService.getAdopterByID(adopterID) == null) {
+			throw new IllegalArgumentException("Cannot add applicant that is not in database");
+		}
+		
+		Set<Adopter> applicants = new HashSet<>();
+		if(a.getAdopters() != null) {
+			for(Adopter adopter : a.getAdopters()) {
+				applicants.add(adopter);
+			}
+		}
+		applicants.add(userService.getAdopterByID(adopterID));
+		a.setAdopters(applicants);
+		
+		return postRepo.save(a);
+	}
+	
 	@Transactional
 	/**
 	 * Deletes a pet

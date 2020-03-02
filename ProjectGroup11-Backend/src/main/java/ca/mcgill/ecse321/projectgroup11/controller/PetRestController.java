@@ -113,6 +113,12 @@ public class PetRestController {
 		}
 	}
 	
+	@PostMapping(value = { "/addApplicant/{postID}/{adopterID}", "/addApplicant/{postID}/{adopterID}/" })
+	public AdoptionPostingDto createOwnerPet(@PathVariable("postID") Integer postID, 
+								 @PathVariable("adopterID") Integer adoptID) throws IllegalArgumentException {
+		return convertToAdoptionPostingDto(petService.addPostingApplicant(postID, adoptID));
+	}
+	
 	//4 create profile methods, each more general
 	@PostMapping(value = { "/profile/{ID}/{name}/{type}/{description}/{breed}/{photoURL}/{apartment}/{kidsOK}/{petsOK}/{highEnergy}/{healthConcerns}", "/profile/{ID}/{name}/{type}/{description}/{breed}/{photoURL}/{apartment}/{kidsOK}/{petsOK}/{highEnergy}/{healthConcerns}/" })
 	public PetProfileDto createPetProfile(@PathVariable("ID") Integer ID, @PathVariable("name") String name,  @PathVariable("type") String type,
