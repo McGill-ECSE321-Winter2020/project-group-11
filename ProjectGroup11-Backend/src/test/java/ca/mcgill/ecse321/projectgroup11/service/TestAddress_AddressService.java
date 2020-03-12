@@ -8,11 +8,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-<<<<<<< HEAD
-=======
+
 import org.mockito.stubbing.Answer;
 import org.mockito.MockitoAnnotations;
->>>>>>> df0f9dfe8e10dd18241bfbe5d53e07d4eb6a638c
+import org.mockito.invocation.InvocationOnMock;
 
 import ca.mcgill.ecse321.projectgroup11.dao.AddressRepository;
 import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
@@ -22,8 +21,7 @@ import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
 import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
 import ca.mcgill.ecse321.projectgroup11.service.AddressService;
 
-<<<<<<< HEAD
-=======
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -35,7 +33,6 @@ import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
 
->>>>>>> df0f9dfe8e10dd18241bfbe5d53e07d4eb6a638c
 /**
 *
 *@author ProjectGroup11
@@ -96,12 +93,12 @@ class TestAddress_AddressService{
 
 		assertNotNull(address);
 		// check error
-		assertEquals(40, adress.getUserId());
+		assertEquals(40, address.getId());
 		assertEquals(3234 , address.getStreetNumber());
 		assertEquals("McGill Ave", address.getStreet());
 		assertEquals("Montreal", address.getCity());
 		assertEquals("Quebec", address.getProvince());
-		assertEquals("H3A 1A7", adopter.getPostalCode());
+		assertEquals("H3A 1A7", address.getPostalCode());
 	}
 	
 	
@@ -110,8 +107,8 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-		string street = null;
-		string error = null;
+		String street = null;
+		String error = null;
 		
 		try {
 			address = service.createAddress(40 , 3234, street, "Montreal", "Quebec", "H3A 1A7");
@@ -129,8 +126,8 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-		string street = "!#$Gtrq5h";
-		string error = null;
+		String street = "!#$Gtrq5h";
+		String error = null;
 		
 		try {
 			address = service.createAddress(40 , 3234, street, "Montreal", "Quebec", "H3A 1A7");
@@ -147,8 +144,8 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-		string street = "McGill";
-		string error = null;
+		String street = "McGill";
+		String error = null;
 		
 		try {
 			address = service.createAddress(40 , 3234, street, "Montreal", "Quebec", "H3A 1A7");
@@ -166,8 +163,8 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-		string city = "!#$Gtrq5h";
-		string error = null;
+		String city = "!#$Gtrq5h";
+		String error = null;
 		
 		try {
 			address = service.createAddress(40 , 3234, "McGill Avenue", city, "Quebec", "H3A 1A7");
@@ -184,8 +181,8 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-		string province = "!#$Gtrq5h";
-		string error = null;
+		String province = "!#$Gtrq5h";
+		String error = null;
 		
 		try {
 			address = service.createAddress(40 , 3234, "McGill Avenue", "Montreal", province, "H3A 1A7");
@@ -202,8 +199,8 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-		int streetNumber = null;
-		string error = null;
+		Integer streetNumber = null;
+		String error = null;
 		
 		try {
 			address = service.createAddress(40 , streetNumber, "McGill Avenue", "Montreal", "Quebec", "H3A 1A7");
@@ -220,13 +217,8 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
-<<<<<<< HEAD
 		int streetNumber = -40;
-		string error = null;
-=======
-		Integer streetNumber = -40;
 		String error = null;
->>>>>>> df0f9dfe8e10dd18241bfbe5d53e07d4eb6a638c
 		
 		try {
 			address = service.createAddress(40 , streetNumber, "McGill Avenue", "Montreal", "Quebec", "H3A 1A7");
