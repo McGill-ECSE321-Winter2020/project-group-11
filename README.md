@@ -20,11 +20,11 @@ Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/
 #### Deliverable 2:
 | Name          | Role          | Hours logged   |
 | ------------- |:-------------:| --------------:|
-| Libby         | Unit testing, Integration testing, project report | 16|
+| Libby         | Unit testing, Integration testing | 16|
 | Yacine        | Project lead, Unit testing      |   18          |
-| Yanis         | Unit Testing, database      |    15          |
-| Dixit         | Unit testing | 12          |
-| Keanu         | Unit testing, requirements      |   8          |
+| Yanis         | RESTful services, database      |    16          |
+| Dixit         | Unit testing | 7         |
+| Keanu         | Unit testing      |   10          |
 
-Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/Deliverable-2)
+Project report can be found [here](https://github.com/McGill-ECSE321-Winter2020/project-group-11/wiki/Deliverable-2)
 

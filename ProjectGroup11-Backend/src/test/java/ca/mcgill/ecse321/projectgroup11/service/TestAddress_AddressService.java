@@ -8,10 +8,34 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+<<<<<<< HEAD
+=======
+import org.mockito.stubbing.Answer;
+import org.mockito.MockitoAnnotations;
+>>>>>>> df0f9dfe8e10dd18241bfbe5d53e07d4eb6a638c
 
 import ca.mcgill.ecse321.projectgroup11.dao.AddressRepository;
+import ca.mcgill.ecse321.projectgroup11.javacode.AccountUser;
 import ca.mcgill.ecse321.projectgroup11.javacode.Address;
+import ca.mcgill.ecse321.projectgroup11.javacode.Adopter;
+import ca.mcgill.ecse321.projectgroup11.javacode.Owner;
+import ca.mcgill.ecse321.projectgroup11.javacode.Pet;
+import ca.mcgill.ecse321.projectgroup11.service.AddressService;
 
+<<<<<<< HEAD
+=======
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.when;
+
+
+
+import org.junit.jupiter.api.Test;
+
+>>>>>>> df0f9dfe8e10dd18241bfbe5d53e07d4eb6a638c
 /**
 *
 *@author ProjectGroup11
@@ -196,8 +220,13 @@ class TestAddress_AddressService{
 		
 		
 		Address address = null;
+<<<<<<< HEAD
 		int streetNumber = -40;
 		string error = null;
+=======
+		Integer streetNumber = -40;
+		String error = null;
+>>>>>>> df0f9dfe8e10dd18241bfbe5d53e07d4eb6a638c
 		
 		try {
 			address = service.createAddress(40 , streetNumber, "McGill Avenue", "Montreal", "Quebec", "H3A 1A7");
@@ -213,12 +242,14 @@ class TestAddress_AddressService{
 	@Test
 	void testUpdatingAddress() {
 		Address a = new Address();
-		try {service.updateAddress(a);
-
+		String error = null;
+		try {
+			service.updateAddress(a);
+		} catch (IllegalArgumentException e) {
+			error = e.getMessage();
 		}
-		catch (IllegalArgumentException e) {
-			assertEquals(e.getMessage() , "Cannot update address that is not in the database");
-		}
+		assertEquals(error , "Cannot update address that is not in the database");
 	}
+	
 	
 }

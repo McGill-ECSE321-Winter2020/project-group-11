@@ -12,12 +12,25 @@ repositories {
 	mavenCentral()
 }
 
+sourceSets {
+    intTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+}
+
+configurations {
+    intTestImplementation.extendsFrom implementation
+    intTestRuntimeOnly.extendsFrom runtimeOnly
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.mockito:mockito-core:2.+'
 	testImplementation 'org.mockito:mockito-junit-jupiter:2.18.3'
 	testImplementation 'org.junit.platform:junit-platform-launcher:1.4.1'
+	intTestImplementation 'org.junit.jupiter:junit-jupiter'
 
 	testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 	
@@ -30,3 +43,22 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+
+
+task integrationTest(type: Test) {
+    description = 'Runs integration tests.'
+    group = 'verification'
+
+    testClassesDirs = sourceSets.intTest.output.classesDirs
+    classpath = sourceSets.intTest.runtimeClasspath
+    shouldRunAfter test
+}
+
+check.dependsOn integrationTest
+
+
+
+
+
+

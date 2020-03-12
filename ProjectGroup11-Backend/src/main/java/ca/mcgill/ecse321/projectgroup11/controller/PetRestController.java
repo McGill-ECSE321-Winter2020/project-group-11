@@ -35,22 +35,46 @@ public class PetRestController {
 	@Autowired
 	private PetService petService;
 	
-	@GetMapping(value = { "/pets", "/pet/" })
+	@GetMapping(value = { "/pets", "/pets/" })
 	public List<PetDto> getAllPets() {
 		return petService.getAllPets().stream().map(p -> convertToPetDto(p)).collect(Collectors.toList());
 	}
+	@GetMapping(value = { "/pets/{ID}", "/pet/{ID}/" })
+	public PetDto getPetById(@PathVariable("ID") Integer ID) {
+		return convertToPetDto(petService.getPetById(ID));
+	}
+	@GetMapping(value = { "/petApplicants/{petID}", "/petApplicants/{petID}/" })
+	public List<AdopterDto> getPetCandidates(@PathVariable("petID") Integer ID) {
+		List<AdopterDto> applicants = petService.getPetApplicants(ID).stream().map(p -> new AdopterDto(p.getUserID(), p.getFirstName(), p.getLastName(), p.getEmailAddress())
+																				  ).collect(Collectors.toList());
+		return applicants;
+	}
+	
 	@GetMapping(value = { "/petProfiles", "/petProfiles/" })
 	public List<PetProfileDto> getAllPetProfiles() {
 		return petService.getAllPetProfiles().stream().map(p -> convertToPetProfileDto(p)).collect(Collectors.toList());
+	}
+	@GetMapping(value = { "/petProfiles/{ID}", "/petProfiles/{ID}/" })
+	public PetProfileDto getPetProfileById(@PathVariable("ID") Integer ID) {
+		return convertToPetProfileDto(petService.getPetProfileById(ID));
 	}
 	
 	@GetMapping(value = { "/shelters", "/shelters/" })
 	public List<ShelterDto> getAllShelters() {
 		return petService.getAllShelters().stream().map(p -> convertToShelterDto(p)).collect(Collectors.toList());
 	}
+	@GetMapping(value = { "/shelters/{ID}", "/shelters/{ID}/" })
+	public ShelterDto getShelterById(@PathVariable("ID") Integer ID) {
+		return convertToShelterDto(petService.getShelterById(ID));
+	}
+	
 	@GetMapping(value = { "/adoptPosts", "/adoptPosts/" })
 	public List<AdoptionPostingDto> getAllAdoptionPostings() {
 		return petService.getAllAdoptionPostings().stream().map(p -> convertToAdoptionPostingDto(p)).collect(Collectors.toList());
+	}
+	@GetMapping(value = { "/adoptPosts/{ID}", "/adoptPosts/{ID}/" })
+	public AdoptionPostingDto getAdoptionPostingById(@PathVariable("ID") Integer ID) {
+		return convertToAdoptionPostingDto(petService.getPostingById(ID));
 	}
 	
 	
@@ -96,6 +120,12 @@ public class PetRestController {
 		}
 	}
 	
+	@PostMapping(value = { "/addApplicant/{postID}/{adopterID}", "/addApplicant/{postID}/{adopterID}/" })
+	public AdoptionPostingDto createOwnerPet(@PathVariable("postID") Integer postID, 
+								 @PathVariable("adopterID") Integer adoptID) throws IllegalArgumentException {
+		return convertToAdoptionPostingDto(petService.addPostingApplicant(postID, adoptID));
+	}
+	
 	//4 create profile methods, each more general
 	@PostMapping(value = { "/profile/{ID}/{name}/{type}/{description}/{breed}/{photoURL}/{apartment}/{kidsOK}/{petsOK}/{highEnergy}/{healthConcerns}", "/profile/{ID}/{name}/{type}/{description}/{breed}/{photoURL}/{apartment}/{kidsOK}/{petsOK}/{highEnergy}/{healthConcerns}/" })
 	public PetProfileDto createPetProfile(@PathVariable("ID") Integer ID, @PathVariable("name") String name,  @PathVariable("type") String type,
@@ -121,6 +151,12 @@ public class PetRestController {
 	public PetProfileDto createPetProfile4(@PathVariable("ID") Integer ID, @PathVariable("name") String name,  @PathVariable("type") String type,
 								   @PathVariable("description") String description) throws IllegalArgumentException {
 		return this.createPetProfile3(ID, name, type, description, null, null);
+	}
+	
+	
+	@PostMapping(value = { "/delete/pet/{ID}", "/delete/pet/{ID}/" })
+	public void deletePet(@PathVariable("ID") Integer PetID) throws IllegalArgumentException {
+		petService.deletePet(PetID);
 	}
 	
 	

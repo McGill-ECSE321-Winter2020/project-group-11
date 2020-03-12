@@ -125,6 +125,24 @@ public class PetService {
 	}
 	
 	
+	@Transactional
+	public List<Adopter> getPetApplicants(Integer ID) {
+		if(ID == null ) return null;
+		Pet p = petRepo.findPet(ID);
+		Set<Adopter> adopters = null;
+		if(p != null) adopters = p.getAdoptionPosting().getAdopters();
+		else return null;
+		if(adopters == null) return null;
+		
+		ArrayList<Adopter> candidates = new ArrayList<>();
+		for(Adopter a : adopters) {
+			candidates.add(a);
+		}
+		
+		return candidates;
+	}
+	
+	
 	
 	//Creation Methods
 	@Transactional
@@ -171,18 +189,18 @@ public class PetService {
 		}
 		
 		if (ID == null &&
-				(name == null || name == "") &&
-				(type == null || type == "") &&
-				(description == null || description == "") &&
-				(photoURL == null || photoURL == "") &&
-				(breed == null || breed == "") &&
-				apartment == null &&
-				kidOk == null &&
-				petOk == null &&
-				highE == null &&
-				(health == null || health == "")) {
+		   (name == null || name == "" || name == " ") &&
+		   (type == null || type == "" || type == " ") &&
+		   (description == null || description == "" || description == " ") &&
+		   (photoURL == null || photoURL == "" || photoURL == " ") &&
+		   (breed == null || breed == "" || breed == " ") &&
+		   apartment == null &&
+		   kidOk == null &&
+	       petOk == null &&
+		   highE == null &&
+		   (health == null || health == "" || health == " ")) {
 				throw new IllegalArgumentException("PetProfile cannot be empty!");
-			}
+		}
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);
@@ -200,6 +218,7 @@ public class PetService {
 
 		return profileRepo.save(p);
 	}
+	
 	@Transactional
 	public PetProfile createPetProfile(Integer ID, String name, String type, String description) {
 		if( profileRepo.findPetProfileById(ID) != null && profileRepo.findPetProfileById(ID).getId() == ID) {
@@ -207,11 +226,11 @@ public class PetService {
 		}
 		
 		if (ID == null &&
-				(name == null || name == "") &&
-				(type == null || type == "") &&
-				(description == null || description == "")) {
+		   (name == null || name == "" || name == " ") &&
+		   (type == null || type == "" || type == " ") &&
+		   (description == null || description == "" || description == " ")) {
 				throw new IllegalArgumentException("PetProfile cannot be empty!");
-			}
+		}
 
 		PetProfile p = new PetProfile();
 		p.setId(ID);
@@ -222,6 +241,52 @@ public class PetService {
 
 		return profileRepo.save(p);
 	}
+	
+	
+	@Transactional
+	/**
+	 * Deletes a pet
+	 * @param ID - ID of pet to delete
+	 */
+	public AdoptionPosting addPostingApplicant(Integer postingID, Integer adopterID) {
+		
+		if(postingID == null || this.getPostingById(postingID) == null) {
+			throw new IllegalArgumentException("Cannot update pet that is not in database");
+		}
+		AdoptionPosting a = this.getPostingById(postingID);
+		
+		if(adopterID == null || userService.getAdopterByID(adopterID) == null) {
+			throw new IllegalArgumentException("Cannot add applicant that is not in database");
+		}
+		
+		Set<Adopter> applicants = new HashSet<>();
+		if(a.getAdopters() != null) {
+			for(Adopter adopter : a.getAdopters()) {
+				applicants.add(adopter);
+			}
+		}
+		applicants.add(userService.getAdopterByID(adopterID));
+		a.setAdopters(applicants);
+		
+		return postRepo.save(a);
+	}
+	
+	
+	@Transactional
+	/**
+	 * Deletes a pet
+	 * @param ID - ID of pet to delete
+	 */
+	public void deletePet(Integer ID) {
+		if(ID == null || this.getPetById(ID) == null) {
+			throw new IllegalArgumentException("Cannot delete pet that is not in database");
+		}
+		Pet p = this.getPetById(ID);
+		if(p.getAdoptionPosting() != null) postRepo.delete(p.getAdoptionPosting());
+		profileRepo.delete(p.getPetProfile());
+		petRepo.deletePetById(ID);
+	}
+	
 	
 	@Transactional
 	public Shelter createShelter(Integer ID, List<Pet> pets, Manager manager) {

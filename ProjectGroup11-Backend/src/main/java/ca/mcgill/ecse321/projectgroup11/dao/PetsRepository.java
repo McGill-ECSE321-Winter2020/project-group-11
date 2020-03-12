@@ -81,5 +81,11 @@ public class PetsRepository {
 				      "DELETE FROM PetProfile").executeUpdate();
 
 	}
+	@Transactional
+	public void deletePetById(Integer ID) {
+			entityManager.createQuery(
+				      "DELETE FROM Pet WHERE id=" + ID).executeUpdate();
+
+	}
 
 }
