@@ -146,13 +146,13 @@ class TestShelter_PetService{
 	}
 	@Test
 	// Try to get an null Shelter by browsing for nonexisting iD
-	public void testGetNonExistingPerson() {
+	public void testGetNonExistingShelter() {
 		assertNull(service.getShelterById(NONEXISTING_KEY));
 	}
 	
 	@Test
 	// Try to get an null Shelter by browsing for nonexisting iD
-	public void testGetExistingPerson() {
+	public void testGetExistingShelter() {
 		assertEquals(USER_KEY, service.getShelterById(USER_KEY).getId());
 	}
 	

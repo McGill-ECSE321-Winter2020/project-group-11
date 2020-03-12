@@ -340,13 +340,13 @@ class TestManager_AccountUserService{
 	
 	@Test
 	// Try to get an null account user by browsing for nonexisting iD
-	public void testGetNonExistingPerson() {
+	public void testGetNonExistingManager() {
 		assertNull(service.getAccountUserByID(NONEXISTING_KEY));
 	}
 	
 	@Test
 	// Try to get an null account user by browsing for nonexisting iD
-	public void testGetExistingPerson() {
+	public void testGetExistingManager() {
 		assertEquals(USER_KEY, service.getAccountUserByID(USER_KEY).getUserID());
 	}
 	

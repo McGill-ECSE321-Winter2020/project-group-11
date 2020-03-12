@@ -333,13 +333,13 @@ class TestAdopter_AccountUserService{
 	
 	@Test
 	// Try to get an null account user by browsing for nonexisting iD
-	public void testGetNonExistingPerson() {
+	public void testGetNonExistingAdopter() {
 		assertNull(service.getAccountUserByID(NONEXISTING_KEY));
 	}
 	
 	@Test
 	// Try to get an null account user by browsing for nonexisting iD
-	public void testGetExistingPerson() {
+	public void testGetExistingAdopter() {
 		assertEquals(USER_KEY, service.getAccountUserByID(USER_KEY).getUserID());
 	}
 	
